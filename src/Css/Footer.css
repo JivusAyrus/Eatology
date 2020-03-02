@@ -1,0 +1,48 @@
+section {
+    padding-top: 60px;
+    color:white !important;
+}
+#footer {
+    background-image: linear-gradient(to top,rgba(255,0,0,1),rgba(255,255,255,1) 97%);
+}
+
+#footer h5{
+	padding-left: 10px;
+    border-left: 3px solid red;
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+    color:red;
+}
+#footer a {
+    color:white !important;
+    text-decoration: none !important;
+    background-color: transparent;
+}
+#footer ul.social li{
+	padding: 3px 0;
+}
+#footer ul.social li a i {
+    margin-right: 5px;
+	font-size:25px;
+	transition: .5s;
+}
+#footer ul.quick-links li a{
+    color:white;
+}
+#footer ul.social li a
+{
+    color:white !important;
+    transition: font-size .5s ease;
+}
+#footer ul.social li a i:hover{
+    font-size: 35px;
+}
+#footer ul.quick-links li{
+	padding: 3px 0;
+	transition: .5s;
+}
+#footer ul.quick-links li:hover{
+	padding: 3px 0;
+	margin-left:10px;
+	font-weight:700;
+}

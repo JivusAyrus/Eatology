@@ -1,0 +1,8 @@
+.card-body {
+    min-height: 300px;
+    min-width: 300px;
+    margin-right: 5px;
+}
+.cardrow::-webkit-scrollbar {
+    display: none;
+}

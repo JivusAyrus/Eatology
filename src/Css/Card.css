@@ -1,0 +1,25 @@
+.custcar{
+    border: 1px solid red;
+    border-radius: 10px;
+    padding:16px;
+    box-shadow:10px 10px 5px grey;
+    text-align: left;
+}
+.car-title{
+    margin-top: 10px;
+    font-family:sans-serif;
+    color:red;
+    font-weight: 400;
+    font-size: 25px;
+}
+.inline{
+    display:inline;
+}
+.car-title a i{
+    float:right;
+    margin-top:5px;
+}
+.car-title a.heartactive{
+    background-color: red;
+    
+}
