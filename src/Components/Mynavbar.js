@@ -125,7 +125,9 @@ export class Mynavbar extends Component {
             </div>
             <div class="overlay"></div>
         </div> 
-        <Footer/>
+        <div class="foot">
+            <Footer/>
+        </div>
     </div>
     )
   }
