@@ -12,7 +12,15 @@ router.route('/').get((req, res) => {
 router.route('/:id').get((req,res) => {
     User.findById(req.params.id)
     .then(users => res.json(users))
-    .catch(err => res.status(400).json('Error : ' + er));
+    .catch(err => res.status(400).json('Error : ' + err));
+})
+
+// localhost/users/email will return user with that email.
+router.route('/by-email/:email').get((req,res) => {
+    console.log(req.param.email)
+    User.find({email : req.params.email })
+    .then(user => res.json(user))
+    .catch(err => res.status(404).json('Error : ' + err))
 })
 
 router.route('/update').get((req,res) => {
