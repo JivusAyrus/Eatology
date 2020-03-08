@@ -6,3 +6,8 @@
 .cardrow::-webkit-scrollbar {
     display: none;
 }
+
+.cardrow{
+    overflowX:scroll;
+    msOverflowStyle:none;
+}

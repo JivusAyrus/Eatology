@@ -2,19 +2,34 @@ import React, { Component } from 'react'
 import '../Css/Card.css'
 import $ from "jquery";
 export class Card extends Component {
-    componentDidMount() {
-        $(document).ready(function () {
-            $('.heart').on('click', function () {
-                $('.heart').toggleClass('heartactive');
-            });
-        });
+
+    constructor(props) {
+        super(props)
+        this.heart = this.heart.bind(this);
+        this.state = {
+            title : props.title,
+            img: props.img,
+            isFavorite:false,
+            //var element = document.create
+        }
+    }
+    heart() {
+        this.setState(state => ({
+          isFavorite:!this.state.isFavorite
+        }));
+        if(this.state.isFavorite){
+            //add to favs
+        }
+        else{
+            //remove from favs
+        }
     }
     render() {
         return (
             <div>
                 <div class="custcar">
-                    <img src={require('./a.jpg')} class="card-img-top" alt="..." width="300" height="200"/>
-                    <p class="car-title inline">Maggie<a className="heart"><i class="fa fa-heart-o" aria-hidden="true"></i></a></p>
+                    <img src= {this.state.img ==null?"https://www.transparentpng.com/thumb/food/Ha2HDD-food-cut-out-png.png":this.state.img} class="card-img-top" alt="..." width="300" height="200"/>
+                    <p class="car-title inline">{this.state.title}</p><div><i  onClick={this.heart} class={this.state.isFavorite?"heart fa fa-heart":" heart fa fa-heart-o"}></i></div>
                 </div>
             </div>
         )

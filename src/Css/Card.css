@@ -10,7 +10,7 @@
     font-family:sans-serif;
     color:red;
     font-weight: 400;
-    font-size: 25px;
+    font-size: 1.0vw;
 }
 .inline{
     display:inline;
@@ -19,7 +19,7 @@
     float:right;
     margin-top:5px;
 }
-.car-title a.heartactive{
-    background-color: red;
-    
+.heart{
+    color:red;
+    font-size: 20px;
 }
