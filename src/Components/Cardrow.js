@@ -21,51 +21,51 @@ export class Cardrow extends Component {
     }
   }
   componentDidMount() {
-    // fetch("https://api.spoonacular.com/recipes/random?number=10&apiKey=036d2ceeeb994c60b37c1b8d1694c643")
-    // .then(res => res.json())
-    // .then(
-    //   (result) => {
-    //     console.log(result)
-    //     this.setState({
-    //       isLoaded: true,
-    //       items: result.recipes
-    //     });
+    fetch("https://api.spoonacular.com/recipes/random?number=10&apiKey=036d2ceeeb994c60b37c1b8d1694c643")
+    .then(res => res.json())
+    .then(
+      (result) => {
+        console.log(result)
+        this.setState({
+          isLoaded: true,
+          items: result.recipes
+        });
+      },
+      //036d2ceeeb994c60b37c1b8d1694c643
+      // Note: it's important to handle errors here
+      // instead of a catch() block so that we don't swallow
+      // exceptions from actual bugs in components.
+      (error) => {
+        this.setState({
+          isLoaded: false,
+          error
+        });
+      }
+    )
+
+    // var temp = [
+    //   {
+    //     "title": "Maggie",
+    //     "image": null
     //   },
-    //   //036d2ceeeb994c60b37c1b8d1694c643
-    //   // Note: it's important to handle errors here
-    //   // instead of a catch() block so that we don't swallow
-    //   // exceptions from actual bugs in components.
-    //   (error) => {
-    //     this.setState({
-    //       isLoaded: false,
-    //       error
-    //     });
-    //   }
-    // )
+    //   {
+    //     "title": "Maggie",
+    //     "image": null
+    //   },
+    //   {
+    //     "title": "Maggie",
+    //     "image": null
+    //   },
+    //   {
+    //     "title": "Maggie",
+    //     "image": null
+    //   },
+    // ]
 
-    var temp = [
-      {
-        "title": "Maggie",
-        "image": null
-      },
-      {
-        "title": "Maggie",
-        "image": null
-      },
-      {
-        "title": "Maggie",
-        "image": null
-      },
-      {
-        "title": "Maggie",
-        "image": null
-      },
-    ]
-
-    this.setState({
-      isLoaded: true,
-      items: temp
-    });
+    // this.setState({
+    //   isLoaded: true,
+    //   items: temp
+    // });
   }
   render() {
 
