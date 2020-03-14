@@ -42,7 +42,6 @@ export class Mynavbar extends Component {
                 $('.overlay').addClass('active');
 
             });
-
             $('.anchors').on('click', function () {
                 $('#sidebar').toggleClass('active');
                 $('.overlay').removeClass('active');
