@@ -44,5 +44,31 @@ input:focus{
     background-color: red !important;
     color:white !important;
 }
+.profile{
+    margin-left:170px;
+    width:100px;
+    height:100px;
+    border-radius: 50%;
+    border:2px solid red;
+    position:relative;
+}
+.profile img{
+    width:100%;
+    height:100%;
+    border-radius: 50%;
+}
+.profile i{
+    position: absolute;
+    top: 70px;
+    right: -7px;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border:1px solid red;
+}
 
 
