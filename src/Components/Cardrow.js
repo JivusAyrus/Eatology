@@ -66,7 +66,6 @@ export class Cardrow extends Component {
     //   isLoaded: true,
     //   items: temp
     // });
-    console.log(this.state.recipes)
   }
   render() {
 

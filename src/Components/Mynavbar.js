@@ -10,21 +10,21 @@ import Favorite from './Favorite'
 import {
     Switch,
     Route,
-    Link
+    Link,
+    withRouter
 } from "react-router-dom";
-
-var userJson = JSON.parse(sessionStorage.getItem('user')) 
 
 export class Mynavbar extends Component {
 
     constructor(props) {
         super(props)
 
-        
         this.state = {
-            user: userJson
+            // user: JSON.parse(sessionStorage.getItem('user'))
         }
-}
+    }
+
+
 
 
     componentDidMount() {
@@ -51,40 +51,41 @@ export class Mynavbar extends Component {
                 $('.login').removeClass('active');
                 $('.favorites').removeClass('active');
                 $('.settings').removeClass('active');
-                $('.contact').removeClass('active');
+                $('.logout').removeClass('active');
             });
             $('.Login').on('click', function () {
                 $('.login').addClass('active');
                 $('.home').removeClass('active');
                 $('.favorites').removeClass('active');
                 $('.settings').removeClass('active');
-                $('.contact').removeClass('active');
+                $('.logout').removeClass('active');
             });
             $('.Favorites').on('click', function () {
                 $('.favorites').addClass('active');
                 $('.login').removeClass('active');
                 $('.home').removeClass('active');
                 $('.settings').removeClass('active');
-                $('.contact').removeClass('active');
+                $('.logout').removeClass('active');
             });
             $('.Settings').on('click', function () {
                 $('.settings').addClass('active');
                 $('.login').removeClass('active');
                 $('.favorites').removeClass('active');
                 $('.home').removeClass('active');
-                $('.contact').removeClass('active');
+                $('.logout').removeClass('active');
             });
-            $('.Contact').on('click', function () {
-                $('.contact').addClass('active');
+            $('.Logout').on('click', function () {
+                $('.logout').addClass('active');
                 $('.login').removeClass('active');
                 $('.favorites').removeClass('active');
                 $('.home').removeClass('active');
                 $('.settings').removeClass('active');
             });
-        });  
+        });
     }
 
     render() {
+        const { router, params, location, routes } = this.props
         return (
             <div>
                 <div className="wrapper" >
@@ -109,8 +110,11 @@ export class Mynavbar extends Component {
                             <li className="settings">
                                 <Link to="/login" className="anchors Settings" style={{ color: "white" }}>Settings</Link>
                             </li>
-                            <li className="contact">
-                                <Link onClick={this.logout()} className="anchors Contact" style={{ color: "white" }}>Logout</Link>
+                            <li className="logout">
+                                <Link onClick={() => {
+                                    sessionStorage.clear()
+                                    location.state = null
+                                }} className="anchors Logout" style={{ color: "white" }}>Logout</Link>
                             </li>
                         </ul>
                         <ul class="list-unstyled list-inline" style={{ fontSize: "28px", marginTop: "280px" }}>
@@ -127,7 +131,7 @@ export class Mynavbar extends Component {
                             </div>
                             <Link to="/" style={{ textDecoration: "none" }}><h4 id="font">Eatology!</h4></Link>
                             <div class="tag">
-                                <p>Welcome {this.state.user == null ? "User !" : this.state.user.username + "!"}
+                                <p>Welcome {sessionStorage.getItem('user') == null ? "User !" : location.state.user.username + "!"}
                                     <Link to="/favorite" style={{ fontSize: "26px", color: "red" }}><i class="fa fa-heart" aria-hidden="true"></i></Link></p>
                             </div>
                         </nav>
@@ -146,11 +150,10 @@ export class Mynavbar extends Component {
             </div>
         )
     }
-    logout() {
-        sessionStorage.clear()
-    }
+
+
 }
 
 
-export default Mynavbar
+export default withRouter(Mynavbar)
 
