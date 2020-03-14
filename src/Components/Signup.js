@@ -53,7 +53,7 @@ export class Signup extends Component {
     render() {
         return (
             <div class="body">
-                <div class="card" style={{ marginTop: "90px" }}>
+                <div class="card" style={{ marginTop: "60px" }}>
                     <div class="card-body">
                         <form>
                             <p class="card-title">Signup</p>
@@ -62,6 +62,7 @@ export class Signup extends Component {
                             <input type="email" name="email" pattern = "(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)" placeholder="Email" required title="eg. abc@gmail.com, abc@dr-ait.org" /><br />
                             <input type="password" name="password" placeholder="Password" required minlength="8"/><br />
                             <input type="password" name="cpass" placeholder="Confirm Password" required minlength="8"/><br />
+                            <input type="file" name="profilepic" placeholder="Profile Image" required/><br />
                             <button type="submit" class="btn btn-outline-danger">Sign Up</button>
                         </form>
 
