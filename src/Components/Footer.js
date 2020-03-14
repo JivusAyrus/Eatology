@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import '../Css/Footer.css'
+import {
+  Link
+} from "react-router-dom";
 export class Footer extends Component {
     render() {
         return (
@@ -11,11 +14,11 @@ export class Footer extends Component {
                 <div class="col-lg-3">
                   <h5>Site Map</h5>
                   <ul class="list-unstyled quick-links">
-                    <li><a href="..."><i class="fa fa-angle-double-right"></i>Home</a></li>
-                    <li><a href="..."><i class="fa fa-angle-double-right"></i>Search Food</a></li>
-                    <li><a href="..."><i class="fa fa-angle-double-right"></i>Favorites</a></li>
-                    <li><a href="..."><i class="fa fa-angle-double-right"></i>Profile</a></li>
-                    <li><a href="..."><i class="fa fa-angle-double-right"></i>Contact Us</a></li>
+                    <li><Link to="/"><i class="fa fa-angle-double-right"></i>Home</Link></li>
+                    <li><Link to=""><i class="fa fa-angle-double-right"></i>Search Food</Link></li>
+                    <li><Link to="/favorite"><i class="fa fa-angle-double-right"></i>Favorites</Link></li>
+                    <li><Link to=""><i class="fa fa-angle-double-right"></i>Profile</Link></li>
+                    <li><Link to=""><i class="fa fa-angle-double-right"></i>Contact Us</Link></li>
                   </ul>
                 </div>
                 <div class="col-lg-6"></div>

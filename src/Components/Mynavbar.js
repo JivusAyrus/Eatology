@@ -7,6 +7,7 @@ import Login from './Login'
 import Signup from './Signup'
 import Footer from './Footer'
 import Favorite from './Favorite'
+import UpdateProfile from './UpdateProfile'
 import {
     Switch,
     Route,
@@ -42,7 +43,6 @@ export class Mynavbar extends Component {
                 $('.overlay').addClass('active');
 
             });
-
             $('.anchors').on('click', function () {
                 $('#sidebar').toggleClass('active');
                 $('.overlay').removeClass('active');
@@ -109,7 +109,7 @@ export class Mynavbar extends Component {
                                 <Link to="/favorite" className="anchors Favorites" style={{ color: "white" }}>Favorites</Link>
                             </li>
                             <li className="settings">
-                                <Link to="/login" className="anchors Settings" style={{ color: "white" }}>Settings</Link>
+                                <Link to="/updateprofile" className="anchors Settings" style={{ color: "white" }}>Update Profile</Link>
                             </li>
                             <li className="logout">
                                 <Link onClick={() => {
@@ -140,6 +140,7 @@ export class Mynavbar extends Component {
                             <Route path="/signup"><Signup /></Route>
                             <Route path="/favorite"><Favorite /></Route>
                             <Route path="/login"><Login /></Route>
+                            <Route path="/updateprofile"><UpdateProfile /></Route>
                             <Route path="/"><HomePage /></Route>
                         </Switch>
                     </div>

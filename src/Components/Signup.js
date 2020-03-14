@@ -2,7 +2,23 @@ import React, { Component } from 'react'
 import "../Css/Signup.css"
 import $ from "jquery"
 export class Signup extends Component {
+    
     componentDidMount() {
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+        
+                reader.onload = function (e) {
+                    $('#image').attr('src', e.target.result);
+                }
+        
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        
+        $("#propic").change(function(){
+            readURL(this);
+        });
         $("form").submit(function (event) {
             var input_values = $(this).serializeArray();
             if ($('input[name="password"]').val() == $('input[name="cpass"]').val()) {
@@ -53,14 +69,20 @@ export class Signup extends Component {
     render() {
         return (
             <div class="body">
-                <div class="card" style={{ marginTop: "90px" }}>
+                <div class="card" style={{ marginTop: "40px" }}>
                     <div class="card-body">
                         <form>
                             <p class="card-title">Signup</p>
-                            <input type="text" name="username" placeholder="First Name" required />
+                            <div class="profile">
+                                <img id="image" src={require("./default profile.png")}/>
+                                <i class="fa fa-edit" onClick={this.handleClick}><input hidden id="propic" type="file" ref={imageref => this.imageHandler=imageref} attach="image/*"/></i>
+                            </div><br/>
+                            
+                            <input type="text" name="fullname" placeholder="Full Name" required />
+                            <input type="text" name="username" placeholder="Public User Name (max 6 characters)" required pattern="(^.{6})"/>
                             <input type="email" name="email" pattern = "(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)" placeholder="Email" required title="eg. abc@gmail.com, abc@dr-ait.org" /><br />
-                            <input type="password" name="password" placeholder="Password" required /><br />
-                            <input type="password" name="cpass" placeholder="Confirm Password" required /><br />
+                            <input type="password" name="password" placeholder="Password" required minlength="8"/><br />
+                            <input type="password" name="cpass" placeholder="Confirm Password" required minlength="8"/><br />
                             <button type="submit" class="btn btn-outline-danger">Sign Up</button>
                         </form>
 
@@ -69,6 +91,8 @@ export class Signup extends Component {
             </div>
         )
     }
+    handleClick=(e) => {this.imageHandler.click()}
+    
 }
 
 export default Signup
