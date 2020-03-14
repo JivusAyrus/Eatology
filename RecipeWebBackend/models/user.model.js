@@ -22,6 +22,12 @@ var UserSchema = new Schema({
         type: String,
         required: true,
         trim: true,
+        maxlength: 6
+    },
+    fullname: {
+        type : String,
+        required: true,
+        trim: true
     },
     password: {
         type: String,
