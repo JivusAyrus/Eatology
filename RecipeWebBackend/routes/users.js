@@ -1,7 +1,7 @@
 const router = require('express').Router();
 let User = require('../models/user.model');
 var multer = require('multer')
-var gridfs = require('multer-gridfs-storage')
+
 
 //Setting up multer to store images in /uploads
 const storage = multer.diskStorage({

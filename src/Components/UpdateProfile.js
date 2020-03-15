@@ -31,7 +31,7 @@ export class UpdateProfile extends Component {
                             </div><br/>
                             
                             <input type="text" name="fullname" placeholder="Full Name" value="" required />
-                            <input type="text" name="username" placeholder="Public User Name (max 6 characters)" value="" required pattern="(^.{6})"/>
+                            <input type="text" name="username" placeholder="Public User Name (max 6 characters)" value="" required maxlength="6"/>
                             <input type="email" name="email" pattern = "(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)" placeholder="Email" required title="eg. abc@gmail.com, abc@dr-ait.org" value="" /><br />
                             <button type="submit" class="btn btn-outline-danger">Update</button>
                         </form>

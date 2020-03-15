@@ -1,7 +1,14 @@
 import React, { Component } from 'react'
 import "../Css/Signup.css"
 import $ from "jquery"
+import { Redirect } from 'react-router-dom'
 export class Signup extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            isSignedUp: false
+        }
+    }
     
     componentDidMount() {
         function readURL(input) {
@@ -11,7 +18,6 @@ export class Signup extends Component {
                 reader.onload = function (e) {
                     $('#image').attr('src', e.target.result);
                 }
-        
                 reader.readAsDataURL(input.files[0]);
             }
         }
@@ -19,30 +25,32 @@ export class Signup extends Component {
         $("#propic").change(function(){
             readURL(this);
         });
+        var that = this;
         $("form").submit(function (event) {
             var input_values = $(this).serializeArray();
             if ($('input[name="password"]').val() == $('input[name="cpass"]').val()) {
-
-
-                var post_JSON = {};
+                var post_JSON = new FormData();
                 $.each(input_values, function (i, field) {
                     if (field.name == 'cpass') return
-                    post_JSON[field.name] = field.value;
+                    post_JSON.append(field.name,field.value);
                 });
-                // console.log(post_JSON)
-
+                post_JSON.append("userImage",document.getElementById('propic').files[0])
                 $.ajax({
                     type: "post",
                     url: "http://localhost:5000/users/add",
                     dataType: "json",
-                    data: JSON.stringify(post_JSON),
+                    data: post_JSON,
+                    contentType:false,
+                    cache:false,
                     processData: false,                     //Assigns the data to post request body and not url
-                    contentType: "application/json",
                     success: (data, status, jqXHR) => {
                         console.log(data);
+                        that.setState({
+                            isSignedUp:true 
+                        })
                     },
                     error: (jqXHR, status, err) => {
-                        console.log(jqXHR.responseText);
+                        console.log(jqXHR);
                         alert('A user with this email already exists !')
                         $('input[name="email"]').val('')
                         $('input[name="cpass"]').val('')
@@ -67,6 +75,13 @@ export class Signup extends Component {
     }
 
     render() {
+        if (this.state.isSignedUp) {
+            return <Redirect to={{
+                pathname: '/login',
+                state: { user: JSON.parse(sessionStorage.getItem('user')) }
+            }}/>
+        }
+        else{
         return (
             <div class="body">
                 <div class="card" style={{ marginTop: "40px" }}>
@@ -75,11 +90,11 @@ export class Signup extends Component {
                             <p class="card-title">Signup</p>
                             <div class="profile">
                                 <img id="image" src={require("./default profile.png")}/>
-                                <i class="fa fa-edit" onClick={this.handleClick}><input hidden id="propic" type="file" ref={imageref => this.imageHandler=imageref} attach="image/*"/></i>
+                                <i class="fa fa-edit" onClick={this.handleClick}></i><input hidden id="propic" name="userImage" type="file" ref={imageref => this.imageHandler=imageref} attach="image/*"/>
                             </div><br/>
                             
                             <input type="text" name="fullname" placeholder="Full Name" required />
-                            <input type="text" name="username" placeholder="Public User Name (max 6 characters)" required pattern="(^.{6})"/>
+                            <input type="text" name="username" placeholder="Public User Name (max 6 characters)" required maxlength="6"/>
                             <input type="email" name="email" pattern = "(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)" placeholder="Email" required title="eg. abc@gmail.com, abc@dr-ait.org" /><br />
                             <input type="password" name="password" placeholder="Password" required minlength="8"/><br />
                             <input type="password" name="cpass" placeholder="Confirm Password" required minlength="8"/><br />
@@ -90,6 +105,7 @@ export class Signup extends Component {
                 </div>
             </div>
         )
+        }
     }
     handleClick=(e) => {this.imageHandler.click()}
     
