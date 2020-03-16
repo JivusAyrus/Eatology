@@ -33,7 +33,7 @@ var UserSchema = new Schema({
         type: String,
         required: true,
     },
-    favourites: [String],
+    favourites: String,
     profile_img: Buffer,
     email: {
         type: String,
