@@ -124,4 +124,21 @@ router.route('/update/:id').post(upload.single('userImage'), (req, res) => {
 
 })
 
+router.route('/update/add-favourite/:id').post(upload.single('userImage'), (req, res) => {
+    console.log(req.file)
+    var username
+    User.findById(req.params.id)
+        .then(users => {
+            username = users.username
+                User.findOneAndUpdate({ _id: req.params.id }, {
+                    favourites : req.body.favourites
+                })
+                .then(() => res.json(`${username} has been successfully updated !`))
+                    .catch(err => res.status(400).json('Error : ' + err));
+                    
+        })
+        .catch(err => res.status(400).json('Error : ' + err));
+
+})
+
 module.exports = router;
