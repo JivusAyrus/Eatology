@@ -94,44 +94,45 @@ router.route('/add').post(upload.single('userImage'), (req, res) => {
 })
 
 // localhost/users/update/:id will update the user whose id is specified
-router.route('/update/:id').post(upload.single('userImage'), (req, res) => {
-    console.log(req.file)
+// router.route('/update/:id').post(upload.single('userImage'), (req, res) => {
+//     console.log(req.file)
+//     var username
+//     User.findById(req.params.id)
+//         .then(users => {
+//             username = users.username
+//             if (req.file != undefined) {
+//                 User.findOneAndUpdate({ _id: req.params.id }, {
+//                     username: req.body.username,
+//                     fullname: req.body.fullname,
+//                     email: req.body.email,
+//                     profile_img: req.file.path
+//                 })
+//                     .then(() => res.json(`${username} has been successfully updated !`))
+//                     .catch(err => res.status(400).json('Error : ' + err));
+//             }
+//             else {
+//                 User.findOneAndUpdate({ _id: req.params.id }, {
+//                     username: req.body.username,
+//                     fullname: req.body.fullname,
+//                     email: req.body.email,
+//                 })
+//                     .then(() => res.json(`${username} has been successfully updated !`))
+//                     .catch(err => res.status(400).json('Error : ' + err));
+//             }
+//         })
+//         .catch(err => res.status(400).json('Error : ' + err));
+
+// })
+
+router.route('/update/add-favourite/:id').post((req, res) => {
     var username
+    console.log('hello')
     User.findById(req.params.id)
         .then(users => {
             username = users.username
-            if (req.file != undefined) {
                 User.findOneAndUpdate({ _id: req.params.id }, {
-                    username: req.body.username,
-                    fullname: req.body.fullname,
-                    email: req.body.email,
-                    profile_img: req.file.path
-                })
-                    .then(() => res.json(`${username} has been successfully updated !`))
-                    .catch(err => res.status(400).json('Error : ' + err));
-            }
-            else {
-                User.findOneAndUpdate({ _id: req.params.id }, {
-                    username: req.body.username,
-                    fullname: req.body.fullname,
-                    email: req.body.email,
-                })
-                    .then(() => res.json(`${username} has been successfully updated !`))
-                    .catch(err => res.status(400).json('Error : ' + err));
-            }
-        })
-        .catch(err => res.status(400).json('Error : ' + err));
-
-})
-
-router.route('/update/add-favourite/:id').post(upload.single('userImage'), (req, res) => {
-    console.log(req.file)
-    var username
-    User.findById(req.params.id)
-        .then(users => {
-            username = users.username
-                User.findOneAndUpdate({ _id: req.params.id }, {
-                    favourites : req.body.favourites
+                    $push : {favourites : req.body.favourite}
+                    
                 })
                 .then(() => res.json(`${username} has been successfully updated !`))
                     .catch(err => res.status(400).json('Error : ' + err));
