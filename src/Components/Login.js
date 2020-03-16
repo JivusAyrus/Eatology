@@ -41,6 +41,7 @@ export class Login extends Component {
                     this.setState({
                         isLoggedIn: true
                     })
+                    console.log(data[0])
                     console.log("LOGGED INN!!")
 
                 }.bind(this)

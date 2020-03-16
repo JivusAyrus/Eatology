@@ -8,6 +8,7 @@ import Signup from './Signup'
 import Footer from './Footer'
 import Favorite from './Favorite'
 import UpdateProfile from './UpdateProfile'
+import { createBrowserHistory } from 'history'
 import {
     Switch,
     Route,
@@ -96,7 +97,16 @@ export class Mynavbar extends Component {
                         </div>
                         <div className="sidebar-header">
                             <h1>Eatology!</h1>
-                            <img src={require('./Suvij.jpeg')} alt="" />
+                            {
+
+                                sessionStorage.getItem('user') == null && location.state != null ? <img src={"data:image/gif;base64," + Buffer.from(location.state.user.profile_img.data).toString('base64')} /> :
+                                    sessionStorage.getItem('user') != null && location.state == null ? <img src={"data:image/gif;base64," + Buffer.from(JSON.parse(sessionStorage.getItem('user')).profile_img.data).toString('base64')} /> :
+                                        sessionStorage.getItem('user') != null && location.state != null ? <img src={"data:image/gif;base64," + Buffer.from(JSON.parse(sessionStorage.getItem('user')).profile_img.data).toString('base64')} /> :
+                                            <img src={require('./default profile.png')} />
+
+                                //sessionStorage.getItem('user') == null || location.state == null ? <img src={require('./default profile.png')} alt="" /> : <img src={"data:image/gif;base64," + Buffer.from(location.state.user.profile_img.data).toString('base64')} />
+
+                            }
                         </div>
                         <ul className="list-unstyled components sidelinks" >
                             <li className="home">
@@ -115,6 +125,7 @@ export class Mynavbar extends Component {
                                 <Link onClick={() => {
                                     sessionStorage.clear()
                                     location.state = null
+                                    window.history.pushState(null,null,'/')
                                 }} className="anchors Logout" style={{ color: "white" }}>Logout</Link>
                             </li>
                         </ul>
@@ -132,7 +143,14 @@ export class Mynavbar extends Component {
                             </div>
                             <Link to="/" style={{ textDecoration: "none" }}><h4 id="font">Eatology!</h4></Link>
                             <div class="tag">
-                                <p>Welcome {sessionStorage.getItem('user') == null ? "User !" : location.state.user.username + "!"}
+                                <p>Welcome {
+                                    sessionStorage.getItem('user') == null && location.state != null ? location.state.user.username + "!" :
+                                        sessionStorage.getItem('user') != null && location.state == null ? JSON.parse(sessionStorage.getItem('user')).username + "!" :
+                                            sessionStorage.getItem('user') != null && location.state != null ? JSON.parse(sessionStorage.getItem('user')).username + "!" :
+                                                "User!"
+
+
+                                }
                                     <Link to="/favorite" style={{ fontSize: "26px", color: "red" }}><i class="fa fa-heart" aria-hidden="true"></i></Link></p>
                             </div>
                         </nav>
