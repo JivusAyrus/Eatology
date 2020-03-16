@@ -73,7 +73,7 @@ export class Cardrow extends Component {
     if (this.state.isLoaded == true) {
       this.state.items.forEach(recipe => {
         cards.push(React.createElement('div', { class: "card-body" }, [
-          React.createElement(Card, { title: recipe.title, img: recipe.image })
+          React.createElement(Card, { recipe_info: recipe})
 
         ]))
       });

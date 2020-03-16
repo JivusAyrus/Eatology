@@ -7,8 +7,7 @@ export class Card extends Component {
         super(props)
         this.heart = this.heart.bind(this);
         this.state = {
-            title : props.title,
-            img: props.img,
+            recipe:props.recipe_info,
             isFavorite:false,
             //var element = document.create
         }
@@ -28,8 +27,8 @@ export class Card extends Component {
         return (
             <div>
                 <div class="custcar">
-                    <img src= {this.state.img ==null?"https://www.transparentpng.com/thumb/food/Ha2HDD-food-cut-out-png.png":this.state.img} class="card-img-top" alt="..." width="300" height="200"/>
-                    <p class="car-title inline">{this.state.title}</p><div><i  onClick={this.heart} class={this.state.isFavorite?"heart fa fa-heart":" heart fa fa-heart-o"}></i></div>
+                    <img src= {this.state.recipe.img ==null?"https://www.transparentpng.com/thumb/food/Ha2HDD-food-cut-out-png.png":this.state.recipe.img} class="card-img-top" alt="..." width="300" height="200"/>
+                    <p class="car-title inline">{this.state.recipe.title}</p><div><i  onClick={this.heart} class={this.state.isFavorite?"heart fa fa-heart":" heart fa fa-heart-o"}></i></div>
                 </div>
             </div>
         )
