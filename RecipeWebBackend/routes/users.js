@@ -1,17 +1,10 @@
 const router = require('express').Router();
 let User = require('../models/user.model');
 var multer = require('multer')
+var fs = require('fs')
 
 
-//Setting up multer to store images in /uploads
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'RecipeWebBackend/uploads/');
-    },
-    filename: function (req, file, cb) {
-        cb(null, new Date().toISOString().replace(/:/g, '-') + file.originalname);
-    }
-});
+const memoryStorage = multer.memoryStorage()
 
 const fileFilter = (req, file, cb) => {
     // reject a file
@@ -23,7 +16,7 @@ const fileFilter = (req, file, cb) => {
 };
 
 const upload = multer({
-    storage: storage,
+    storage: memoryStorage,
     limits: {
         fileSize: 1024 * 1024 * 5
     },
@@ -61,8 +54,8 @@ router.route('/add').post(upload.single('userImage'), (req, res) => {
         const fullname = req.body.fullname
         const email = req.body.email
         const password = req.body.password
-        const profile_img = req.file.path
-        console.log(req.file)
+        const profile_img = req.file.buffer
+        console.log(req.file.buffer)
         const newUser = User({
             username,
             fullname,
@@ -130,13 +123,13 @@ router.route('/update/add-favourite/:id').post((req, res) => {
     User.findById(req.params.id)
         .then(users => {
             username = users.username
-                User.findOneAndUpdate({ _id: req.params.id }, {
-                    $push : {favourites : req.body.favourite}
-                    
-                })
+            User.findOneAndUpdate({ _id: req.params.id }, {
+                $push: { favourites: req.body.favourite }
+
+            })
                 .then(() => res.json(`${username} has been successfully updated !`))
-                    .catch(err => res.status(400).json('Error : ' + err));
-                    
+                .catch(err => res.status(400).json('Error : ' + err));
+
         })
         .catch(err => res.status(400).json('Error : ' + err));
 

@@ -88,6 +88,9 @@ export class Mynavbar extends Component {
 
     render() {
         const { router, params, location, routes } = this.props
+        var user = JSON.parse(sessionStorage.getItem('user'))
+        if(user != null)
+            console.log(this.arrayBufferToBase64(user.profile_img.data))
         return (
             <div>
                 <div className="wrapper" >
@@ -98,14 +101,8 @@ export class Mynavbar extends Component {
                         <div className="sidebar-header">
                             <h1>Eatology!</h1>
                             {
-
-                                sessionStorage.getItem('user') == null && location.state != null ? <img src={"data:image/gif;base64," + Buffer.from(location.state.user.profile_img.data).toString('base64')} /> :
-                                    sessionStorage.getItem('user') != null && location.state == null ? <img src={"data:image/gif;base64," + Buffer.from(JSON.parse(sessionStorage.getItem('user')).profile_img.data).toString('base64')} /> :
-                                        sessionStorage.getItem('user') != null && location.state != null ? <img src={"data:image/gif;base64," + Buffer.from(JSON.parse(sessionStorage.getItem('user')).profile_img.data).toString('base64')} /> :
-                                            <img src={require('./default profile.png')} />
-
-                                //sessionStorage.getItem('user') == null || location.state == null ? <img src={require('./default profile.png')} alt="" /> : <img src={"data:image/gif;base64," + Buffer.from(location.state.user.profile_img.data).toString('base64')} />
-
+                                user == null ? <img src={require('./default profile.png')} /> :
+                                    <img src={"data:image/jpeg;base64," + this.arrayBufferToBase64(user.profile_img.data)} />
                             }
                         </div>
                         <ul className="list-unstyled components sidelinks" >
@@ -125,7 +122,7 @@ export class Mynavbar extends Component {
                                 <Link onClick={() => {
                                     sessionStorage.clear()
                                     location.state = null
-                                    window.history.pushState(null,null,'/')
+                                    window.history.pushState(null, null, '/')
                                 }} className="anchors Logout" style={{ color: "white" }}>Logout</Link>
                             </li>
                         </ul>
@@ -144,12 +141,8 @@ export class Mynavbar extends Component {
                             <Link to="/" style={{ textDecoration: "none" }}><h4 id="font">Eatology!</h4></Link>
                             <div class="tag">
                                 <p>Welcome {
-                                    sessionStorage.getItem('user') == null && location.state != null ? location.state.user.username + "!" :
-                                        sessionStorage.getItem('user') != null && location.state == null ? JSON.parse(sessionStorage.getItem('user')).username + "!" :
-                                            sessionStorage.getItem('user') != null && location.state != null ? JSON.parse(sessionStorage.getItem('user')).username + "!" :
-                                                "User!"
 
-
+                                    user == null ? "User!" : user.username
                                 }
                                     <Link to="/favorite" style={{ fontSize: "26px", color: "red" }}><i class="fa fa-heart" aria-hidden="true"></i></Link></p>
                             </div>
@@ -170,6 +163,13 @@ export class Mynavbar extends Component {
             </div>
         )
     }
+
+    arrayBufferToBase64(buffer) {
+        var binary = '';
+        var bytes = [].slice.call(new Uint8Array(buffer));
+        bytes.forEach((b) => binary += String.fromCharCode(b));
+        return window.btoa(binary);
+    };
 
 
 }

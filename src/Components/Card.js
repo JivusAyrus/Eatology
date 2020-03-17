@@ -15,19 +15,23 @@ export class Card extends Component {
     heart() {
         this.setState(state => ({
           isFavorite:!this.state.isFavorite
-        }));
+        }
+        ));
+
         if(this.state.isFavorite){
             //add to favs
+            
         }
         else{
             //remove from favs
         }
+        
     }
     render() {
         return (
             <div>
                 <div class="custcar">
-                    <img src= {this.state.recipe.img ==null?"https://www.transparentpng.com/thumb/food/Ha2HDD-food-cut-out-png.png":this.state.recipe.img} class="card-img-top" alt="..." width="300" height="200"/>
+                    <img src= {this.state.recipe.image ==null?"https://www.transparentpng.com/thumb/food/Ha2HDD-food-cut-out-png.png":this.state.recipe.image} class="card-img-top" alt="..." width="300" height="200"/>
                     <p class="car-title inline">{this.state.recipe.title}</p><div><i  onClick={this.heart} class={this.state.isFavorite?"heart fa fa-heart":" heart fa fa-heart-o"}></i></div>
                 </div>
             </div>

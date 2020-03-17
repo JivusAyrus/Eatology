@@ -57,9 +57,7 @@ export class Login extends Component {
         if (this.state.isLoggedIn) {
             return <Redirect to={{
                 pathname: '/',
-                state: { user: JSON.parse(sessionStorage.getItem('user')) }
-            }}
-    />
+            }} />
         }
         else {
             return (
