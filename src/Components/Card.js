@@ -32,6 +32,21 @@ export class Card extends Component {
             ));
             if (this.state.isFavorite) {
                 //remove from favs (because is favourite will become false in the next render)
+                $.ajax({
+                    type: "post",
+                    url: "http://localhost:5000/users/update/remove-favourite/" + JSON.parse(sessionStorage.getItem('user'))._id,
+                    dataType: "json",
+                    data: JSON.stringify({ favourite: this.state.recipe.id }),
+                    processData: false,                     //Assigns the data to post request body and not url
+                    contentType: "application/json",
+                    success: (data, status, jqXHR) => {
+                        console.log(data);
+                    },
+                    error: (jqXHR, status, err) => {
+                        console.log(jqXHR);
+                    },
+
+                });
 
             }
             else {
