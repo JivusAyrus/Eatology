@@ -21,14 +21,14 @@ export class Cardrow extends Component {
     }
   }
   componentDidMount() {
-    fetch("https://api.spoonacular.com/recipes/random?number=10&apiKey=036d2ceeeb994c60b37c1b8d1694c643")
+    fetch("https://api.spoonacular.com/recipes/search?number=10&apiKey=036d2ceeeb994c60b37c1b8d1694c643&query=burger")
     .then(res => res.json())
     .then(
       (result) => {
         console.log(result)
         this.setState({
           isLoaded: true,
-          items: result.recipes
+          items: result.results
         });
       },
       //036d2ceeeb994c60b37c1b8d1694c643
