@@ -44,7 +44,13 @@ export class Signup extends Component {
                     cache:false,
                     processData: false,                     //Assigns the data to post request body and not url
                     success: (data, status, jqXHR) => {
-                        console.log(data);
+                        var jsonObject = {};
+                        jsonObject["favourites"]=[]
+                        jsonObject["search_history"]=[]
+                        for (const [key, value]  of post_JSON.entries()) {
+                            jsonObject[key] = value;
+                        }
+                        sessionStorage.setItem("user", JSON.stringify(jsonObject))
                         that.setState({
                             isSignedUp:true 
                         })
@@ -64,7 +70,7 @@ export class Signup extends Component {
                 alert('Passwords do not match')
                 $('input[name="cpass"]').val('')
             }
-
+            
             event.preventDefault();
 
         });
@@ -77,8 +83,7 @@ export class Signup extends Component {
     render() {
         if (this.state.isSignedUp) {
             return <Redirect to={{
-                pathname: '/login',
-                state: { user: JSON.parse(sessionStorage.getItem('user')) }
+                pathname: '/'
             }}/>
         }
         else{
@@ -92,7 +97,6 @@ export class Signup extends Component {
                                 <img id="image" src={require("./default profile.png")}/>
                                 <i class="fa fa-edit" onClick={this.handleClick}></i><input hidden id="propic" name="userImage" type="file" ref={imageref => this.imageHandler=imageref} attach="image/*"/>
                             </div><br/>
-                            
                             <input type="text" name="fullname" placeholder="Full Name" required />
                             <input type="text" name="username" placeholder="Public User Name (max 6 characters)" required maxlength="6"/>
                             <input type="email" name="email" pattern = "(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)" placeholder="Email" required title="eg. abc@gmail.com, abc@dr-ait.org" /><br />
@@ -100,7 +104,6 @@ export class Signup extends Component {
                             <input type="password" name="cpass" placeholder="Confirm Password" required minlength="8"/><br />
                             <button type="submit" class="btn btn-outline-danger">Sign Up</button>
                         </form>
-
                     </div>
                 </div>
             </div>

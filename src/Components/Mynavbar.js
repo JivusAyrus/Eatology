@@ -4,6 +4,7 @@ import $ from "jquery";
 import HomePage from './HomePage';
 import MyParticles from './MyParticles'
 import Login from './Login'
+import Search from './Search'
 import Signup from './Signup'
 import Footer from './Footer'
 import Favorite from './Favorite'
@@ -15,6 +16,9 @@ import {
     Link,
     withRouter
 } from "react-router-dom";
+
+
+
 
 export class Mynavbar extends Component {
 
@@ -89,8 +93,6 @@ export class Mynavbar extends Component {
     render() {
         const { router, params, location, routes } = this.props
         var user = JSON.parse(sessionStorage.getItem('user'))
-        if(user != null)
-            console.log(this.arrayBufferToBase64(user.profile_img.data))
         return (
             <div>
                 <div className="wrapper" >
@@ -102,12 +104,16 @@ export class Mynavbar extends Component {
                             <h1>Eatology!</h1>
                             {
                                 user == null ? <img src={require('./default profile.png')} /> :
-                                    <img src={"data:image/jpeg;base64," + this.arrayBufferToBase64(user.profile_img.data)} />
+                                user.profile_img==null?<img src={require('./default profile.png')} />:
+                                <img src={"data:image/jpeg;base64," + this.arrayBufferToBase64(user.profile_img.data)} />
                             }
                         </div>
                         <ul className="list-unstyled components sidelinks" >
                             <li className="home">
                                 <Link to="/" className="anchors Home" style={{ color: "white" }}>Home</Link>
+                            </li>
+                            <li className="search">
+                                <Link to="/search" className="anchors Search" style={{ color: "white" }}>Search</Link>
                             </li>
                             <li className="login">
                                 <Link to="/login" className="anchors Login" style={{ color: "white" }}>Login</Link>
@@ -126,7 +132,7 @@ export class Mynavbar extends Component {
                                 }} className="anchors Logout" style={{ color: "white" }}>Logout</Link>
                             </li>
                         </ul>
-                        <ul class="list-unstyled list-inline" style={{ fontSize: "28px", marginTop: "280px" }}>
+                        <ul class="list-unstyled list-inline" style={{ fontSize: "28px", marginTop: "250px" }}>
                             <li class="list-inline-item"><a href="https://www.facebook.com/suvij.surya"><i class='fab fa-facebook-square'></i></a></li>
                             <li class="list-inline-item"><a href="..."><i class='fab fa-twitter'></i></a></li>
                             <li class="list-inline-item"><a href="https://www.instagram.com/vineetkgb"><i class='fab fa-instagram'></i></a></li>
@@ -141,7 +147,6 @@ export class Mynavbar extends Component {
                             <Link to="/" style={{ textDecoration: "none" }}><h4 id="font">Eatology!</h4></Link>
                             <div class="tag">
                                 <p>Welcome {
-
                                     user == null ? "User!" : user.username
                                 }
                                     <Link to="/favorite" style={{ fontSize: "26px", color: "red" }}><i class="fa fa-heart" aria-hidden="true"></i></Link></p>
@@ -149,6 +154,7 @@ export class Mynavbar extends Component {
                         </nav>
                         <Switch>
                             <Route path="/signup"><Signup /></Route>
+                            <Route path="/search"><Search /></Route>
                             <Route path="/favorite"><Favorite /></Route>
                             <Route path="/login"><Login /></Route>
                             <Route path="/updateprofile"><UpdateProfile /></Route>

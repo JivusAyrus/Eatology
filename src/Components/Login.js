@@ -10,6 +10,7 @@ import {
 import Signup from './Signup';
 import $ from "jquery"
 import { Redirect } from 'react-router-dom'
+
 export class Login extends Component {
 
     constructor(props) {
@@ -37,11 +38,11 @@ export class Login extends Component {
                     }
 
                     //Add login functionality
-                    sessionStorage.setItem("user", JSON.stringify(data[0]))
+                    
                     this.setState({
                         isLoggedIn: true
                     })
-                    console.log(data[0])
+                    
                     console.log("LOGGED INN!!")
 
                 }.bind(this)
@@ -62,6 +63,7 @@ export class Login extends Component {
         else {
             return (
                 <div class="body" id="root">
+                    
                     <div class="card">
                         <div class="card-body">
                             <form>
