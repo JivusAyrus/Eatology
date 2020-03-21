@@ -9,6 +9,7 @@ import Signup from './Signup'
 import Footer from './Footer'
 import Favorite from './Favorite'
 import UpdateProfile from './UpdateProfile'
+import Cusinefavs from './Cusinefavs'
 import { createBrowserHistory } from 'history'
 import {
     Switch,
@@ -153,6 +154,7 @@ export class Mynavbar extends Component {
                             </div>
                         </nav>
                         <Switch>
+                            <Route path="/cusinefavs"><Cusinefavs/></Route>
                             <Route path="/signup"><Signup /></Route>
                             <Route path="/search"><Search /></Route>
                             <Route path="/favorite"><Favorite /></Route>

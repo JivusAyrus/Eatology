@@ -68,8 +68,8 @@ export class Login extends Component {
                         <div class="card-body">
                             <form>
                                 <p class="card-title">Login</p>
-                                <input type="email" name="email" placeholder="Email" pattern="(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)" required title="eg. abc@gmail.com, abc@dr-ait.org" /><br />
-                                <input type="password" name="password" placeholder="Password" required /><br />
+                                <input class="logininp"type="email" name="email" placeholder="Email" pattern="(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)" required title="eg. abc@gmail.com, abc@dr-ait.org" /><br />
+                                <input class="logininp"type="password" name="password" placeholder="Password" required /><br />
                                 <button type="submit" class="btn btn-outline-danger">Log In</button>
                             </form>
                             <p class="link"><Link to="" style={{ color: "red" }}>Forgot Password?</Link>
