@@ -38,11 +38,13 @@ export class Login extends Component {
                     }
 
                     //Add login functionality
-                    
+                    sessionStorage.setItem('user', JSON.stringify(data[0]))
                     this.setState({
                         isLoggedIn: true
                     })
-                    
+
+
+
                     console.log("LOGGED INN!!")
 
                 }.bind(this)
@@ -63,13 +65,13 @@ export class Login extends Component {
         else {
             return (
                 <div class="body" id="root">
-                    
+
                     <div class="card">
                         <div class="card-body">
                             <form>
                                 <p class="card-title">Login</p>
-                                <input class="logininp"type="email" name="email" placeholder="Email" pattern="(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)" required title="eg. abc@gmail.com, abc@dr-ait.org" /><br />
-                                <input class="logininp"type="password" name="password" placeholder="Password" required /><br />
+                                <input class="logininp" type="email" name="email" placeholder="Email" pattern="(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)" required title="eg. abc@gmail.com, abc@dr-ait.org" /><br />
+                                <input class="logininp" type="password" name="password" placeholder="Password" required /><br />
                                 <button type="submit" class="btn btn-outline-danger">Log In</button>
                             </form>
                             <p class="link"><Link to="" style={{ color: "red" }}>Forgot Password?</Link>
