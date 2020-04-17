@@ -41,6 +41,7 @@ export class Card extends Component {
                     contentType: "application/json",
                     success: (data, status, jqXHR) => {
                         console.log(data);
+                        sessionStorage.setItem('user',JSON.stringify(data))
                     },
                     error: (jqXHR, status, err) => {
                         console.log(jqXHR);
@@ -60,6 +61,7 @@ export class Card extends Component {
                     contentType: "application/json",
                     success: (data, status, jqXHR) => {
                         console.log(data);
+                        sessionStorage.setItem('user',JSON.stringify(data))
                     },
                     error: (jqXHR, status, err) => {
                         console.log(jqXHR);

@@ -117,7 +117,9 @@ router.route('/update/add-favourite/:id').post((req, res) => {
                 $push: { favourites: req.body.favourite }
 
             })
-                .then(() => res.json(`${username} has been successfully updated !`))
+                .then(() => {
+                    res.json(users)
+                })
                 .catch(err => res.status(400).json('Error : ' + err));
 
         })
@@ -134,7 +136,9 @@ router.route('/update/remove-favourite/:id').post((req, res) => {
                 $pull: { favourites: { $in: [req.body.favourite] } }
 
             })
-                .then(() => res.json(`${username} has been successfully updated !`))
+                .then(() => {
+                    res.json(users)
+                })
                 .catch(err => res.status(400).json('Error : ' + err));
 
         })
