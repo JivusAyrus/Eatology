@@ -105,8 +105,8 @@ export class Mynavbar extends Component {
                             <h1>Eatology!</h1>
                             {
                                 user == null ? <img src={require('./default profile.png')} /> :
-                                user.profile_img==null?<img src={require('./default profile.png')} />:
-                                <img src={"data:image/jpeg;base64," + this.arrayBufferToBase64(user.profile_img.data)} />
+                                    user.profile_img == null ? <img src={require('./default profile.png')} /> :
+                                        <img src={"data:image/jpeg;base64," + this.arrayBufferToBase64(user.profile_img.data)} />
                             }
                         </div>
                         <ul className="list-unstyled components sidelinks" >
@@ -154,7 +154,7 @@ export class Mynavbar extends Component {
                             </div>
                         </nav>
                         <Switch>
-                            <Route path="/cusinefavs"><Cusinefavs/></Route>
+                            <Route path="/cusinefavs"><Cusinefavs /></Route>
                             <Route path="/signup"><Signup /></Route>
                             <Route path="/search"><Search /></Route>
                             <Route path="/favorite"><Favorite /></Route>

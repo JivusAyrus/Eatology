@@ -91,8 +91,17 @@ router.route('/update/:id').post(upload.single('profile_img'), (req, res) => {
     User.findById(req.params.id)
         .then(users => {
             username = users.username
-            User.findOneAndUpdate({ _id: req.params.id }, req.body)
-                .then(() => res.json(`${username} has been successfully updated !`))
+            var postObj = req.body
+            if (req.file != undefined)
+                postObj.profile_img = req.file.buffer
+            User.findOneAndUpdate({ _id: req.params.id }, postObj)
+                .then(() => {
+                    User.findById(req.params.id)
+                        .then(users => {
+                            res.json(users)
+                        })
+                        .catch(err => res.status(400).json('Error : ' + err));
+                })
                 .catch(err => res.status(400).json('Error : ' + err));
         })
         .catch(err => res.status(400).json('Error : ' + err));
