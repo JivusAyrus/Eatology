@@ -48,7 +48,7 @@ router.route('/by-email/:email').get((req, res) => {
 })
 
 // localhost/users/add will add a user whose object is specified in the request body.
-router.route('/add').post(upload.single('profile_img'), (req, res) => {
+router.route('/add').post(upload.single('userImage'), (req, res) => {
     if (req.file != undefined) {
         const username = req.body.username
         const fullname = req.body.fullname

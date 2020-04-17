@@ -53,41 +53,41 @@ export class Mynavbar extends Component {
                 $('#sidebar').toggleClass('active');
                 $('.overlay').removeClass('active');
             });
-            $('.Home').on('click', function () {
-                $('.home').addClass('active');
-                $('.login').removeClass('active');
-                $('.favorites').removeClass('active');
-                $('.settings').removeClass('active');
-                $('.logout').removeClass('active');
-            });
-            $('.Login').on('click', function () {
-                $('.login').addClass('active');
-                $('.home').removeClass('active');
-                $('.favorites').removeClass('active');
-                $('.settings').removeClass('active');
-                $('.logout').removeClass('active');
-            });
-            $('.Favorites').on('click', function () {
-                $('.favorites').addClass('active');
-                $('.login').removeClass('active');
-                $('.home').removeClass('active');
-                $('.settings').removeClass('active');
-                $('.logout').removeClass('active');
-            });
-            $('.Settings').on('click', function () {
-                $('.settings').addClass('active');
-                $('.login').removeClass('active');
-                $('.favorites').removeClass('active');
-                $('.home').removeClass('active');
-                $('.logout').removeClass('active');
-            });
-            $('.Logout').on('click', function () {
-                $('.logout').addClass('active');
-                $('.login').removeClass('active');
-                $('.favorites').removeClass('active');
-                $('.home').removeClass('active');
-                $('.settings').removeClass('active');
-            });
+            // $('.Home').on('click', function () {
+            //     $('.home').addClass('active');
+            //     $('.login').removeClass('active');
+            //     $('.favorites').removeClass('active');
+            //     $('.settings').removeClass('active');
+            //     $('.logout').removeClass('active');
+            // });
+            // $('.Login').on('click', function () {
+            //     $('.login').addClass('active');
+            //     $('.home').removeClass('active');
+            //     $('.favorites').removeClass('active');
+            //     $('.settings').removeClass('active');
+            //     $('.logout').removeClass('active');
+            // });
+            // $('.Favorites').on('click', function () {
+            //     $('.favorites').addClass('active');
+            //     $('.login').removeClass('active');
+            //     $('.home').removeClass('active');
+            //     $('.settings').removeClass('active');
+            //     $('.logout').removeClass('active');
+            // });
+            // $('.Settings').on('click', function () {
+            //     $('.settings').addClass('active');
+            //     $('.login').removeClass('active');
+            //     $('.favorites').removeClass('active');
+            //     $('.home').removeClass('active');
+            //     $('.logout').removeClass('active');
+            // });
+            // $('.Logout').on('click', function () {
+            //     $('.logout').addClass('active');
+            //     $('.login').removeClass('active');
+            //     $('.favorites').removeClass('active');
+            //     $('.home').removeClass('active');
+            //     $('.settings').removeClass('active');
+            // });
         });
     }
 

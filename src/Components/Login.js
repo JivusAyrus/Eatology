@@ -36,8 +36,7 @@ export class Login extends Component {
                         $('input[name="password"]').val('')
                         return
                     }
-
-                    //Add login functionality
+                    sessionStorage.setItem("user", JSON.stringify(data[0]))
                     
                     this.setState({
                         isLoggedIn: true
