@@ -41,7 +41,7 @@ export class Card extends Component {
                     contentType: "application/json",
                     success: (data, status, jqXHR) => {
                         console.log(data);
-                        sessionStorage.setItem('user',JSON.stringify(data))
+                        sessionStorage.setItem('user', JSON.stringify(data))
                     },
                     error: (jqXHR, status, err) => {
                         console.log(jqXHR);
@@ -61,7 +61,7 @@ export class Card extends Component {
                     contentType: "application/json",
                     success: (data, status, jqXHR) => {
                         console.log(data);
-                        sessionStorage.setItem('user',JSON.stringify(data))
+                        sessionStorage.setItem('user', JSON.stringify(data))
                     },
                     error: (jqXHR, status, err) => {
                         console.log(jqXHR);
@@ -73,10 +73,17 @@ export class Card extends Component {
 
     }
     render() {
+        var imgUrl;
+        if (this.state.recipe.image.startsWith("http")) {
+            imgUrl = this.state.recipe.image
+        }
+        else {
+            imgUrl = "https://spoonacular.com/recipeImages/" + this.state.recipe.image
+        }
         return (
             <div>
                 <div class="custcar">
-                    <img src={this.state.recipe.image == null ? "https://www.transparentpng.com/thumb/food/Ha2HDD-food-cut-out-png.png" : "https://spoonacular.com/recipeImages/" + this.state.recipe.image} class="card-img-top" alt="..." width="300" height="200" />
+                    <img src={this.state.recipe.image == null ? "https://www.transparentpng.com/thumb/food/Ha2HDD-food-cut-out-png.png" : imgUrl} class="card-img-top" alt="..." width="300" height="200" />
                     <p class="car-title inline">{this.state.recipe.title}</p><div><i onClick={this.heart} class={this.state.isFavorite ? "heart fa fa-heart" : " heart fa fa-heart-o"}></i></div>
                 </div>
             </div>
