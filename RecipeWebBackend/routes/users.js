@@ -2,6 +2,7 @@ const router = require('express').Router();
 let User = require('../models/user.model');
 var multer = require('multer')
 var fs = require('fs')
+var mailer = require("nodemailer")
 
 
 const memoryStorage = multer.memoryStorage()
@@ -113,31 +114,41 @@ router.route('/update/add-favourite/:id').post((req, res) => {
     User.findById(req.params.id)
         .then(users => {
             username = users.username
-            User.findOneAndUpdate({ _id: req.params.id }, {
-                $push: { favourites: req.body.favourite }
+            if (users.favourites.includes(req.body.favourite)) {
+                res.json(users)
+            }
+            else {
+                User.findOneAndUpdate({ _id: req.params.id }, {
+                    $push: { favourites: req.body.favourite }
 
-            })
-                .then(() => {
-                    res.json(users)
+                }, {
+                    new: true
                 })
-                .catch(err => res.status(400).json('Error : ' + err));
+                    .then(updatedUser => {
+                        res.json(updatedUser)
+                    })
+                    .catch(err => res.status(400).json('Error : ' + err));
 
+            }
         })
         .catch(err => res.status(400).json('Error : ' + err));
+
 
 })
 
 router.route('/update/remove-favourite/:id').post((req, res) => {
     var username
     User.findById(req.params.id)
-        .then(users => {
+        .then(async users => {
             username = users.username
             User.findOneAndUpdate({ _id: req.params.id }, {
                 $pull: { favourites: { $in: [req.body.favourite] } }
 
+            }, {
+                new: true
             })
-                .then(() => {
-                    res.json(users)
+                .then(updatedUser => {
+                    res.json(updatedUser)
                 })
                 .catch(err => res.status(400).json('Error : ' + err));
 
@@ -145,5 +156,42 @@ router.route('/update/remove-favourite/:id').post((req, res) => {
         .catch(err => res.status(400).json('Error : ' + err));
 
 })
+
+router.route('/send-otp/:email').post((req, res) => {
+    var email = req.params.email
+    var transporter = mailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'eatologyhq@gmail.com',
+            pass: 'eatology#pass'
+        }
+    });
+
+    var otp = genOtp()
+    var mailOptions = {
+        from: 'eatologyhq@gmail.com',
+        to: email,
+        subject: "Reset password",
+        html: "<h3>Your one time password is " + otp + "</h3>"+
+            "<h3>Regards,</h3><h3>Team Eatology.</h3>"
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+            res.json({ "otp": otp })
+        }
+    });
+})
+
+function genOtp() {
+    var otp = ""
+    for (var i = 0; i < 6; i++) {
+        otp += Math.trunc(Math.random() * 10)
+    }
+    return otp
+}
 
 module.exports = router;
