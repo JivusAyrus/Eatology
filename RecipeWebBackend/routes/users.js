@@ -49,7 +49,7 @@ router.route('/by-email/:email').get((req, res) => {
 })
 
 // localhost/users/add will add a user whose object is specified in the request body.
-router.route('/add').post(upload.single('userImage'), (req, res) => {
+router.route('/add').post(upload.single('profile_img'), (req, res) => {
     if (req.file != undefined) {
         const username = req.body.username
         const fullname = req.body.fullname
@@ -139,7 +139,7 @@ router.route('/update/add-favourite/:id').post((req, res) => {
 router.route('/update/remove-favourite/:id').post((req, res) => {
     var username
     User.findById(req.params.id)
-        .then(async users => {
+        .then(users => {
             username = users.username
             User.findOneAndUpdate({ _id: req.params.id }, {
                 $pull: { favourites: { $in: [req.body.favourite] } }
@@ -172,7 +172,7 @@ router.route('/send-otp/:email').post((req, res) => {
         from: 'eatologyhq@gmail.com',
         to: email,
         subject: "Reset password",
-        html: "<h3>Your one time password is " + otp + "</h3>"+
+        html: "<h3>Your one time password is " + otp + "</h3>" +
             "<h3>Regards,</h3><h3>Team Eatology.</h3>"
     };
 
@@ -184,6 +184,26 @@ router.route('/send-otp/:email').post((req, res) => {
             res.json({ "otp": otp })
         }
     });
+})
+
+router.route('/update/add-fav-cuisines/:id').post((req, res) => {
+
+    User.findById(req.params.id)
+        .then(user => {
+            User.findOneAndUpdate({ _id: req.params.id }, {
+                $push: { pref_cuisines: req.body.cuisines }
+
+            }, {
+                new: true
+            })
+                .then(user => {
+                    res.json({
+                        "success": true,
+                        "user": user
+                    })
+                })
+        })
+
 })
 
 function genOtp() {

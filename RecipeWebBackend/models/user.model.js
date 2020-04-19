@@ -35,6 +35,7 @@ var UserSchema = new Schema({
     },
     favourites: [String],
     profile_img: Buffer,
+    pref_cuisines : [String],
     email: {
         type: String,
         match: /.+@.+/i, //Validates email ids
