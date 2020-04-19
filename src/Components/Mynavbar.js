@@ -17,6 +17,9 @@ import {
     Link,
     withRouter
 } from "react-router-dom";
+import ForgotPassword from './ForgotPassword';
+import NewPassword from './NewPassword';
+import EnterOTP from './EnterOTP';
 
 
 
@@ -156,6 +159,9 @@ export class Mynavbar extends Component {
                         <Switch>
                             <Route path="/cusinefavs"><Cusinefavs /></Route>
                             <Route path="/signup"><Signup /></Route>
+                            <Route path="/enterotp"><EnterOTP /></Route>
+                            <Route path="/forgotpassword"><ForgotPassword /></Route>
+                            <Route path="/newpassword"><NewPassword /></Route>
                             <Route path="/search"><Search /></Route>
                             <Route path="/favorite"><Favorite /></Route>
                             <Route path="/login"><Login /></Route>

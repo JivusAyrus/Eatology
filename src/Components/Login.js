@@ -74,7 +74,7 @@ export class Login extends Component {
                                 <input class="logininp" type="password" name="password" placeholder="Password" required /><br />
                                 <button type="submit" class="btn btn-outline-danger">Log In</button>
                             </form>
-                            <p class="link"><Link to="" style={{ color: "red" }}>Forgot Password?</Link>
+                            <p class="link"><Link to="/forgotpassword" style={{ color: "red" }}>Forgot Password?</Link>
                                 <p>New User?<Link to="/signup" style={{ color: "red" }}>Sign Up</Link></p></p>
                         </div>
                     </div>

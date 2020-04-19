@@ -56,7 +56,9 @@ export class Favorite extends Component {
         cards.push(cardRow)
       })
       var cardRoot = React.createElement('div', { class: "row" }, cards)
-      return cardRoot
+      var refreshbtn = React.createElement('button',{class:"btn btn-outline-danger"},"Refresh")
+      var favpage = React.createElement('div',{},cardRoot,refreshbtn)
+      return favpage
     }
     else return (
       <div className="sweet-loading">
