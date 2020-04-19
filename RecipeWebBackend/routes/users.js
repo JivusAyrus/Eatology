@@ -64,7 +64,12 @@ router.route('/add').post(upload.single('profile_img'), (req, res) => {
             profile_img
         });
         newUser.save()
-            .then(() => res.json(`${username} has been successfully added !`))
+            .then(user => {
+                res.json({
+                    success:true,
+                    id:user._id
+                })
+            })
             .catch(err => res.status(400).json('Error : ' + err));
     }
     else {

@@ -47,6 +47,8 @@ export class Signup extends Component {
                         var jsonObject = {};
                         jsonObject["favourites"]=[]
                         jsonObject["search_history"]=[]
+                        jsonObject["pref_cuisines"]=[]
+                        jsonObject["_id"]=data.id
                         for (const [key, value]  of post_JSON.entries()) {
                             jsonObject[key] = value;
                         }
