@@ -56,8 +56,9 @@ export class Favorite extends Component {
         cards.push(cardRow)
       })
       var cardRoot = React.createElement('div', { class: "row" }, cards)
-      var refreshbtn = React.createElement('button',{class:"btn btn-outline-danger"},"Refresh")
-      var favpage = React.createElement('div',{},cardRoot,refreshbtn)
+      var refreshlogo = React.createElement('i',{class:"fa fa-refresh",ariaHidden:"true"})
+      var refreshbtn = React.createElement('button',{class:"btn btn-outline-danger",style:{marginTop:"10px",borderRadius:"100%"},onClick:()=>window.location.reload()},refreshlogo)
+      var favpage = React.createElement('div',{},refreshbtn,cardRoot)
       return favpage
     }
     else return (

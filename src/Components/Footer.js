@@ -38,7 +38,7 @@ export class Footer extends Component {
                   <ul class="list-unstyled list-inline social text-center">
                     <li class="list-inline-item"><a href="https://www.facebook.com/suvij.surya"><i class='fab fa-facebook-square'></i></a></li>
                     <li class="list-inline-item"><a href="..."><i class='fab fa-twitter'></i></a></li>
-                    <li class="list-inline-item"><a href="..."><i class='fab fa-github'></i></a></li>
+                    <li class="list-inline-item"><a href="https://github.com/JivusAyrus"><i class='fab fa-github'></i></a></li>
                     <li class="list-inline-item"><a href="https://www.instagram.com/vineetkgb"><i class='fab fa-instagram'></i></a></li>
                     <li class="list-inline-item"><a href="..."><i class="fa fa-info-circle"></i></a></li>
                   </ul>
