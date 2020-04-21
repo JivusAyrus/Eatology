@@ -1,6 +1,14 @@
 import React, { Component } from 'react'
 import '../Css/Card.css'
 import $ from "jquery";
+import { css } from "@emotion/core";
+import PulseLoader from "react-spinners/PulseLoader";
+
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 export class Card extends Component {
 
     constructor(props) {
@@ -17,11 +25,12 @@ export class Card extends Component {
         this.state = {
             recipe: props.recipe_info,
             isFavorite: added,
+            isLoading:false
             //var element = document.create
         }
     }
     heart() {
-
+        var that = this;
         if (sessionStorage.getItem('user') == null) {
             alert('Please login first')
         }
@@ -32,6 +41,9 @@ export class Card extends Component {
             ));
             if (this.state.isFavorite) {
                 //remove from favs (because is favourite will become false in the next render)
+                this.setState({
+                    isLoading:true
+                })
                 $.ajax({
                     type: "post",
                     url: "http://localhost:5000/users/update/remove-favourite/" + JSON.parse(sessionStorage.getItem('user'))._id,
@@ -42,9 +54,15 @@ export class Card extends Component {
                     success: (data, status, jqXHR) => {
                         console.log(data);
                         sessionStorage.setItem('user', JSON.stringify(data))
+                        that.setState({
+                            isLoading:false
+                        })
                     },
                     error: (jqXHR, status, err) => {
                         console.log(jqXHR);
+                        that.setState({
+                            isLoading:false
+                        })
                     },
 
                 });
@@ -52,6 +70,9 @@ export class Card extends Component {
             }
             else {
                 //add to favs (because is favourite will become true in the next render)
+                this.setState({
+                    isLoading:true
+                })
                 $.ajax({
                     type: "post",
                     url: "http://localhost:5000/users/update/add-favourite/" + JSON.parse(sessionStorage.getItem('user'))._id,
@@ -62,9 +83,15 @@ export class Card extends Component {
                     success: (data, status, jqXHR) => {
                         console.log(data);
                         sessionStorage.setItem('user', JSON.stringify(data))
+                        that.setState({
+                            isLoading:false
+                        })
                     },
                     error: (jqXHR, status, err) => {
                         console.log(jqXHR);
+                        that.setState({
+                            isLoading:false
+                        })
                     },
 
                 });
@@ -72,8 +99,35 @@ export class Card extends Component {
         }
 
     }
+
     render() {
         var imgUrl;
+        if(this.state.isLoading){
+            if (this.state.recipe.image.startsWith("http")) {
+                imgUrl = this.state.recipe.image
+            }
+            else {
+                imgUrl = "https://spoonacular.com/recipeImages/" + this.state.recipe.image
+            }
+            return (
+                <div>
+                    <div class="custcar">
+                        <img src={this.state.recipe.image == null ? "https://www.transparentpng.com/thumb/food/Ha2HDD-food-cut-out-png.png" : imgUrl} class="card-img-top" alt="..." width="300" height="200" />
+                        <p class="car-title inline">{this.state.recipe.title}</p>
+                        <div>
+                            <PulseLoader
+                            css={override}
+                            size={10}
+                            //size={"150px"} this also works
+                            color={"red"}
+                            loading="true"
+                            />
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+        else{
         if (this.state.recipe.image.startsWith("http")) {
             imgUrl = this.state.recipe.image
         }
@@ -84,10 +138,11 @@ export class Card extends Component {
             <div>
                 <div class="custcar">
                     <img src={this.state.recipe.image == null ? "https://www.transparentpng.com/thumb/food/Ha2HDD-food-cut-out-png.png" : imgUrl} class="card-img-top" alt="..." width="300" height="200" />
-                    <p class="car-title inline">{this.state.recipe.title}</p><div><i onClick={this.heart} class={this.state.isFavorite ? "heart fa fa-heart" : " heart fa fa-heart-o"}></i></div>
+                    <p class="car-title inline">{this.state.recipe.title}</p><div><i onClick={this.heart} class={this.state.isFavorite?"heart fa fa-heart":" heart fa fa-heart-o"}></i></div>
                 </div>
             </div>
         )
+        }
     }
 }
 

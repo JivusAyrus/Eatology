@@ -15,21 +15,21 @@ export class Footer extends Component {
                   <h5>Site Map</h5>
                   <ul class="list-unstyled quick-links">
                     <li><Link to="/"><i class="fa fa-angle-double-right"></i>Home</Link></li>
-                    <li><Link to=""><i class="fa fa-angle-double-right"></i>Search Food</Link></li>
+                    <li><Link to="/search"><i class="fa fa-angle-double-right"></i>Search Food</Link></li>
                     <li><Link to="/favorite"><i class="fa fa-angle-double-right"></i>Favorites</Link></li>
-                    <li><Link to=""><i class="fa fa-angle-double-right"></i>Profile</Link></li>
-                    <li><Link to=""><i class="fa fa-angle-double-right"></i>Contact Us</Link></li>
+                    <li><Link to="/updateprofile"><i class="fa fa-angle-double-right"></i>Profile</Link></li>
+                    <li><Link to="/contactus"><i class="fa fa-angle-double-right"></i>Contact Us</Link></li>
                   </ul>
                 </div>
                 <div class="col-lg-6"></div>
                 <div class="col-lg-3">
                 <h5>Quick links</h5>
                 <ul class="list-unstyled quick-links">
-                  <li><a href="..."><i class="fa fa-angle-double-right"></i>Company Home</a></li>
-                  <li><a href="..."><i class="fa fa-angle-double-right"></i>Add Job</a></li>
-                  <li><a href="..."><i class="fa fa-angle-double-right"></i>Search Employee</a></li>
-                  <li><a href="..."><i class="fa fa-angle-double-right"></i>Courses</a></li>
-                  <li><a href="..."><i class="fa fa-angle-double-right"></i>About Us</a></li>
+                  <li><Link to="/"><i class="fa fa-angle-double-right"></i>Home</Link></li>
+                  <li><Link to="/login"><i class="fa fa-angle-double-right"></i>Login</Link></li>
+                  <li><Link to="/signup"><i class="fa fa-angle-double-right"></i>Sign Up</Link></li>
+                  <li><Link to="/updateprofile"><i class="fa fa-angle-double-right"></i>Profile</Link></li>
+                  <li><Link to=""><i class="fa fa-angle-double-right"></i>About Us</Link></li>
                 </ul>
                 </div>
               </div><br/>
@@ -44,7 +44,6 @@ export class Footer extends Component {
                   </ul>
                 </div>
               </div>
-              
             </div>
           </section> 
             </div>
