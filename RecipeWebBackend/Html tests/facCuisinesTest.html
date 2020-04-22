@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<script>
+
+    function submit() {
+        cuisinesObj = { cuisines : ["american", "Indian", "Chinese"] }
+        $.ajax({
+            type: "post",
+            url: "http://localhost:5000/users/update/add-fav-cuisines/5e9f13f8b261d337f4d53e90",
+            dataType: "json",
+            data: JSON.stringify(cuisinesObj),
+            contentType: "application/json",
+            cache: false,
+            processData: false,                     //Assigns the data to post request body and not url
+            success: (data, status, jqXHR) => {
+                var updatedUser = JSON.stringify(data.user)
+                sessionStorage.setItem('user', updatedUser)
+                console.log(updatedUser)
+                console.log("FavCusines are added")
+                that.setState({
+                    isUpdated: true
+                })
+            },
+            error: (jqXHR, status, err) => {
+                console.log(jqXHR);
+            },
+
+        });
+    }
+
+</script>
+
+<body>
+    <center>
+        <button onclick="submit()">SUBMIT FAV CUISINES</button>
+    </center>
+</body>
+
+</html>

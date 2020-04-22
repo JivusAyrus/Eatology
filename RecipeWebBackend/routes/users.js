@@ -66,8 +66,8 @@ router.route('/add').post(upload.single('profile_img'), (req, res) => {
         newUser.save()
             .then(user => {
                 res.json({
-                    success:true,
-                    id:user._id
+                    success: true,
+                    id: user._id
                 })
             })
             .catch(err => res.status(400).json('Error : ' + err));
@@ -195,8 +195,9 @@ router.route('/update/add-fav-cuisines/:id').post((req, res) => {
 
     User.findById(req.params.id)
         .then(user => {
+            console.log("BODY IS " + JSON.stringify(req.body))
             User.findOneAndUpdate({ _id: req.params.id }, {
-                $push: { pref_cuisines: req.body.cuisines }
+                $push: { pref_cuisines: { $each: req.body.cuisines } }
 
             }, {
                 new: true
