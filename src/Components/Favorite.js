@@ -73,7 +73,7 @@ export class Favorite extends Component {
         else {
           this.state.items.forEach(recipe => {
             var card = React.createElement('div', { class: "card-body" }, [
-              React.createElement(Card, { recipe_info: recipe })
+              React.createElement(Card, { recipe_info: recipe,favpage:true })
             ])
             cardRow = React.createElement('div', { class: "col-lg-3" }, card)
             cards.push(cardRow)

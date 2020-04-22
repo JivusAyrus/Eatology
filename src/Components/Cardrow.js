@@ -13,23 +13,32 @@ const override = css`
 export class Cardrow extends Component {
   constructor(props) {
     super(props)
-
     this.state = {
       error: null,
       isLoaded: false,
-      items: {}
+      items: {},
+      url : "https://api.spoonacular.com/recipes/" + props.endpoint
     }
   }
   componentDidMount() {
-    fetch("https://api.spoonacular.com/recipes/search?number=10&apiKey=036d2ceeeb994c60b37c1b8d1694c643&query=burger")
+    console.log(this.state.url)
+    fetch(this.state.url)
     .then(res => res.json())
     .then(
       (result) => {
         console.log(result)
-        this.setState({
-          isLoaded: true,
-          items: result.results
-        });
+        if(result.recipes != undefined){
+          this.setState({
+            isLoaded: true,
+            items: result.recipes
+          });
+        }
+        else{
+          this.setState({
+            isLoaded: true,
+            items: result
+          });
+        }
       },
       //036d2ceeeb994c60b37c1b8d1694c643
       // Note: it's important to handle errors here
@@ -67,7 +76,7 @@ export class Cardrow extends Component {
     //   items: temp
     // });
   }
-  render() {
+  render(props) {
 
     var cards = []
     if (this.state.isLoaded == true) {
@@ -77,8 +86,9 @@ export class Cardrow extends Component {
 
         ]))
       });
-
-      var CardsElement = React.createElement('div', { class: "d-flex flex-row flex-nowrap" }, cards)
+      var heading = React.createElement('h3',{style:{color:"red",float:"left"}},this.props.title)
+      var linebreak = React.createElement('br')
+      var CardsElement = React.createElement('div', { class: "d-flex flex-row flex-nowrap" }, heading,linebreak,cards)
       var CardRowRoot = React.createElement('div', { class: 'cardrow', style: { overflowX: 'scroll', msOverflowStyle: 'none' } }, CardsElement)
       return CardRowRoot
     }

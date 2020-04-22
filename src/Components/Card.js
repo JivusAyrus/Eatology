@@ -57,6 +57,9 @@ export class Card extends Component {
                         that.setState({
                             isLoading:false
                         })
+                        if(this.props.favpage){
+                            window.location.reload()
+                        }
                     },
                     error: (jqXHR, status, err) => {
                         console.log(jqXHR);
@@ -103,7 +106,10 @@ export class Card extends Component {
     render() {
         var imgUrl;
         if(this.state.isLoading){
-            if (this.state.recipe.image.startsWith("http")) {
+            if(this.state.recipe.image == undefined){
+                imgUrl = this.state.recipe.sourceUrl
+            }
+            else if (this.state.recipe.image != undefined && this.state.recipe.image.startsWith("http")) {
                 imgUrl = this.state.recipe.image
             }
             else {
@@ -128,7 +134,10 @@ export class Card extends Component {
             )
         }
         else{
-        if (this.state.recipe.image.startsWith("http")) {
+            if(this.state.recipe.image == undefined){
+                imgUrl = this.state.recipe.sourceUrl
+            }
+        else if (this.state.recipe.image.startsWith("http")) {
             imgUrl = this.state.recipe.image
         }
         else {
