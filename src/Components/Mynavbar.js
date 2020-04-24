@@ -21,6 +21,7 @@ import ForgotPassword from './ForgotPassword';
 import NewPassword from './NewPassword';
 import EnterOTP from './EnterOTP';
 import ContactUs from './ContactUs';
+import RecipeInfo from './RecipeInfo';
 
 
 
@@ -152,13 +153,16 @@ export class Mynavbar extends Component {
                             <Link to="/" style={{ textDecoration: "none" }}><h4 id="font">Eatology!</h4></Link>
                             <div class="tag">
                                 <p>Welcome {
-                                    user == null ? "User!" : user.username
+                                    user == null ? "User!" : user.username 
                                 }
-                                    <Link to="/favorite" style={{ fontSize: "26px", color: "red" }}><i class="fa fa-heart" aria-hidden="true"></i></Link></p>
+                                    <Link to="/search" style={{ fontSize: "26px", color: "red" }}><i class="fa fa-search" aria-hidden="true"></i></Link>
+                                    <Link to="/favorite" style={{ fontSize: "26px", color: "red" }}><i class="fa fa-heart" aria-hidden="true"></i></Link>
+                                </p>
                             </div>
                         </nav>
                         <Switch>
                             <Route path="/cusinefavs"><Cusinefavs /></Route>
+                            <Route path="/recipeinfo"><RecipeInfo/></Route>
                             <Route path="/signup"><Signup /></Route>
                             <Route path="/contactus"><ContactUs /></Route>
                             <Route path="/enterotp"><EnterOTP /></Route>

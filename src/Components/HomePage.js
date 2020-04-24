@@ -4,8 +4,8 @@ import Cardrow from './Cardrow'
 import '../Css/HomePage.css'
 export class HomePage extends Component { 
     render() {
-        // return(<h1>Hey</h1>)
-        
+        return(<h1>Hey</h1>)
+        {/*
         var user = JSON.parse(sessionStorage.getItem('user'))
         if(user){ 
         // var favids = []
@@ -49,7 +49,7 @@ export class HomePage extends Component {
                 {/*
                 <Cardrow title="Hand picked for you" endpoint=""/>
                 <br/>
-                */}
+                
                 <h3 style={{color:"red",float:"left"}}><u>Vegetarian recipes -></u></h3>
                 <br/><br/>
                 <Cardrow title="Vegetarian recipes" endpoint={endpoint4}/>
@@ -99,7 +99,7 @@ export class HomePage extends Component {
                 
 
             )
-        }
+        }*/}
     }
 }
 
