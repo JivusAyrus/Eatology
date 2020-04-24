@@ -7,6 +7,7 @@ var mailer = require("nodemailer")
 
 const memoryStorage = multer.memoryStorage()
 
+//Filters file type to be only jpeg or png.
 const fileFilter = (req, file, cb) => {
     // reject a file
     if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
@@ -16,12 +17,22 @@ const fileFilter = (req, file, cb) => {
     }
 };
 
+//Setting up multer to upload binary data (images).
 const upload = multer({
     storage: memoryStorage,
     limits: {
         fileSize: 1024 * 1024 * 5
     },
     fileFilter: fileFilter
+});
+
+//Setting up nodemailer.
+var transporter = mailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'eatologyhq@gmail.com',
+        pass: 'eatology#pass'
+    }
 });
 
 // localhost/users/ will return all the users in the response body.
@@ -163,32 +174,44 @@ router.route('/update/remove-favourite/:id').post((req, res) => {
 })
 
 router.route('/send-otp/:email').post((req, res) => {
-    var email = req.params.email
-    var transporter = mailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: 'eatologyhq@gmail.com',
-            pass: 'eatology#pass'
-        }
-    });
-
+    var userEmail = req.params.email
     var otp = genOtp()
+
     var mailOptions = {
         from: 'eatologyhq@gmail.com',
-        to: email,
+        to: userEmail,
         subject: "Reset password",
         html: "<h3>Your one time password is " + otp + "</h3>" +
             "<h3>Regards,</h3><h3>Team Eatology.</h3>"
     };
 
-    transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-            console.log(error);
-        } else {
-            console.log('Email sent: ' + info.response);
-            res.json({ "otp": otp })
-        }
-    });
+    User.findOne({ "email": userEmail })
+        .then(user => {
+            if(user){
+                transporter.sendMail(mailOptions, function (error, info) {
+                    console.log("The returned document is " + JSON.stringify(user))
+
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log('Email sent: ' + info.response + " ");
+                        res.json({ "otp": otp })
+                    }
+                });
+            }
+            else
+            {
+                res.json({
+                    "success" : false,
+                    "msg" : "This email has not been registered !"
+                })
+            }
+        })
+        .catch(error => {
+            res.status(400).json('Error : ' + err)
+        })
+
+
 })
 
 router.route('/update/add-fav-cuisines/:id').post((req, res) => {
@@ -197,14 +220,17 @@ router.route('/update/add-fav-cuisines/:id').post((req, res) => {
         .then(user => {
             console.log("BODY IS " + JSON.stringify(req.body))
             User.findOneAndUpdate({ _id: req.params.id }, {
-                $push: { pref_cuisines: { $each: req.body.cuisines } }
+                $push: {
+                    pref_cuisines: { $each: req.body.cuisines },
+                    "success": true
+                }
 
             }, {
                 new: true
             })
                 .then(user => {
                     res.json({
-                        "success": true,
+                        "success": false,
                         "user": user
                     })
                 })
@@ -212,6 +238,7 @@ router.route('/update/add-fav-cuisines/:id').post((req, res) => {
 
 })
 
+//Helper funtion to generate a random 6 digit otp.
 function genOtp() {
     var otp = ""
     for (var i = 0; i < 6; i++) {
