@@ -86,9 +86,9 @@ export class Cardrow extends Component {
 
         ]))
       });
-      var heading = React.createElement('h3',{style:{color:"red",float:"left"}},this.props.title)
-      var linebreak = React.createElement('br')
-      var CardsElement = React.createElement('div', { class: "d-flex flex-row flex-nowrap" }, heading,linebreak,cards)
+      // var heading = React.createElement('h3',{style:{color:"red",float:"left"}},this.props.title)
+      // var linebreak = React.createElement('br')
+      var CardsElement = React.createElement('div', { class: "d-flex flex-row flex-nowrap" }, cards)
       var CardRowRoot = React.createElement('div', { class: 'cardrow', style: { overflowX: 'scroll', msOverflowStyle: 'none' } }, CardsElement)
       return CardRowRoot
     }
