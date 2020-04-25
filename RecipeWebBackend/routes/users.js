@@ -125,6 +125,28 @@ router.route('/update/:id').post(upload.single('profile_img'), (req, res) => {
 
 })
 
+router.route('/update-by-email/:email').post((req, res) => {
+    var postObj = req.body
+    if (req.file != undefined)
+        postObj.profile_img = req.file.buffer
+    User.findOneAndUpdate({ email: req.params.email }, postObj, {
+        new: true
+    })
+        .then(user => {
+            if (user) {
+                res.json({
+                    "success": true,
+                    "user": user
+                })
+            }
+            else {
+                res.json({ "success": false })
+            }
+        })
+        .catch(err => res.status(400).json('Error : ' + err));
+
+})
+
 router.route('/update/add-favourite/:id').post((req, res) => {
     var username
     User.findById(req.params.id)
@@ -187,7 +209,7 @@ router.route('/send-otp/:email').post((req, res) => {
 
     User.findOne({ "email": userEmail })
         .then(user => {
-            if(user){
+            if (user) {
                 transporter.sendMail(mailOptions, function (error, info) {
                     console.log("The returned document is " + JSON.stringify(user))
 
@@ -199,11 +221,10 @@ router.route('/send-otp/:email').post((req, res) => {
                     }
                 });
             }
-            else
-            {
+            else {
                 res.json({
-                    "success" : false,
-                    "msg" : "This email has not been registered !"
+                    "success": false,
+                    "msg": "This email has not been registered !"
                 })
             }
         })
@@ -213,6 +234,29 @@ router.route('/send-otp/:email').post((req, res) => {
 
 
 })
+
+// router.route('/contact-us').post((req,res) => {
+//     var from = req.body.username;
+//     var body = req.body.email_body;
+
+//     var mailOptions = {
+//         from: 'eatologyhq@gmail.com',
+//         to: "vkalghat@gmail.com",
+//         subject: "User Query/Feedback from " + from,
+//         body: body
+//     };
+
+//     transporter.sendMail(mailOptions, function (error, info) {
+
+//         if (error) {
+//             console.log(error);
+//         } else {
+//             console.log('Email sent: ' + info.response + " ");
+//             res.json({ "otp": otp })
+//         }
+//     });
+
+// })
 
 router.route('/update/add-fav-cuisines/:id').post((req, res) => {
 
