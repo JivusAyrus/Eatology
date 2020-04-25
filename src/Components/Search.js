@@ -7,9 +7,10 @@ import ReactDOM from 'react-dom'
 export class Search extends Component {
     constructor(props) {
         super(props)
-
+        this.extraresult = this.extraresult.bind(this);
         this.state = {
-            cards: []
+            cards: [],
+            offset:12
         }
     }
 
@@ -35,6 +36,9 @@ export class Search extends Component {
                 <div class="row" id="searchresult" children={this.state.cards}>
 
                 </div>
+                <h1 style={{color:"red",marginTop:"15px"}} id="searchtext">No more search results</h1>
+                <button class="btn btn-outline-danger" id="extra" onClick={this.extraresult} style={{borderRadius:"100%",marginTop:"10px"}}><i class="fa fa-arrow-down" aria-hidden="true"></i></button>
+
 
 
 
@@ -43,6 +47,8 @@ export class Search extends Component {
     }
     componentDidMount() {
         var that = this;
+        $('#searchtext').hide()
+        $('#extra').hide()
         $("#search").on("input", function () {
             $.ajax({
                 type: "get",
@@ -63,24 +69,30 @@ export class Search extends Component {
         });
         $('form').on("submit", function (event) {
             that.setState({
-                cards : []
+                cards : [],
+                offset:12
             })
+            $('#searchtext').hide()
+            $('#extra').show()
             $.ajax({
                 type: "get",
-                url: "https://api.spoonacular.com/recipes/search?number=10&apiKey=036d2ceeeb994c60b37c1b8d1694c643&query=" + $('#search').val(),
+                url: "https://api.spoonacular.com/recipes/search?number=12&apiKey=036d2ceeeb994c60b37c1b8d1694c643&query=" + $('#search').val(),
                 dataType: "json",
                 success: (data, status, jqXHR) => {
                     var card = null
                     var result = []
                     data.results.forEach(recipe => {
-                        console.log(recipe.title)
                         card = React.createElement('div', { class: "card-body" }, [
                             React.createElement(Card, { recipe_info: recipe })
                         ])
                         var cardRow = React.createElement('div', { class: "col-lg-3" }, card)
                         result.push(cardRow)
                     })
-                    console.log("SIZE OF RESULT IS : " + result.length)
+                    if(data.length< 12){
+                        $('#extra').hide()
+                        $('#searchtext').show()
+                    }
+                    console.log(" from search SIZE OF RESULT IS : " + result.length)
                     that.setState({
                         cards: result
                     })
@@ -91,6 +103,41 @@ export class Search extends Component {
 
             });
             event.preventDefault();
+        });
+    }
+    extraresult(){
+        var that = this;
+        var result = this.state.cards
+        that.setState({
+            offset:that.state.offset + 12,
+        })
+        $.ajax({
+            type: "get",
+            url: "https://api.spoonacular.com/recipes/search?number=12&apiKey=036d2ceeeb994c60b37c1b8d1694c643&query=" 
+                + $('#search').val() + "&offset=" + this.state.offset,
+            dataType: "json",
+            success: (data, status, jqXHR) => {
+                var card = null
+                data.results.forEach(recipe => {
+                    card = React.createElement('div', { class: "card-body" }, [
+                        React.createElement(Card, { recipe_info: recipe })
+                    ])
+                    var cardRow = React.createElement('div', { class: "col-lg-3" }, card)
+                    result.push(cardRow)
+                    if(data.length< 12){
+                        $('#extra').hide()
+                        $('#searchtext').show()
+                    }
+                })
+                console.log("SIZE OF RESULT IS : " + result.length)
+                that.setState({
+                    cards: result
+                })
+            },
+            error: (jqXHR, status, err) => {
+                console.log(jqXHR);
+            },
+
         });
     }
 }
