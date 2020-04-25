@@ -195,7 +195,9 @@ router.route('/send-otp/:email').post((req, res) => {
                         console.log(error);
                     } else {
                         console.log('Email sent: ' + info.response + " ");
-                        res.json({ "otp": otp })
+                        res.json({ "otp": otp ,
+                                "success":true
+                        })
                     }
                 });
             }
