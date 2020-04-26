@@ -31,9 +31,7 @@ export class Cusinefavs extends Component {
                     return
                 }
             })
-            console.log(favcusine)
             var cuisines = { cuisines: favcusine }
-            console.log(cuisines)
             $.ajax({
                 type: "post",
                 url: "http://localhost:5000/users/update/add-fav-cuisines/" + user._id,
@@ -45,8 +43,6 @@ export class Cusinefavs extends Component {
                 success: (data, status, jqXHR) => {
                     var updatedUser = JSON.stringify(data.user)
                     sessionStorage.setItem('user', updatedUser)
-                    console.log(updatedUser)
-                    console.log("FavCusines are added")
                     that.setState({
                         isUpdated: true
                     })
