@@ -51,7 +51,6 @@ router.route('/:id').get((req, res) => {
 
 // localhost/users/email will return user with that email.
 router.route('/by-email/:email').get((req, res) => {
-    console.log(req.param.email)
     User.find({ email: req.params.email })
         .then(user => {
             res.json(user)
@@ -88,7 +87,6 @@ router.route('/add').post(upload.single('profile_img'), (req, res) => {
         const fullname = req.body.fullname
         const email = req.body.email
         const password = req.body.password
-        console.log(req.file)
         const newUser = User({
             username,
             fullname,
@@ -211,8 +209,6 @@ router.route('/send-otp/:email').post((req, res) => {
         .then(user => {
             if (user) {
                 transporter.sendMail(mailOptions, function (error, info) {
-                    console.log("The returned document is " + JSON.stringify(user))
-
                     if (error) {
                         console.log(error);
                     } else {
@@ -264,7 +260,6 @@ router.route('/update/add-fav-cuisines/:id').post((req, res) => {
 
     User.findById(req.params.id)
         .then(user => {
-            console.log("BODY IS " + JSON.stringify(req.body))
             User.findOneAndUpdate({ _id: req.params.id }, {
                 $push: {
                     pref_cuisines: { $each: req.body.cuisines },
