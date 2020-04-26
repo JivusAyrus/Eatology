@@ -10,9 +10,9 @@ class ForgotPassword extends Component {
         }
     }
     otphandler(){
-        var time = new Date();
-        var timeLimit = new Date(time.getDate+(15*60000))
-        sessionStorage.setItem('timeLimit',timeLimit.toString())
+        var timeLimit = new Date();
+        timeLimit.setMinutes(timeLimit.getMinutes() + 15)
+        sessionStorage.setItem('timeLimit', timeLimit.toString())
     }
     componentDidMount(){
         var that = this;
@@ -27,7 +27,7 @@ class ForgotPassword extends Component {
                 success: (response, status, jqXHR) => {
                     if(response.success){
                         sessionStorage.setItem('otp',response.otp)
-                        sessionStorage.setItem('email',$('#email').val)
+                        sessionStorage.setItem('email',$('#email').val())
                         that.setState({
                             sent:true
                         })

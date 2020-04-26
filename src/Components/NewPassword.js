@@ -5,60 +5,67 @@ import $ from 'jquery'
 class NewPassword extends Component {
     constructor(props) {
         super(props)
-    
+
         this.state = {
-             isChanged:false
+            isChanged: false
         }
     }
-    
-    componentDidMount(){
+
+    componentDidMount() {
         var email = sessionStorage.getItem('email')
-        if($('#newpass').val()==$('#newcpass')){
-        $('form').on('submit',function(event){
-            fetch("http://localhost:5000/users/update-by-email/" + email, {
-                "method": "POST",
-                "headers": {
-                    "content-type": "application/json"
-                },
-                "body": {
-                    "password": $('#pass').val()
-                }
-            })
-            .then(response => {
-                console.log(response);
-            })
-            .catch(err => {
-                console.log(err);   
-            });
+        var that = this;
+        $('form').on('submit', function (event) {
+            if ($('#newpass').val() == $('#newcpass').val()) {
+                fetch("http://localhost:5000/users/update-by-email/" + email, {
+                    "method": "POST",
+                    "headers": {
+                        "content-type": "application/json"
+                    },
+                    "body": JSON.stringify({
+                        "password": $('#newpass').val()
+                    })
+                })
+                    .then(response => {
+                        alert('Password updated successfully')
+                        that.setState({
+                            isChanged : true
+                        })
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
+            }
+
+            else {
+                alert('Passwords do not match')
+                $('input[name="newcpass"]').val('')
+            }
             event.preventDefault()
+
         })
-        }
-        else{
-            alert('Passwords do not match')
-            $('input[name="newcpass"]').val('')
-        }
+
     }
     render() {
-        if(this.state.isChanged){
+        if (this.state.isChanged) {
             return <Redirect to={{
                 pathname: '/login',
             }} />
         }
-        else{
-        return (
-            <div class="newpass">
-                <div class="card" style={{ marginTop: "160px" }}>
-                    <div class="card-body">
-                        <form>
-                            <p class="card-title">New Password</p><br/>
-                            <input type="password" id="newpass" name="newpassword" placeholder="Password" required minlength="8" /><br />
-                            <input type="password" id="newcpass" name="newcpass" placeholder="Confirm Password" required minlength="8"/><br />
-                            <button type="submit" class="btn btn-outline-danger">Submit</button>
-                        </form>
+        else {
+            return (
+                <div class="newpass">
+                    <div class="card" style={{ marginTop: "160px" }}>
+                        <div class="card-body">
+                            <form>
+                                <p class="card-title">New Password</p><br />
+                                <input type="password" id="newpass" name="newpassword" placeholder="Password" required minlength="8" /><br />
+                                <input type="password" id="newcpass" name="newcpass" placeholder="Confirm Password" required minlength="8" /><br />
+                                <button type="submit" class="btn btn-outline-danger">Submit</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
         }
     }
 }
