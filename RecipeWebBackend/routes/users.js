@@ -123,6 +123,7 @@ router.route('/update/:id').post(upload.single('profile_img'), (req, res) => {
 
 })
 
+//localhost/users/update-by-email/:email will update the user whose email is specified.
 router.route('/update-by-email/:email').post((req, res) => {
     var postObj = req.body
     if (req.file != undefined)
@@ -145,6 +146,7 @@ router.route('/update-by-email/:email').post((req, res) => {
 
 })
 
+//localhost/update/add-favourite/:id will add a favourite to the user that is specified.
 router.route('/update/add-favourite/:id').post((req, res) => {
     var username
     User.findById(req.params.id)
@@ -172,6 +174,7 @@ router.route('/update/add-favourite/:id').post((req, res) => {
 
 })
 
+//localhost/users/update/remove-favourite/:id will remove a favourite from the user that is specified.
 router.route('/update/remove-favourite/:id').post((req, res) => {
     var username
     User.findById(req.params.id)
@@ -193,6 +196,7 @@ router.route('/update/remove-favourite/:id').post((req, res) => {
 
 })
 
+//localhost/users/send-otp/:email will send a otp to the specified user email if it is registered.
 router.route('/send-otp/:email').post((req, res) => {
     var userEmail = req.params.email
     var otp = genOtp()
@@ -213,8 +217,9 @@ router.route('/send-otp/:email').post((req, res) => {
                         console.log(error);
                     } else {
                         console.log('Email sent: ' + info.response + " ");
-                        res.json({ "otp": otp ,
-                                "success":true
+                        res.json({
+                            "otp": otp,
+                            "success": true
                         })
                     }
                 });
@@ -256,6 +261,8 @@ router.route('/send-otp/:email').post((req, res) => {
 
 // })
 
+
+//localhost/users/update/add-fav-cuisines/:id will add an array of favourite cuisines to the user whose id is specified.
 router.route('/update/add-fav-cuisines/:id').post((req, res) => {
 
     User.findById(req.params.id)
@@ -275,6 +282,43 @@ router.route('/update/add-fav-cuisines/:id').post((req, res) => {
                         "user": user
                     })
                 })
+        })
+
+})
+
+router.route('/update/add-search-history/:id').post((req, res) => {
+
+    const size = 5
+
+    User.findByIdAndUpdate(req.params.id,
+        {
+            $push:
+            {
+                search_history: {
+                    $each: [req.body.history_item]
+                },
+                $position: 0
+            }
+        },
+        {
+            new: true
+        })
+        .then(user => {
+            if (user.search_history.length >= size) {
+                User.findByIdAndUpdate(req.params.id, { $pop: { search_history: -1 } })
+                    .then(user => {
+                        res.json({
+                            "success": true,
+                            "search_history": user.search_history
+                        })
+                    })
+            }
+            else {
+                res.json({
+                    "success": true,
+                    "search_history": user.search_history
+                })
+            }
         })
 
 })
