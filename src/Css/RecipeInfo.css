@@ -1,12 +1,72 @@
-.recipetitle{
-    position: absolute;
-    bottom:20px;
-    left:20px;
-    background-color: black;
-    padding-left: 20px;
-    padding-right: 20px;
+@font-face{
+    font-family:Playlist;
+    src:url(../Components/Playlist.otf);
+}
+
+.rectitle{
+    font-size: 60px;
+    color:red;
+    font-family: Playlist;
+    /* border-bottom: 5px  red; */
+    /* border-top: 5px double red; */
+    margin-top:2px;
+    width: fit-content;
+    margin-left:70px;
+    padding-bottom: 4px;
+}
+.favinfo{
+    border:1.5px solid red;
+    border-radius: 100%;
+    padding: 10px;
+    margin-right:15px;
+    margin-top: 20px;
+    float:left;
+}
+
+.favgroup{
+    margin-left:70px
+}
+.ingre h3 ,.ingre h4{
+    color:red;
+}
+
+.imagefade{
+    float:left;
+    margin-left:50px;
+    width:900px;
+    margin-top:-15px
+}
+.info{
+    color: red;
+    font-family: Playlist;
+    font-size: 30px;
+    margin-top:70px;
+    border:3px dotted red;
+    margin-left: 30px;
+    float:left;
+    padding:15px;
 }
 .heart{
     color:red;
     font-size: 20px;
+}
+.separator {
+    margin-top: 10px;
+    display:flex;
+    align-items: center;
+    text-align: center;
+    color:red;
+    font-family: Playlist;
+    font-size: 50px;
+}
+.separator::before, .separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid red;
+}
+.separator::before {
+    margin-right: .50em;
+}
+.separator::after {
+    margin-left: .50em;
 }

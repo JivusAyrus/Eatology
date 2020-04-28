@@ -3,7 +3,7 @@ import '../Css/Card.css'
 import $ from "jquery";
 import { css } from "@emotion/core";
 import PulseLoader from "react-spinners/PulseLoader";
-
+import {Link} from 'react-router-dom'
 const override = css`
   display: block;
   margin: 0 auto;
@@ -102,21 +102,23 @@ export class Card extends Component {
         }
 
     }
-
+    resolveImage(){
+        if(this.state.recipe.image == undefined){
+            return null
+        }
+        else if (this.state.recipe.image != undefined && this.state.recipe.image.startsWith("http")) {
+            return this.state.recipe.image
+        }
+        else {
+            return "https://spoonacular.com/recipeImages/" + this.state.recipe.image
+        }
+        
+    }
     render() {
         var imgUrl;
         if(this.state.isLoading){
-            if(this.state.recipe.image == undefined){
-                imgUrl = this.state.recipe.sourceUrl
-            }
-            else if (this.state.recipe.image != undefined && this.state.recipe.image.startsWith("http")) {
-                imgUrl = this.state.recipe.image
-            }
-            else {
-                imgUrl = "https://spoonacular.com/recipeImages/" + this.state.recipe.image
-            }
+            imgUrl = this.resolveImage()
             return (
-                <div>
                     <div class="custcar">
                         <img src={this.state.recipe.image == null ? "https://www.transparentpng.com/thumb/food/Ha2HDD-food-cut-out-png.png" : imgUrl} class="card-img-top" alt="..." width="300" height="200" />
                         <p class="car-title inline">{this.state.recipe.title}</p>
@@ -130,25 +132,22 @@ export class Card extends Component {
                             />
                         </div>
                     </div>
-                </div>
             )
         }
         else{
-            if(this.state.recipe.image == undefined){
-                imgUrl = this.state.recipe.sourceUrl
-            }
-        else if (this.state.recipe.image.startsWith("http")) {
-            imgUrl = this.state.recipe.image
-        }
-        else {
-            imgUrl = "https://spoonacular.com/recipeImages/" + this.state.recipe.image
-        }
+            var imgUrl = this.resolveImage()
         return (
-            <div>
-                <div class="custcar">
+            <div class="custcar">
+                <Link to={{
+                    pathname:"/recipeinfo",
+                    state:{
+                        recipe:this.state.recipe
+                    }
+                }} >
                     <img src={this.state.recipe.image == null ? "https://www.transparentpng.com/thumb/food/Ha2HDD-food-cut-out-png.png" : imgUrl} class="card-img-top" alt="..." width="300" height="200" />
-                    <p class="car-title inline">{this.state.recipe.title}</p><div><i onClick={this.heart} class={this.state.isFavorite?"heart fa fa-heart":" heart fa fa-heart-o"}></i></div>
-                </div>
+                    <p class="car-title inline">{this.state.recipe.title}</p>
+                </Link>
+                <div><i onClick={this.heart} class={this.state.isFavorite?"heart fa fa-heart":" heart fa fa-heart-o"}></i></div>
             </div>
         )
         }
