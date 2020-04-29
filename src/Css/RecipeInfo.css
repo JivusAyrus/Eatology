@@ -29,12 +29,17 @@
 .ingre h3 ,.ingre h4{
     color:red;
 }
-
+.steps li{
+    color:red;
+    font-size: 25px;
+    text-align: start;
+}
 .imagefade{
     float:left;
     margin-left:50px;
     width:900px;
-    margin-top:-15px
+    margin-top:-15px;
+    border:1px solid red;
 }
 .info{
     color: red;

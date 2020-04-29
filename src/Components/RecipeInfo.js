@@ -178,10 +178,42 @@ export class RecipeInfo extends Component {
             var ingrediv = React.createElement('div',{class:"col-lg-3"},image,title,amount)
             ingredients.push(ingrediv)
         })
-        // this.setState({
-        //     ingredients:ingredients
-        // })
         return ingredients
+    }
+    getEquipmentsList(){
+        var equipments = []
+        var names = []
+        for(var i=0;i<this.state.instructions.length;i++){
+            for(var j=0;j<this.state.instructions[i].steps.length;j++){
+                    if(this.state.instructions[i].steps[j].equipment.length != 0){
+                        this.state.instructions[i].steps[j].equipment.forEach(e => {
+                            if(names.includes(e.name[0].toUpperCase()+e.name.slice(1))){
+                                return
+                            }
+                            else{
+                                var image = React.createElement('img',{style:{borderRadius:"100%",width:"100px",height:"100px"},src:"https://spoonacular.com/cdn/equipment_500x500/" + e.image})
+                                var title = React.createElement('h3',{},e.name[0].toUpperCase()+e.name.slice(1))
+                                var equidiv = React.createElement('div',{class:"col-lg-3"},image,title)
+                                equipments.push(equidiv)
+                                names.push(e.name[0].toUpperCase()+e.name.slice(1))
+                            }
+                            
+                        })
+                    } 
+            }
+
+        }
+        return equipments
+    }
+    getStepsList(){
+        var steps = []
+        for(var i=0;i<this.state.instructions.length;i++){
+            this.state.instructions[i].steps.forEach(s =>{
+                var step = React.createElement('li',{},s.step)
+                steps.push(step)
+            })
+        }
+        return steps
     }
     resolveImage(){
         if(this.state.recipe.image == undefined){
@@ -220,14 +252,22 @@ export class RecipeInfo extends Component {
                 <div class="row">
                 <div class="favgroup">
                     <div class="favinfo"><i onClick={this.heart} class={this.state.isFavorite?"heart fa fa-heart":" heart fa fa-heart-o"} style={{color:"red",fontSize:"30px"}}></i></div>
-                    <div class="favinfo"><i class="fa fa-share-alt" aria-hidden="true" style={{color:"red",fontSize:"31px"}}></i></div>
+                    <div class="favinfo">
+                        <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" width="30px" height="30px" style={{borderRadius:"100%"}}/>
+                    </div>
                     <div class="favinfo"><i class="fa fa-print" aria-hidden="true" style={{color:"red",fontSize:"31px"}} onClick= {()=>{window.print()}}></i></div>
                 </div>
                 </div>
                 <div class="separator" align="left">Ingredients</div><br/><br/>
                 <div class="row ingre" children={this.getIngredientsList()}></div>
-                <div class="separator" align="left"></div><br/><br/>
-            
+                {this.getEquipmentsList().length != 0?
+                    <div>
+                        <div class="separator" align="left">Equipments</div><br/><br/>
+                        <div class="row ingre" children={this.getEquipmentsList()}></div>
+                    </div>:<br/>
+                }
+                <div class="separator" align="left">Steps</div><br/><br/>
+                <ol children={this.getStepsList()} class="steps"></ol>
 
                 
                 
