@@ -1,87 +1,119 @@
-@font-face{
-    font-family:Playlist;
-    src:url(../Components/Playlist.otf);
+@font-face {
+    font-family: Playlist;
+    src: url(../Components/Playlist.otf);
 }
 
-.rectitle{
+.rectitle {
     font-size: 60px;
-    color:red;
+    color: red;
     font-family: Playlist;
     /* border-bottom: 5px  red; */
     /* border-top: 5px double red; */
-    margin-top:2px;
+    margin-top: 2px;
     width: fit-content;
-    margin-left:70px;
+    margin-left: 70px;
     padding-bottom: 4px;
 }
-.favinfo{
-    border:1.5px solid red;
+
+.favinfo {
+    border: 1.5px solid red;
     border-radius: 100%;
     padding: 10px;
-    margin-right:15px;
+    margin-right: 15px;
     margin-top: 20px;
-    float:left;
+    float: left;
 }
 
-.favgroup{
-    margin-left:70px
+.favgroup {
+    margin-left: 70px
 }
-.ingre h3 ,.ingre h4{
-    color:red;
+
+.ingre h3, .ingre h4 {
+    color: red;
 }
-.steps li{
-    color:red;
+
+/* .ingre {
+    max-width: 1300px;
+    margin : 0 auto 0 auto;
+    display: grid;
+}
+
+@media (min-width: 600px) {
+    .ingre {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 900px) {
+    .ingre {
+        grid-template-columns: repeat(5, 1fr);
+    }
+} */
+
+
+
+.steps li {
+    color: red;
     font-size: 25px;
     text-align: start;
     margin-bottom: 3px;
 }
-.nutri li{
-    color:red;
+
+.nutri li {
+    color: red;
     font-size: 25px;
     text-align: start;
 }
-.dish li{
-    color:red;
+
+.dish li {
+    color: red;
     font-size: 25px;
 }
-.imagefade{
-    float:left;
-    margin-left:50px;
-    width:900px;
-    margin-top:-15px;
-    border:1px solid red;
+
+.imagefade {
+    float: left;
+    margin-left: 50px;
+    width: 900px;
+    margin-top: -15px;
+    border: 1px solid red;
 }
-.info{
+
+.info {
     color: red;
     font-family: Playlist;
     font-size: 30px;
-    margin-top:70px;
-    border:3px dotted red;
+    margin-top: 70px;
+    border: 3px dotted red;
     margin-left: 30px;
-    float:left;
-    padding:15px;
+    float: left;
+    padding: 15px;
 }
-.heart{
-    color:red;
+
+.heart {
+    color: red;
     font-size: 20px;
 }
+
 .separator {
     margin-top: 10px;
-    display:flex;
+    display: flex;
     align-items: center;
     text-align: center;
-    color:red;
+    color: red;
     font-family: Playlist;
     font-size: 50px;
 }
+
 .separator::before, .separator::after {
     content: '';
     flex: 1;
     border-bottom: 1px solid red;
 }
+
 .separator::before {
     margin-right: .50em;
 }
+
 .separator::after {
     margin-left: .50em;
 }

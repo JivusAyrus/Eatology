@@ -69,7 +69,7 @@ export class RecipeInfo extends Component {
         else{
             $.ajax({
                 type: "get",
-                url: "https://api.spoonacular.com/recipes/"+this.state.recipe.id+"/information?includeNutrition=false&apiKey=" + process.env.REACT_APP_API_KEY,
+                url: "https://api.spoonacular.com/recipes/"+this.state.recipe.id+"/information?includeNutrition=true&apiKey=" + process.env.REACT_APP_API_KEY,
                 dataType: "json",
                 success: (data, status, jqXHR) => {
                     that.setState({
@@ -175,7 +175,7 @@ export class RecipeInfo extends Component {
             var image = React.createElement('img',{style:{borderRadius:"100%",width:"100px",height:"100px"},src:"https://spoonacular.com/cdn/ingredients_100x100/"+ i.image})
             var title = React.createElement('h3',{},i.name[0].toUpperCase()+i.name.slice(1))
             var amount = React.createElement('h4',{},i.amount.us.value+" "+i.amount.us.unit)
-            var ingrediv = React.createElement('div',{class:"col-lg-3"},image,title,amount)
+            var ingrediv = React.createElement('div',{class:"col-lg-3 col-md-3 col-sm-3 col-xs-3"},image,title,amount)
             ingredients.push(ingrediv)
         })
         return ingredients
@@ -193,7 +193,7 @@ export class RecipeInfo extends Component {
                             else{
                                 var image = React.createElement('img',{style:{borderRadius:"100%",width:"100px",height:"100px"},src:"https://spoonacular.com/cdn/equipment_500x500/" + e.image})
                                 var title = React.createElement('h3',{},e.name[0].toUpperCase()+e.name.slice(1))
-                                var equidiv = React.createElement('div',{class:"col-lg-3"},image,title)
+                                var equidiv = React.createElement('div',{class:"col-lg-3 col-md-3 col-sm-3 col-xs-3"},image,title)
                                 equipments.push(equidiv)
                                 names.push(e.name[0].toUpperCase()+e.name.slice(1))
                             }
@@ -218,7 +218,7 @@ export class RecipeInfo extends Component {
     getDishTypesList(){
         var dishes = []
         for(var i=0;i<this.state.recipe.dishTypes.length;i++){
-            var dish = React.createElement('li',{class:"col-lg-3"},this.state.recipe.dishTypes[i])
+            var dish = React.createElement('li',{class:"col-lg-3 col-md-3 col-sm-3 col-xs-3"},this.state.recipe.dishTypes[i])
             dishes.push(dish)
         }
         return dishes
@@ -226,7 +226,7 @@ export class RecipeInfo extends Component {
     getNutritionList(){
         var nutrients = []
         this.state.recipe.nutrition.nutrients.forEach(n=>{
-            var nutrient = React.createElement('li',{class:"col-lg-3"},n.title + "-" + n.amount + n.unit)
+            var nutrient = React.createElement('li',{class:"col-lg-3 col-md-3 col-sm-3 col-xs-3"},n.title + "-" + n.amount + n.unit)
             nutrients.push(nutrient)
         })
         return nutrients
