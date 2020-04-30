@@ -1,6 +1,7 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+const ShoppingList = require('./shoppingList.model')
 
 /*
 Structure of a User :
@@ -11,8 +12,10 @@ User
     password:       String,
     favorites:      [String],
     profileImg:     Buffer,
+    pref_cuisines : [String]
     email:          String,
     search_history: [String],
+    shopping_list : [ShoppingList]
     phone_number:   String
 }
 */
@@ -25,7 +28,7 @@ var UserSchema = new Schema({
         maxlength: 6
     },
     fullname: {
-        type : String,
+        type: String,
         required: true,
         trim: true
     },
@@ -35,7 +38,7 @@ var UserSchema = new Schema({
     },
     favourites: [String],
     profile_img: Buffer,
-    pref_cuisines : [String],
+    pref_cuisines: [String],
     email: {
         type: String,
         match: /.+@.+/i, //Validates email ids
@@ -43,6 +46,7 @@ var UserSchema = new Schema({
         required: true,
     },
     search_history: [String],
+    shopping_lists: [ShoppingList.schema],
     phone_number: {
         type: String,
         maxlength: 10,
