@@ -33,6 +33,16 @@
     color:red;
     font-size: 25px;
     text-align: start;
+    margin-bottom: 3px;
+}
+.nutri li{
+    color:red;
+    font-size: 25px;
+    text-align: start;
+}
+.dish li{
+    color:red;
+    font-size: 25px;
 }
 .imagefade{
     float:left;
