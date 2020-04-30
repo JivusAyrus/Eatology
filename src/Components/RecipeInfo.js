@@ -34,7 +34,7 @@ export class RecipeInfo extends Component {
     }
     componentDidMount(){
         var that = this;
-        if(this.state.recipe.healthScore != undefined){
+        if(this.state.recipe.nutrition != undefined){
             $.ajax({
                 type: "get",
                 url: "https://api.spoonacular.com/recipes/"+this.state.recipe.id+"/ingredientWidget.json?apiKey=036d2ceeeb994c60b37c1b8d1694c643",
@@ -69,7 +69,7 @@ export class RecipeInfo extends Component {
         else{
             $.ajax({
                 type: "get",
-                url: "https://api.spoonacular.com/recipes/"+this.state.recipe.id+"/information?includeNutrition=false&apiKey=036d2ceeeb994c60b37c1b8d1694c643",
+                url: "https://api.spoonacular.com/recipes/"+this.state.recipe.id+"/information?includeNutrition=true&apiKey=036d2ceeeb994c60b37c1b8d1694c643",
                 dataType: "json",
                 success: (data, status, jqXHR) => {
                     that.setState({
@@ -209,11 +209,27 @@ export class RecipeInfo extends Component {
         var steps = []
         for(var i=0;i<this.state.instructions.length;i++){
             this.state.instructions[i].steps.forEach(s =>{
-                var step = React.createElement('li',{},s.step)
+                var step = React.createElement('li',{},s.step[0].toUpperCase()+s.step.slice(1))
                 steps.push(step)
             })
         }
         return steps
+    }
+    getDishTypesList(){
+        var dishes = []
+        for(var i=0;i<this.state.recipe.dishTypes.length;i++){
+            var dish = React.createElement('li',{class:"col-lg-3"},this.state.recipe.dishTypes[i])
+            dishes.push(dish)
+        }
+        return dishes
+    }
+    getNutritionList(){
+        var nutrients = []
+        this.state.recipe.nutrition.nutrients.forEach(n=>{
+            var nutrient = React.createElement('li',{class:"col-lg-3"},n.title + "-" + n.amount + n.unit)
+            nutrients.push(nutrient)
+        })
+        return nutrients
     }
     resolveImage(){
         if(this.state.recipe.image == undefined){
@@ -262,13 +278,20 @@ export class RecipeInfo extends Component {
                 <div class="row ingre" children={this.getIngredientsList()}></div>
                 {this.getEquipmentsList().length != 0?
                     <div>
-                        <div class="separator" align="left">Equipments</div><br/><br/>
+                        <div class="separator" align="left">Equipment</div><br/><br/>
                         <div class="row ingre" children={this.getEquipmentsList()}></div>
                     </div>:<br/>
                 }
                 <div class="separator" align="left">Steps</div><br/><br/>
                 <ol children={this.getStepsList()} class="steps"></ol>
-
+                {this.getDishTypesList().length != 0?
+                    <div>
+                        <div class="separator" align="left">Dish Type</div><br/><br/>
+                        <div class="row dish" children={this.getDishTypesList()}></div>
+                    </div>:<br/>
+                }
+                <div class="separator" align="left">Nutrition</div><br/><br/>
+                <ul children={this.getNutritionList()} class=" row nutri"></ul>
                 
                 
                 
