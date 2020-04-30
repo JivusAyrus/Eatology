@@ -20,7 +20,7 @@ export class Favorite extends Component {
   }
 
   componentDidMount() {
-    var api = "https://api.spoonacular.com/recipes/informationBulk/?apiKey=036d2ceeeb994c60b37c1b8d1694c643&ids="
+    var api = "https://api.spoonacular.com/recipes/informationBulk/?apiKey=" + process.env.REACT_APP_API_KEY + "&ids="
     var user = JSON.parse(sessionStorage.getItem("user"))
     if (user) {
       fetch(api + user.favourites.toString())
@@ -41,7 +41,7 @@ export class Favorite extends Component {
             }
           }
           ,
-          //036d2ceeeb994c60b37c1b8d1694c643
+          //" + process.env.REACT_APP_API_KEY + "
           // Note: it's important to handle errors here
           // instead of a catch() block so that we don't swallow
           // exceptions from actual bugs in components.

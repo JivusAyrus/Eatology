@@ -37,7 +37,7 @@ export class RecipeInfo extends Component {
         if(this.state.recipe.healthScore != undefined){
             $.ajax({
                 type: "get",
-                url: "https://api.spoonacular.com/recipes/"+this.state.recipe.id+"/ingredientWidget.json?apiKey=036d2ceeeb994c60b37c1b8d1694c643",
+                url: "https://api.spoonacular.com/recipes/"+this.state.recipe.id+"/ingredientWidget.json?apiKey=" + process.env.REACT_APP_API_KEY,
                 dataType: "json",
                 success: (data, status, jqXHR) => {
                     that.setState({
@@ -45,7 +45,7 @@ export class RecipeInfo extends Component {
                     })
                     $.ajax({
                         type: "get",
-                        url: "https://api.spoonacular.com/recipes/"+this.state.recipe.id+"/analyzedInstructions?apiKey=036d2ceeeb994c60b37c1b8d1694c643",
+                        url: "https://api.spoonacular.com/recipes/"+this.state.recipe.id+"/analyzedInstructions?apiKey=" + process.env.REACT_APP_API_KEY,
                         dataType: "json",
                         success: (data, status, jqXHR) => {
                             that.setState({
@@ -69,7 +69,7 @@ export class RecipeInfo extends Component {
         else{
             $.ajax({
                 type: "get",
-                url: "https://api.spoonacular.com/recipes/"+this.state.recipe.id+"/information?includeNutrition=false&apiKey=036d2ceeeb994c60b37c1b8d1694c643",
+                url: "https://api.spoonacular.com/recipes/"+this.state.recipe.id+"/information?includeNutrition=false&apiKey=" + process.env.REACT_APP_API_KEY,
                 dataType: "json",
                 success: (data, status, jqXHR) => {
                     that.setState({
@@ -77,7 +77,7 @@ export class RecipeInfo extends Component {
                     })
                     $.ajax({
                         type: "get",
-                        url: "https://api.spoonacular.com/recipes/"+this.state.recipe.id+"/ingredientWidget.json?apiKey=036d2ceeeb994c60b37c1b8d1694c643",
+                        url: "https://api.spoonacular.com/recipes/"+this.state.recipe.id+"/ingredientWidget.json?apiKey=" + process.env.REACT_APP_API_KEY,
                         dataType: "json",
                         success: (data, status, jqXHR) => {
                             that.setState({
@@ -85,7 +85,7 @@ export class RecipeInfo extends Component {
                             })
                             $.ajax({
                                 type: "get",
-                                url: "https://api.spoonacular.com/recipes/"+this.state.recipe.id+"/analyzedInstructions?apiKey=036d2ceeeb994c60b37c1b8d1694c643",
+                                url: "https://api.spoonacular.com/recipes/"+this.state.recipe.id+"/analyzedInstructions?apiKey=" + process.env.REACT_APP_API_KEY,
                                 dataType: "json",
                                 success: (data, status, jqXHR) => {
                                     that.setState({

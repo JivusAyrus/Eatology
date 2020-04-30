@@ -52,7 +52,7 @@ export class Search extends Component {
         $("#search").on("input", function () {
             $.ajax({
                 type: "get",
-                url: "https://api.spoonacular.com/recipes/autocomplete?number=4&apiKey=036d2ceeeb994c60b37c1b8d1694c643&query=" +
+                url: "https://api.spoonacular.com/recipes/autocomplete?number=4&apiKey=" + process.env.REACT_APP_API_KEY + "&query=" +
                     $('#search').val(),
                 dataType: "json",
                 success: (data, status, jqXHR) => {
@@ -76,7 +76,7 @@ export class Search extends Component {
             $('#extra').show()
             $.ajax({
                 type: "get",
-                url: "https://api.spoonacular.com/recipes/search?number=12&apiKey=036d2ceeeb994c60b37c1b8d1694c643&query=" + $('#search').val(),
+                url: "https://api.spoonacular.com/recipes/search?number=12&apiKey=" + process.env.REACT_APP_API_KEY + "&query=" + $('#search').val(),
                 dataType: "json",
                 success: (data, status, jqXHR) => {
                     var card = null
@@ -113,7 +113,7 @@ export class Search extends Component {
         })
         $.ajax({
             type: "get",
-            url: "https://api.spoonacular.com/recipes/search?number=12&apiKey=036d2ceeeb994c60b37c1b8d1694c643&query=" 
+            url: "https://api.spoonacular.com/recipes/search?number=12&apiKey=" + process.env.REACT_APP_API_KEY + "&query=" 
                 + $('#search').val() + "&offset=" + this.state.offset,
             dataType: "json",
             success: (data, status, jqXHR) => {
