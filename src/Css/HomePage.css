@@ -1,4 +1,11 @@
-.recipelist h3{
+@font-face{
+    font-family:Playlist;
+    src:url(../Components/Playlist.otf);
+}
+.recipelist{
     margin-left:15px;
-    margin-top:5px;
+    margin-top:10px;
+    font-family: Playlist;
+    font-size: 40px;
+    border-bottom:1.5px solid red;
 }

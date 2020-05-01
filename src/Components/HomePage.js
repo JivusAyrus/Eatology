@@ -8,7 +8,7 @@ export class HomePage extends Component {
 
 
     render() {
-        const size = 1;
+        const size = 10;
         var user = JSON.parse(sessionStorage.getItem('user'))
         if (user) {
              var favids = ""
@@ -45,35 +45,35 @@ export class HomePage extends Component {
                 endpoint3 = user.search_history[user.search_history.length - 1] + "/similar?number="+size+"&apiKey=" + process.env.REACT_APP_API_KEY 
             }
             return (
-                <div class="recipelist">
+                <div>
                     <ControlledCarousel id = "banner"/>
                     <br />
-                    <h3 style={{ color: "red", float: "left" }}><u>Based on favourite cusines -></u></h3>
-                    <br /><br />
+                    <h3 class="recipelist" style={{ color: "red", float: "left" }}>Based on favourite cusines </h3>
+                    <br /><br /><br />
                     <Cardrow title="Based on favourite cuisines" endpoint={endpoint1} />
                     <br />
-                    <h3 style={{ color: "red", float: "left" }}><u>{user.favourites.length == 0 ? "Try something new ->" : "Based on your favourite recipes ->"}</u></h3>
-                    <br /><br />
+                    <h3 class="recipelist" style={{ color: "red", float: "left" }}>{user.favourites.length == 0 ? "Try something new " : "Based on your favourite recipes "}</h3>
+                    <br /><br /><br />
                     <Cardrow title={user.favourites.length == 0 ? "Try something new" : "Based on your favourite recipes"} endpoint={endpoint2} />
                     <br />
-                    <h3 style={{ color: "red", float: "left" }}><u>Hand picked for you -></u></h3>
-                    <br /><br />
+                    <h3 class="recipelist" style={{ color: "red", float: "left" }}>Hand picked for you </h3>
+                    <br /><br /><br />
                     <Cardrow title="Hand picked for you" endpoint={endpoint3} />
                     <br />
-                    <h3 style={{ color: "red", float: "left" }}><u>Vegetarian recipes -></u></h3>
-                    <br /> <br />
+                    <h3 class="recipelist" style={{ color: "red", float: "left" }}>Vegetarian recipes </h3>
+                    <br /> <br /><br />
                     <Cardrow title="Vegetarian recipes" endpoint={endpoint4} />
                     <br />
-                    <h3 style={{ color: "red", float: "left" }}><u>Main Course-></u></h3>
-                    <br /> <br />
+                    <h3 class="recipelist" style={{ color: "red", float: "left" }}>Main Course</h3>
+                    <br /> <br /><br />
                     <Cardrow title="Main Course" endpoint={endpoint5} />
                     <br />
-                    <h3 style={{ color: "red", float: "left" }}><u>Gluten Free recipes -></u></h3>
-                    <br /> <br />
+                    <h3 class="recipelist" style={{ color: "red", float: "left" }}>Gluten Free recipes </h3>
+                    <br /> <br /><br />
                     <Cardrow title="Gluten Free recipes" endpoint={endpoint6} />
                     <br />
-                    <h3 style={{ color: "red", float: "left" }}><u>Desserts -></u></h3>
-                    <br /> <br />
+                    <h3 class="recipelist" style={{ color: "red", float: "left" }}>Desserts </h3>
+                    <br /> <br /><br />
                     <Cardrow title="Desserts" endpoint={endpoint7} />
                     <br />
 
@@ -86,23 +86,23 @@ export class HomePage extends Component {
             var endpoint6 = "random?number="+size+"&limitLicense=true&apiKey=" + process.env.REACT_APP_API_KEY + "&tags=gluten free"
             var endpoint7 = "random?number="+size+"&limitLicense=true&apiKey=" + process.env.REACT_APP_API_KEY + "&tags=desserts"
             return (
-                <div class="recipelist">
+                <div >
                     <ControlledCarousel id = "banner"/>
                     <br />
-                    <h3 style={{ color: "red", float: "left" }}><u>Vegetarian recipes -></u></h3>
-                    <br /><br />
+                    <h3 class="recipelist" style={{ color: "red", float: "left" }}>Vegetarian recipes </h3>
+                    <br /><br /><br />
                     <Cardrow title="Vegetarian recipes" endpoint={endpoint4} />
                     <br/>
-                    <h3 style={{ color: "red", float: "left" }}><u>Main Course-></u></h3>
-                    <br /><br />
+                    <h3 class="recipelist" style={{ color: "red", float: "left" }}>Main Course</h3>
+                    <br /><br /><br />
                     <Cardrow title="Main Course" endpoint={endpoint5} />
                     <br />
-                    <h3 style={{ color: "red", float: "left" }}><u>Gluten Free recipes -></u></h3>
-                    <br /><br />
+                    <h3 class="recipelist" style={{ color: "red", float: "left" }}>Gluten Free recipes </h3>
+                    <br /><br /><br />
                     <Cardrow title="Gluten Free recipes" endpoint={endpoint6} />
                     <br />
-                    <h3 style={{ color: "red", float: "left" }}><u>Desserts -></u></h3>
-                    <br /><br />
+                    <h3 class="recipelist" style={{ color: "red", float: "left" }}>Desserts </h3>
+                    <br /><br /><br />
                     <Cardrow title="Desserts" endpoint={endpoint7} />
                     <br />
                 </div>

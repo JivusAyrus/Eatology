@@ -14,6 +14,8 @@ export class Card extends Component {
     constructor(props) {
         super(props)
         this.heart = this.heart.bind(this);
+        this.searchhistory = this.searchhistory.bind(this);
+        this.resolveImage = this.resolveImage.bind(this);
         var user = JSON.parse(sessionStorage.getItem('user'))
         if (user != null) {
             var added = false
@@ -104,7 +106,12 @@ export class Card extends Component {
     }
     resolveImage(){
         if(this.state.recipe.image == undefined){
-            return null
+            var UpdatedRecipe = this.state.recipe
+            UpdatedRecipe.image = "https://spoonacular.com/recipeImages/" + this.state.recipe.id +"-556x370.jpg"
+            this.setState({
+                recipe:UpdatedRecipe
+            })
+            return UpdatedRecipe.image
         }
         else if (this.state.recipe.image != undefined && this.state.recipe.image.startsWith("http")) {
             return this.state.recipe.image
