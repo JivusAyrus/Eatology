@@ -8,13 +8,13 @@ export class HomePage extends Component {
 
 
     render() {
-        const size = 10;
+        const size = 1;
         var user = JSON.parse(sessionStorage.getItem('user'))
         if (user) {
              var favids = ""
             // if(user.favourites.length >=4){
             //     for(var i=0;i<4;i++){
-            favids = (user.favourites[Math.trunc(Math.random(user.favourites.length)*10)])
+            favids = (user.search_history[Math.trunc(Math.random(user.search_history.length)*10)])
             //     }
             // }
             // else {
@@ -42,7 +42,7 @@ export class HomePage extends Component {
                 endpoint3 = "random?number="+size+"&limitLicense=true&apiKey=" + process.env.REACT_APP_API_KEY + ""
             }
             else{
-                endpoint3 = user.search_history[user.search_history.length - 1] + "/similar?number="+size+"&apiKey=" + process.env.REACT_APP_API_KEY 
+                endpoint3 = user.search_history[user.search_history.length - 1].split(',')[0] + "/similar?number="+size+"&apiKey=" + process.env.REACT_APP_API_KEY 
             }
             return (
                 <div>
@@ -56,7 +56,7 @@ export class HomePage extends Component {
                     <br /><br /><br />
                     <Cardrow title={user.favourites.length == 0 ? "Try something new" : "Based on your favourite recipes"} endpoint={endpoint2} />
                     <br />
-                    <h3 class="recipelist" style={{ color: "red", float: "left" }}>Hand picked for you </h3>
+                    <h3 class="recipelist" style={{ color: "red", float: "left" }}>{user.search_history.length == 0 ? "Step outside your comfort zone":"Because you viewed "+ user.search_history[user.search_history.length-1].split(',')[1]}</h3>
                     <br /><br /><br />
                     <Cardrow title="Hand picked for you" endpoint={endpoint3} />
                     <br />

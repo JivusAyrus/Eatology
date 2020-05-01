@@ -126,7 +126,7 @@ export class Card extends Component {
             type: "post",
             url: "http://localhost:5000/users/update/add-search-history/" + JSON.parse(sessionStorage.getItem('user'))._id,
             dataType: "json",
-            data: JSON.stringify({ history_item: this.state.recipe.id }),
+            data: JSON.stringify({ history_item: this.state.recipe.id+","+this.state.recipe.title }),
             processData: false,                     //Assigns the data to post request body and not url
             contentType: "application/json",
             success: (data, status, jqXHR) => {
