@@ -114,6 +114,26 @@ export class Card extends Component {
         }
         
     }
+    searchhistory(){
+        $.ajax({
+            type: "post",
+            url: "http://localhost:5000/users/update/add-search-history/" + JSON.parse(sessionStorage.getItem('user'))._id,
+            dataType: "json",
+            data: JSON.stringify({ history_item: this.state.recipe.id }),
+            processData: false,                     //Assigns the data to post request body and not url
+            contentType: "application/json",
+            success: (data, status, jqXHR) => {
+                console.log(data);
+                var user = JSON.parse(sessionStorage.getItem('user'))
+                user.search_history = data.search_history
+                sessionStorage.setItem('user',JSON.stringify(user))
+            },
+            error: (jqXHR, status, err) => {
+                console.log(jqXHR);
+            },
+
+        });
+    }
     render() {
         var imgUrl;
         if(this.state.isLoading){
@@ -137,7 +157,7 @@ export class Card extends Component {
         else{
             var imgUrl = this.resolveImage()
         return (
-            <div class="custcar">
+            <div class="custcar" onClick = {this.searchhistory}>
                 <Link to={{
                     pathname:"/recipeinfo",
                     state:{

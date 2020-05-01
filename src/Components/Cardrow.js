@@ -26,11 +26,16 @@ export class Cardrow extends Component {
       .then(res => res.json())
       .then(
         (result) => {
-          console.log(result)
           if (result.recipes != undefined) {
             this.setState({
               isLoaded: true,
               items: result.recipes
+            });
+          }
+          else if(result.results != undefined){
+            this.setState({
+              isLoaded: true,
+              items: result.results
             });
           }
           else {
@@ -93,61 +98,62 @@ export class Cardrow extends Component {
       return CardRowRoot
     }
     else {
-      var tempCards = []
-      // for (var i = 0; i < 10; i++) {
-      //   tempCards.push(React.createElement('div', { class: "card-body" }, [
-      //     React.createElement(Card, { recipe_info: { title: "" } })
+      // var tempCards = []
+      // // for (var i = 0; i < 10; i++) {
+      // //   tempCards.push(React.createElement('div', { class: "card-body" }, [
+      // //     React.createElement(Card, { recipe_info: { title: "" } })
 
-      //   ]))
-      // }
-      // var TempCardsElement = React.createElement('div', { class: "d-flex flex-row flex-nowrap" }, tempCards)
-      // var TempCardRowRoot = React.createElement('div', { class: 'cardrow', style: { overflowX: 'scroll', msOverflowStyle: 'none' } }, TempCardsElement)
-      return (<div className="cardrow" style={{ overflowX: 'scroll', msOverflowStyle: 'none' }}>
-        <div className="d-flex flex-row flex-nowrap">
-          <div className="card-body">
-          <Card recipe_info={{title : ""}}></Card>
-          </div>
-          <div className="card-body">
-          <Card recipe_info={{title : ""}}></Card>
-          </div>
-          <div className="card-body">
-          <Card recipe_info={{title : ""}}></Card>
-          </div>
-          <div className="card-body">
-          <Card recipe_info={{title : ""}}></Card>
-          </div>
-          <div className="card-body">
-          <Card recipe_info={{title : ""}}></Card>
-          </div>
-          <div className="card-body">
-          <Card recipe_info={{title : ""}}></Card>
-          </div>
-          <div className="card-body">
-          <Card recipe_info={{title : ""}}></Card>
-          </div>
-          <div className="card-body">
-          <Card recipe_info={{title : ""}}></Card>
-          </div>
-          <div className="card-body">
-          <Card recipe_info={{title : ""}}></Card>
-          </div>
-          <div className="card-body">
-          <Card recipe_info={{title : ""}}></Card>
-          </div>
-        </div>
+      // //   ]))
+      // // }
+      // // var TempCardsElement = React.createElement('div', { class: "d-flex flex-row flex-nowrap" }, tempCards)
+      // // var TempCardRowRoot = React.createElement('div', { class: 'cardrow', style: { overflowX: 'scroll', msOverflowStyle: 'none' } }, TempCardsElement)
+      // return (<div className="cardrow" style={{ overflowX: 'scroll', msOverflowStyle: 'none' }}>
+      //   <div className="d-flex flex-row flex-nowrap">
+      //     <div className="card-body">
+      //     <Card recipe_info={{title : ""}}></Card>
+      //     </div>
+      //     <div className="card-body">
+      //     <Card recipe_info={{title : ""}}></Card>
+      //     </div>
+      //     <div className="card-body">
+      //     <Card recipe_info={{title : ""}}></Card>
+      //     </div>
+      //     <div className="card-body">
+      //     <Card recipe_info={{title : ""}}></Card>
+      //     </div>
+      //     <div className="card-body">
+      //     <Card recipe_info={{title : ""}}></Card>
+      //     </div>
+      //     <div className="card-body">
+      //     <Card recipe_info={{title : ""}}></Card>
+      //     </div>
+      //     <div className="card-body">
+      //     <Card recipe_info={{title : ""}}></Card>
+      //     </div>
+      //     <div className="card-body">
+      //     <Card recipe_info={{title : ""}}></Card>
+      //     </div>
+      //     <div className="card-body">
+      //     <Card recipe_info={{title : ""}}></Card>
+      //     </div>
+      //     <div className="card-body">
+      //     <Card recipe_info={{title : ""}}></Card>
+      //     </div>
+      //   </div>
+      // </div>
+      // )
+      return(
+      <div className="sweet-loading">
+        <ClipLoader
+          css={override}
+          size={100}
+          //size={"150px"} this also works
+          color={"#123abc"}
+          loading="true"
+        />
+        <br />
       </div>
       )
-      // <div className="sweet-loading">
-      //   <ClipLoader
-      //     css={override}
-      //     size={100}
-      //     //size={"150px"} this also works
-      //     color={"#123abc"}
-      //     loading="true"
-      //   />
-      //   <br />
-      // </div>
-
 
     }
   }

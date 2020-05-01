@@ -8,13 +8,13 @@ export class HomePage extends Component {
 
 
     render() {
-
+        const size = 1;
         var user = JSON.parse(sessionStorage.getItem('user'))
         if (user) {
-            // var favids = []
+             var favids = ""
             // if(user.favourites.length >=4){
             //     for(var i=0;i<4;i++){
-            //         favids.push(user.favourites[Math.trunc(Math.random(user.favourites.length)*10)])
+            favids = (user.favourites[Math.trunc(Math.random(user.favourites.length)*10)])
             //     }
             // }
             // else {
@@ -22,37 +22,44 @@ export class HomePage extends Component {
             // }
             var endpoint1 = ""
             var endpoint2 = ""
-            var endpoint4 = "random?number=10&limitLicense=true&apiKey=" + process.env.REACT_APP_API_KEY + "&tags=vegetarian"
-            var endpoint5 = "random?number=10&limitLicense=true&apiKey=" + process.env.REACT_APP_API_KEY + "&tags=main course"
-            var endpoint6 = "random?number=10&limitLicense=true&apiKey=" + process.env.REACT_APP_API_KEY + "&tags=gluten free"
-            var endpoint7 = "random?number=10&limitLicense=true&apiKey=" + process.env.REACT_APP_API_KEY + "&tags=desserts"
+            var endpoint3 = ""
+            var endpoint4 = "random?number="+size+"&limitLicense=true&apiKey=" + process.env.REACT_APP_API_KEY + "&tags=vegetarian"
+            var endpoint5 = "random?number="+size+"&limitLicense=true&apiKey=" + process.env.REACT_APP_API_KEY + "&tags=main course"
+            var endpoint6 = "random?number="+size+"&limitLicense=true&apiKey=" + process.env.REACT_APP_API_KEY + "&tags=gluten free"
+            var endpoint7 = "random?number="+size+"&limitLicense=true&apiKey=" + process.env.REACT_APP_API_KEY + "&tags=desserts"
             if (user.pref_cuisines.length == 0) {
-                endpoint1 = "random?number=10&limitLicense=true&apiKey=" + process.env.REACT_APP_API_KEY + "&tags=indian"
+                endpoint1 = "random?number="+size+"&limitLicense=true&apiKey=" + process.env.REACT_APP_API_KEY + "&tags=indian"
             }
             else {
-                endpoint1 = "random?number=10&limitLicense=true&apiKey=" + process.env.REACT_APP_API_KEY + "&tags=" + JSON.stringify(user.pref_cuisines)
+                endpoint1 = "search?number="+size+"&limitLicense=true&apiKey=" + process.env.REACT_APP_API_KEY + "&cuisine=" + JSON.stringify(user.pref_cuisines.toString())
             }
             if (user.favourites.length == 0) {
-                endpoint2 = "random?number=10&limitLicense=true&apiKey=" + process.env.REACT_APP_API_KEY + ""
+                endpoint2 = "random?number="+size+"&limitLicense=true&apiKey=" + process.env.REACT_APP_API_KEY + ""
             }
             else
-                endpoint2 = user.favourites[user.favourites.length - 1] + "/similar?number=10&apiKey=" + process.env.REACT_APP_API_KEY + ""
+                endpoint2 = user.favourites[user.favourites.length - 1] + "/similar?number="+size+"&apiKey=" + process.env.REACT_APP_API_KEY 
+            if(user.search_history.length == 0){
+                endpoint3 = "random?number="+size+"&limitLicense=true&apiKey=" + process.env.REACT_APP_API_KEY + ""
+            }
+            else{
+                endpoint3 = user.search_history[user.search_history.length - 1] + "/similar?number="+size+"&apiKey=" + process.env.REACT_APP_API_KEY 
+            }
             return (
                 <div class="recipelist">
                     <ControlledCarousel id = "banner"/>
                     <br />
                     <h3 style={{ color: "red", float: "left" }}><u>Based on favourite cusines -></u></h3>
                     <br /><br />
-                    <Cardrow title="Based on favourite cusines" endpoint={endpoint1} />
+                    <Cardrow title="Based on favourite cuisines" endpoint={endpoint1} />
                     <br />
                     <h3 style={{ color: "red", float: "left" }}><u>{user.favourites.length == 0 ? "Try something new ->" : "Based on your favourite recipes ->"}</u></h3>
                     <br /><br />
                     <Cardrow title={user.favourites.length == 0 ? "Try something new" : "Based on your favourite recipes"} endpoint={endpoint2} />
                     <br />
-
-                    <Cardrow title="Hand picked for you" endpoint="" />
+                    <h3 style={{ color: "red", float: "left" }}><u>Hand picked for you -></u></h3>
+                    <br /><br />
+                    <Cardrow title="Hand picked for you" endpoint={endpoint3} />
                     <br />
-
                     <h3 style={{ color: "red", float: "left" }}><u>Vegetarian recipes -></u></h3>
                     <br /> <br />
                     <Cardrow title="Vegetarian recipes" endpoint={endpoint4} />
@@ -74,10 +81,10 @@ export class HomePage extends Component {
             )
         }
         else {
-            var endpoint4 = "random?number=10&limitLicense=true&apiKey=" + process.env.REACT_APP_API_KEY + "&tags=vegetarian"
-            var endpoint5 = "random?number=10&limitLicense=true&apiKey=" + process.env.REACT_APP_API_KEY + "&tags=main course"
-            var endpoint6 = "random?number=10&limitLicense=true&apiKey=" + process.env.REACT_APP_API_KEY + "&tags=gluten free"
-            var endpoint7 = "random?number=10&limitLicense=true&apiKey=" + process.env.REACT_APP_API_KEY + "&tags=desserts"
+            var endpoint4 = "random?number="+size+"&limitLicense=true&apiKey=" + process.env.REACT_APP_API_KEY + "&tags=vegetarian"
+            var endpoint5 = "random?number="+size+"&limitLicense=true&apiKey=" + process.env.REACT_APP_API_KEY + "&tags=main course"
+            var endpoint6 = "random?number="+size+"&limitLicense=true&apiKey=" + process.env.REACT_APP_API_KEY + "&tags=gluten free"
+            var endpoint7 = "random?number="+size+"&limitLicense=true&apiKey=" + process.env.REACT_APP_API_KEY + "&tags=desserts"
             return (
                 <div class="recipelist">
                     <ControlledCarousel id = "banner"/>
@@ -85,7 +92,7 @@ export class HomePage extends Component {
                     <h3 style={{ color: "red", float: "left" }}><u>Vegetarian recipes -></u></h3>
                     <br /><br />
                     <Cardrow title="Vegetarian recipes" endpoint={endpoint4} />
-
+                    <br/>
                     <h3 style={{ color: "red", float: "left" }}><u>Main Course-></u></h3>
                     <br /><br />
                     <Cardrow title="Main Course" endpoint={endpoint5} />

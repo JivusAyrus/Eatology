@@ -29,8 +29,8 @@ function ControlledCarousel() {
 
             <img
               className="d-block w-100"
-              src={recipes[0].image}
-              alt="First slide"
+              src={recipes[0].image == undefined ?require("./placeholder.jpg"):recipes[0].image}
+              alt={recipes[0].title}
               height="400px"
               style={{ zIndex: "0" }}
             />
@@ -54,8 +54,8 @@ function ControlledCarousel() {
 
             <img
               className="d-block w-100"
-              src={recipes[1].image}
-              alt="Second slide"
+              src={recipes[1].image == undefined ?require("./placeholder.jpg"):recipes[1].image}
+              alt={recipes[1].title}
               height="400px"
               style={{ zIndex: "0" }}
             />
@@ -80,8 +80,8 @@ function ControlledCarousel() {
 
             <img
               className="d-block w-100"
-              src={recipes[2].image}
-              alt="Third slide"
+              src={recipes[2].image == undefined ?require("./placeholder.jpg"):recipes[2].image}
+              alt={recipes[2].title}
               height="400px"
               style={{ zIndex: "0" }}
             />

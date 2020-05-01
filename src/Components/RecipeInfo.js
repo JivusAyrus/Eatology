@@ -34,6 +34,7 @@ export class RecipeInfo extends Component {
     }
     componentDidMount(){
         var that = this;
+        
         if(this.state.recipe.nutrition != undefined){
             $.ajax({
                 type: "get",

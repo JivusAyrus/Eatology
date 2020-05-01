@@ -88,7 +88,7 @@ export class Search extends Component {
                         var cardRow = React.createElement('div', { class: "col-lg-3" }, card)
                         result.push(cardRow)
                     })
-                    if(data.length< 12){
+                    if(data.results.length< 12){
                         $('#extra').hide()
                         $('#searchtext').show()
                     }
@@ -124,7 +124,7 @@ export class Search extends Component {
                     ])
                     var cardRow = React.createElement('div', { class: "col-lg-3" }, card)
                     result.push(cardRow)
-                    if(data.length< 12){
+                    if(data.results.length< 12){
                         $('#extra').hide()
                         $('#searchtext').show()
                     }
