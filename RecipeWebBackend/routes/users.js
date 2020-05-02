@@ -238,28 +238,30 @@ router.route('/send-otp/:email').post((req, res) => {
 
 })
 
-// router.route('/contact-us').post((req,res) => {
-//     var from = req.body.username;
-//     var body = req.body.email_body;
+//localhost/users/contact-us will allow the sepecified user to contact eatology via email.
+router.route('/contact-us').post((req,res) => {
+    var from = req.body.username;
+    var email_body = req.body.email_body;
+    
+    var mailOptions = {
+        from: 'eatologyhq@gmail.com',
+        to: "vkalghat@gmail.com",
+        subject: "User Query/Feedback from " + from,
+        text: email_body
+    };
 
-//     var mailOptions = {
-//         from: 'eatologyhq@gmail.com',
-//         to: "vkalghat@gmail.com",
-//         subject: "User Query/Feedback from " + from,
-//         body: body
-//     };
+    transporter.sendMail(mailOptions, function (error, info) {
 
-//     transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response + " ");
+            res.json({"success" : true,
+        })
+        }
+    });
 
-//         if (error) {
-//             console.log(error);
-//         } else {
-//             console.log('Email sent: ' + info.response + " ");
-//             res.json({ "otp": otp })
-//         }
-//     });
-
-// })
+})
 
 
 //localhost/users/update/add-fav-cuisines/:id will add an array of favourite cuisines to the user whose id is specified.
