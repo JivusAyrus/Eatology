@@ -241,13 +241,15 @@ router.route('/send-otp/:email').post((req, res) => {
 //localhost/users/contact-us will allow the sepecified user to contact eatology via email.
 router.route('/contact-us').post((req,res) => {
     var from = req.body.username;
+    var email_id = req.body.email_id;
     var email_body = req.body.email_body;
     
     var mailOptions = {
         from: 'eatologyhq@gmail.com',
         to: "vkalghat@gmail.com",
-        subject: "User Query/Feedback from " + from,
-        text: email_body
+        cc: "suvijsurya76@gmail.com",
+        subject: "User Query/Feedback from " + from ,
+        html: from +"(" + email_id + ") says:" + "<br/><h4>"+email_body+"</h4>"
     };
 
     transporter.sendMail(mailOptions, function (error, info) {

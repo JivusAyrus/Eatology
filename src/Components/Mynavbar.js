@@ -121,22 +121,28 @@ export class Mynavbar extends Component {
                             <li className="search">
                                 <Link to="/search" className="anchors Search" style={{ color: "white" }}>Search</Link>
                             </li>
+                            {user == null ?
                             <li className="login">
                                 <Link to="/login" className="anchors Login" style={{ color: "white" }}>Login</Link>
-                            </li>
+                            </li>:''
+                            }
                             <li className="favorites">
                                 <Link to="/favorite" className="anchors Favorites" style={{ color: "white" }}>Favorites</Link>
                             </li>
+                            {user ?
                             <li className="settings">
                                 <Link to="/updateprofile" className="anchors Settings" style={{ color: "white" }}>Update Profile</Link>
-                            </li>
+                            </li> : ''
+                            }
+                            {user ?
                             <li className="logout">
                                 <Link onClick={() => {
                                     sessionStorage.clear()
                                     location.state = null
                                     window.history.pushState(null, null, '/')
                                 }} className="anchors Logout" style={{ color: "white" }}>Logout</Link>
-                            </li>
+                            </li> : ''
+                            }
                         </ul>
                         <ul class="list-unstyled list-inline" style={{ fontSize: "28px", marginTop: "250px" }}>
                             <li class="list-inline-item"><a href="https://www.facebook.com/suvij.surya"><i class='fab fa-facebook-square'></i></a></li>
