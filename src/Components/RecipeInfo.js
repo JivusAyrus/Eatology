@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import '../Css/RecipeInfo.css'
+import Cardrow from './Cardrow'
 import $ from "jquery";
 import {withRouter} from 'react-router-dom'
 import { css } from "@emotion/core";
@@ -293,12 +294,13 @@ export class RecipeInfo extends Component {
                 {this.getDishTypesList().length != 0?
                     <div>
                         <div class="separator" align="left">Dish Type</div><br/><br/>
-                        <div class="row dish" children={this.getDishTypesList()}></div>
+                        <ul class="row dish" children={this.getDishTypesList()}></ul>
                     </div>:<br/>
                 }
                 <div class="separator" align="left">Nutrition</div><br/><br/>
                 <ul children={this.getNutritionList()} class=" row nutri"></ul>
-                
+                <div class="separator" align="left">Similar Recipes</div><br/>
+                <Cardrow endpoint={recipe.id+"/similar?number=8&apiKey=" + process.env.REACT_APP_API_KEY }/>
                 
                 
                 
