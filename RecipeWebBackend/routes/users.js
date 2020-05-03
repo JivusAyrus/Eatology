@@ -239,10 +239,10 @@ router.route('/send-otp/:email').post((req, res) => {
 })
 
 //localhost/users/contact-us will allow the sepecified user to contact eatology via email.
-router.route('/contact-us').post((req,res) => {
+router.route('/contact-us').post((req, res) => {
     var from = req.body.username;
     var email_body = req.body.email_body;
-    
+
     var mailOptions = {
         from: 'eatologyhq@gmail.com',
         to: "vkalghat@gmail.com",
@@ -256,11 +256,52 @@ router.route('/contact-us').post((req,res) => {
             console.log(error);
         } else {
             console.log('Email sent: ' + info.response + " ");
-            res.json({"success" : true,
-        })
+            res.json({
+                "success": true,
+            })
         }
     });
 
+})
+
+//localhost/users/send-mail will send a registration mail to th specified user email.
+router.route('/send-registration-mail').post((req, res) => {
+
+    var userEmail = req.body.email
+    var htmlBody = "initial"
+    htmlBody = fs.readFileSync("RecipeWebBackend\\EatologyTemplate.html")
+    var mailOptions = {
+        from: 'eatologyhq@gmail.com',
+        to: userEmail,
+        subject: "Welcome to Eatology!",
+        html: htmlBody
+    };
+
+
+    User.findOne({ "email": userEmail })
+        .then(user => {
+            if (user) {
+                transporter.sendMail(mailOptions, function (error, info) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log('Email sent: ' + info.response + " ");
+                        res.json({
+                            "success": true
+                        })
+                    }
+                });
+            }
+            else {
+                res.json({
+                    "success": false,
+                    "msg": "This email has not been registered !"
+                })
+            }
+        })
+        .catch(error => {
+            res.status(400).json('Error : ' + err)
+        })
 })
 
 
