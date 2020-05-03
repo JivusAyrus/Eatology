@@ -10,7 +10,8 @@ export class Search extends Component {
         this.extraresult = this.extraresult.bind(this);
         this.state = {
             cards: [],
-            offset:12
+            offset:12,
+            recipe_data:[]
         }
     }
 
@@ -44,6 +45,23 @@ export class Search extends Component {
 
             </div>
         )
+    }
+    componentWillUnmount(){
+        sessionStorage.setItem('search_cache',JSON.stringify(this.state.recipe_data))
+        sessionStorage.setItem('search_query',$('#search').val())
+
+    }
+    getRecipeCards(recipe_data){
+        var result = []
+        var card = null
+        recipe_data.forEach(recipe => {
+            card = React.createElement('div', { class: "card-body" }, [
+                React.createElement(Card, { recipe_info: recipe })
+            ])
+            var cardRow = React.createElement('div', { class: "col-lg-3" }, card)
+            result.push(cardRow)
+        })
+        return result
     }
     componentDidMount() {
         var that = this;
@@ -79,6 +97,9 @@ export class Search extends Component {
                 url: "https://api.spoonacular.com/recipes/search?number=12&apiKey=" + process.env.REACT_APP_API_KEY + "&query=" + $('#search').val(),
                 dataType: "json",
                 success: (data, status, jqXHR) => {
+                    that.setState({
+                        recipe_data:data.results
+                    })
                     var card = null
                     var result = []
                     data.results.forEach(recipe => {
@@ -104,6 +125,17 @@ export class Search extends Component {
             });
             event.preventDefault();
         });
+        if(sessionStorage.getItem('search_cache')){
+            this.setState({
+                cards:this.getRecipeCards(JSON.parse(sessionStorage.getItem('search_cache'))),
+                recipe_data:JSON.parse(sessionStorage.getItem('search_cache'))
+            })
+            sessionStorage.removeItem('search_cache')
+            if(this.state.cards.length != 0)
+                $('#extra').show()
+            $('#search').val(sessionStorage.getItem('search_query'))
+            sessionStorage.removeItem('search_query')
+        }
     }
     extraresult(){
         var that = this;

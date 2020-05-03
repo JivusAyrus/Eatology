@@ -122,6 +122,8 @@ export class Card extends Component {
         
     }
     searchhistory(){
+        var user = JSON.parse(sessionStorage.getItem('user'))
+        if(user){
         $.ajax({
             type: "post",
             url: "http://localhost:5000/users/update/add-search-history/" + JSON.parse(sessionStorage.getItem('user'))._id,
@@ -140,6 +142,7 @@ export class Card extends Component {
             },
 
         });
+        }
     }
     render() {
         var imgUrl;
