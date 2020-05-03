@@ -9,20 +9,20 @@ export class Signup extends Component {
             isSignedUp: false
         }
     }
-    
+
     componentDidMount() {
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
-        
+
                 reader.onload = function (e) {
                     $('#image').attr('src', e.target.result);
                 }
                 reader.readAsDataURL(input.files[0]);
             }
         }
-        
-        $("#propic").change(function(){
+
+        $("#propic").change(function () {
             readURL(this);
         });
         var that = this;
@@ -32,29 +32,45 @@ export class Signup extends Component {
                 var post_JSON = new FormData();
                 $.each(input_values, function (i, field) {
                     if (field.name == 'cpass') return
-                    post_JSON.append(field.name,field.value);
+                    post_JSON.append(field.name, field.value);
                 });
-                post_JSON.append("profile_img",document.getElementById('propic').files[0])
+                post_JSON.append("profile_img", document.getElementById('propic').files[0])
                 $.ajax({
                     type: "post",
                     url: "http://localhost:5000/users/add",
                     dataType: "json",
                     data: post_JSON,
-                    contentType:false,
-                    cache:false,
+                    contentType: false,
+                    cache: false,
                     processData: false,                     //Assigns the data to post request body and not url
                     success: (data, status, jqXHR) => {
                         var jsonObject = {};
-                        jsonObject["favourites"]=[]
-                        jsonObject["search_history"]=[]
-                        jsonObject["pref_cuisines"]=[]
-                        jsonObject["_id"]=data.id
-                        for (const [key, value]  of post_JSON.entries()) {
+                        jsonObject["favourites"] = []
+                        jsonObject["search_history"] = []
+                        jsonObject["pref_cuisines"] = []
+                        jsonObject["_id"] = data.id
+                        for (const [key, value] of post_JSON.entries()) {
                             jsonObject[key] = value;
                         }
                         sessionStorage.setItem("user", JSON.stringify(jsonObject))
+                        //Send the registration mail
+                        var settings = {
+                            "async": true,
+                            "crossDomain": true,
+                            "url": "http://localhost:5000/users/send-registration-mail",
+                            "method": "POST",
+                            "headers": {
+                                "content-type": "application/json"
+                            },
+                            "processData": false,
+                            "data": JSON.stringify({ email: post_JSON.get("email") })
+                        }
+
+                        $.ajax(settings).done(function (response) {
+                            console.log(response);
+                        });
                         that.setState({
-                            isSignedUp:true 
+                            isSignedUp: true
                         })
                     },
                     error: (jqXHR, status, err) => {
@@ -72,7 +88,7 @@ export class Signup extends Component {
                 alert('Passwords do not match')
                 $('input[name="cpass"]').val('')
             }
-            
+
             event.preventDefault();
 
         });
@@ -86,34 +102,34 @@ export class Signup extends Component {
         if (this.state.isSignedUp) {
             return <Redirect to={{
                 pathname: '/cusinefavs'
-            }}/>
+            }} />
         }
-        else{
-        return (
-            <div class="body">
-                <div class="card" style={{ marginTop: "40px" }}>
-                    <div class="card-body">
-                        <form>
-                            <p class="card-title">Signup</p>
-                            <div class="profile">
-                                <img id="image" src={require("./default profile.png")}/>
-                                <i class="fa fa-edit" onClick={this.handleClick}></i><input hidden id="propic" name="userImage" type="file" ref={imageref => this.imageHandler=imageref} attach="image/*"/>
-                            </div><br/>
-                            <input class="signupinp" type="text" name="fullname" placeholder="Full Name" required />
-                            <input class="signupinp" type="text" name="username" placeholder="Public User Name (max 6 characters)" required maxlength="6"/>
-                            <input class="signupinp" type="email" name="email" pattern = "(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)" placeholder="Email" required title="eg. abc@gmail.com, abc@dr-ait.org" /><br />
-                            <input class="signupinp" type="password" name="password" placeholder="Password" required minlength="8"/><br />
-                            <input class="signupinp" type="password" name="cpass" placeholder="Confirm Password" required minlength="8"/><br />
-                            <button type="submit" class="btn btn-outline-danger">Sign Up</button>
-                        </form>
+        else {
+            return (
+                <div class="body">
+                    <div class="card" style={{ marginTop: "40px" }}>
+                        <div class="card-body">
+                            <form>
+                                <p class="card-title">Signup</p>
+                                <div class="profile">
+                                    <img id="image" src={require("./default profile.png")} />
+                                    <i class="fa fa-edit" onClick={this.handleClick}></i><input hidden id="propic" name="userImage" type="file" ref={imageref => this.imageHandler = imageref} attach="image/*" />
+                                </div><br />
+                                <input class="signupinp" type="text" name="fullname" placeholder="Full Name" required />
+                                <input class="signupinp" type="text" name="username" placeholder="Public User Name (max 6 characters)" required maxlength="6" />
+                                <input class="signupinp" type="email" name="email" pattern="(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)" placeholder="Email" required title="eg. abc@gmail.com, abc@dr-ait.org" /><br />
+                                <input class="signupinp" type="password" name="password" placeholder="Password" required minlength="8" /><br />
+                                <input class="signupinp" type="password" name="cpass" placeholder="Confirm Password" required minlength="8" /><br />
+                                <button type="submit" class="btn btn-outline-danger">Sign Up</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
         }
     }
-    handleClick=(e) => {this.imageHandler.click()}
-    
+    handleClick = (e) => { this.imageHandler.click() }
+
 }
 
 export default Signup
