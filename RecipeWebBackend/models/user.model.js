@@ -2,10 +2,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 const ShoppingList = require('./shoppingList.model')
-
 /*
 Structure of a User :
-
 User
 {
     username :      String,
@@ -19,7 +17,6 @@ User
     phone_number:   String
 }
 */
-
 var UserSchema = new Schema({
     username: {
         type: String,
@@ -53,7 +50,5 @@ var UserSchema = new Schema({
         match: /^\d{10}$/,  //Validates phone number
     },
 });
-
 const User = mongoose.model('User', UserSchema);
-
 module.exports = User;

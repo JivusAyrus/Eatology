@@ -4,9 +4,7 @@ var multer = require('multer')
 var fs = require('fs')
 var mailer = require("nodemailer")
 
-
 const memoryStorage = multer.memoryStorage()
-
 //Filters file type to be only jpeg or png.
 const fileFilter = (req, file, cb) => {
     // reject a file
@@ -16,7 +14,6 @@ const fileFilter = (req, file, cb) => {
         cb(null, false);
     }
 };
-
 //Setting up multer to upload binary data (images).
 const upload = multer({
     storage: memoryStorage,
@@ -25,7 +22,6 @@ const upload = multer({
     },
     fileFilter: fileFilter
 });
-
 //Setting up nodemailer.
 var transporter = mailer.createTransport({
     service: 'gmail',
@@ -34,21 +30,18 @@ var transporter = mailer.createTransport({
         pass: 'eatology#pass'
     }
 });
-
 // localhost/users/ will return all the users in the response body.
 router.route('/').get((req, res) => {
     User.find()
         .then(users => res.json(users))
         .catch(err => res.status(400).json('Error : ' + err));
 });
-
 // localhost/users/id will return a user having that id.
 router.route('/:id').get((req, res) => {
     User.findById(req.params.id)
         .then(users => res.json(users))
         .catch(err => res.status(400).json('Error : ' + err));
 })
-
 // localhost/users/email will return user with that email.
 router.route('/by-email/:email').get((req, res) => {
     User.find({ email: req.params.email })
@@ -57,7 +50,6 @@ router.route('/by-email/:email').get((req, res) => {
         })
         .catch(err => res.status(404).json('Error : ' + err))
 })
-
 // localhost/users/add will add a user whose object is specified in the request body.
 router.route('/add').post(upload.single('profile_img'), (req, res) => {
     if (req.file != undefined) {
@@ -92,7 +84,6 @@ router.route('/add').post(upload.single('profile_img'), (req, res) => {
             fullname,
             email,
             password,
-
         });
         newUser.save()
             .then(user => {
@@ -104,7 +95,6 @@ router.route('/add').post(upload.single('profile_img'), (req, res) => {
             .catch(err => res.status(400).json('Error : ' + err));
     }
 })
-
 // localhost/users/update/:id will update the user whose id is specified
 router.route('/update/:id').post(upload.single('profile_img'), (req, res) => {
     var username
@@ -125,9 +115,7 @@ router.route('/update/:id').post(upload.single('profile_img'), (req, res) => {
                 .catch(err => res.status(400).json('Error : ' + err));
         })
         .catch(err => res.status(400).json('Error : ' + err));
-
 })
-
 //localhost/users/update-by-email/:email will update the user whose email is specified.
 router.route('/update-by-email/:email').post((req, res) => {
     var postObj = req.body
@@ -148,9 +136,7 @@ router.route('/update-by-email/:email').post((req, res) => {
             }
         })
         .catch(err => res.status(400).json('Error : ' + err));
-
 })
-
 //localhost/update/add-favourite/:id will add a favourite to the user that is specified.
 router.route('/update/add-favourite/:id').post((req, res) => {
     var username
@@ -163,7 +149,6 @@ router.route('/update/add-favourite/:id').post((req, res) => {
             else {
                 User.findOneAndUpdate({ _id: req.params.id }, {
                     $push: { favourites: req.body.favourite }
-
                 }, {
                     new: true
                 })
@@ -171,14 +156,11 @@ router.route('/update/add-favourite/:id').post((req, res) => {
                         res.json(updatedUser)
                     })
                     .catch(err => res.status(400).json('Error : ' + err));
-
             }
         })
         .catch(err => res.status(400).json('Error : ' + err));
 
-
 })
-
 //localhost/users/update/remove-favourite/:id will remove a favourite from the user that is specified.
 router.route('/update/remove-favourite/:id').post((req, res) => {
     var username
@@ -187,7 +169,6 @@ router.route('/update/remove-favourite/:id').post((req, res) => {
             username = users.username
             User.findOneAndUpdate({ _id: req.params.id }, {
                 $pull: { favourites: { $in: [req.body.favourite] } }
-
             }, {
                 new: true
             })
@@ -195,17 +176,13 @@ router.route('/update/remove-favourite/:id').post((req, res) => {
                     res.json(updatedUser)
                 })
                 .catch(err => res.status(400).json('Error : ' + err));
-
         })
         .catch(err => res.status(400).json('Error : ' + err));
-
 })
-
 //localhost/users/send-otp/:email will send a otp to the specified user email if it is registered.
 router.route('/send-otp/:email').post((req, res) => {
     var userEmail = req.params.email
     var otp = genOtp()
-
     var mailOptions = {
         from: 'eatologyhq@gmail.com',
         to: userEmail,
@@ -213,7 +190,6 @@ router.route('/send-otp/:email').post((req, res) => {
         html: "<h3>Your one time password is " + otp + "</h3>" +
             "<h3>Regards,</h3><h3>Team Eatology.</h3>"
     };
-
     User.findOne({ "email": userEmail })
         .then(user => {
             if (user) {
@@ -240,15 +216,12 @@ router.route('/send-otp/:email').post((req, res) => {
             res.status(400).json('Error : ' + err)
         })
 
-
 })
-
 //localhost/users/contact-us will allow the sepecified user to contact eatology via email.
 router.route('/contact-us').post((req, res) => {
     var from = req.body.username;
     var email_id = req.body.email_id;
     var email_body = req.body.email_body;
-
     var mailOptions = {
         from: 'eatologyhq@gmail.com',
         to: "vkalghat@gmail.com",
@@ -256,9 +229,7 @@ router.route('/contact-us').post((req, res) => {
         subject: "User Query/Feedback from " + from,
         html: from + "(" + email_id + ") says:" + "<br/><h4>" + email_body + "</h4>"
     };
-
     transporter.sendMail(mailOptions, function (error, info) {
-
         if (error) {
             console.log(error);
         } else {
@@ -268,12 +239,9 @@ router.route('/contact-us').post((req, res) => {
             })
         }
     });
-
 })
-
 //localhost/users/send-mail will send a registration mail to th specified user email.
 router.route('/send-registration-mail').post((req, res) => {
-
     var userEmail = req.body.email
     var htmlBody = "initial"
     htmlBody = fs.readFileSync("RecipeWebBackend\\EatologyTemplate.html")
@@ -283,7 +251,6 @@ router.route('/send-registration-mail').post((req, res) => {
         subject: "Welcome to Eatology!",
         html: htmlBody
     };
-
 
     User.findOne({ "email": userEmail })
         .then(user => {
@@ -311,10 +278,8 @@ router.route('/send-registration-mail').post((req, res) => {
         })
 })
 
-
 //localhost/users/update/add-fav-cuisines/:id will add an array of favourite cuisines to the user whose id is specified.
 router.route('/update/add-fav-cuisines/:id').post((req, res) => {
-
     User.findById(req.params.id)
         .then(user => {
             User.findOneAndUpdate({ _id: req.params.id }, {
@@ -322,7 +287,6 @@ router.route('/update/add-fav-cuisines/:id').post((req, res) => {
                     pref_cuisines: { $each: req.body.cuisines },
                     "success": true
                 }
-
             }, {
                 new: true
             })
@@ -333,13 +297,9 @@ router.route('/update/add-fav-cuisines/:id').post((req, res) => {
                     })
                 })
         })
-
 })
-
 router.route('/update/add-search-history/:id').post((req, res) => {
-
     const size = 5
-
     User.findByIdAndUpdate(req.params.id,
         {
             $push:
@@ -370,9 +330,7 @@ router.route('/update/add-search-history/:id').post((req, res) => {
                 })
             }
         })
-
 })
-
 //Helper funtion to generate a random 6 digit otp.
 function genOtp() {
     var otp = ""
@@ -381,5 +339,4 @@ function genOtp() {
     }
     return otp
 }
-
 module.exports = router;
