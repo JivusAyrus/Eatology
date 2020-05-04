@@ -95,7 +95,12 @@ router.route('/add').post(upload.single('profile_img'), (req, res) => {
 
         });
         newUser.save()
-            .then(() => res.json(`${username} has been successfully added !`))
+            .then(user => {
+                res.json({
+                    success: true,
+                    id: user._id
+                })
+            })
             .catch(err => res.status(400).json('Error : ' + err));
     }
 })
@@ -248,8 +253,8 @@ router.route('/contact-us').post((req, res) => {
         from: 'eatologyhq@gmail.com',
         to: "vkalghat@gmail.com",
         cc: "suvijsurya76@gmail.com",
-        subject: "User Query/Feedback from " + from ,
-        html: from +"(" + email_id + ") says:" + "<br/><h4>"+email_body+"</h4>"
+        subject: "User Query/Feedback from " + from,
+        html: from + "(" + email_id + ") says:" + "<br/><h4>" + email_body + "</h4>"
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
