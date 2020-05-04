@@ -5,7 +5,6 @@ import $ from 'jquery'
 import { Link } from 'react-router-dom'
 function ControlledCarousel() {
 
-
   const [isLoaded, setLoaded] = useState(false)
   const [recipes, setRecipes] = useState([])
   if (!isLoaded) {
@@ -15,7 +14,6 @@ function ControlledCarousel() {
         setLoaded(true)
       })
   }
-
   if (isLoaded) {
     return (
       <Carousel className="carou">
@@ -26,7 +24,6 @@ function ControlledCarousel() {
               recipe: recipes[0]
             }
           }} >
-
             <img
               className="d-block w-100"
               src={recipes[0].image == undefined ?require("./placeholder.jpg"):recipes[0].image}
@@ -38,10 +35,8 @@ function ControlledCarousel() {
               <h3>{recipes[0].title}</h3>
               <p>Ready in {recipes[0].readyInMinutes} minutes!</p>
             </Carousel.Caption>
-
           </Link>
         </Carousel.Item>
-
         <Carousel.Item>
           <Link to={{
             pathname: "/recipeinfo",
@@ -50,8 +45,6 @@ function ControlledCarousel() {
             }
           }} >
 
-
-
             <img
               className="d-block w-100"
               src={recipes[1].image == undefined ?require("./placeholder.jpg"):recipes[1].image}
@@ -59,15 +52,12 @@ function ControlledCarousel() {
               height="400px"
               style={{ zIndex: "0" }}
             />
-
             <Carousel.Caption>
               <h3>{recipes[1].title}</h3>
               <p>Ready in {recipes[1].readyInMinutes} minutes!</p>
             </Carousel.Caption>
-
           </Link>
         </Carousel.Item>
-
         <Carousel.Item>
           <Link to={{
             pathname: "/recipeinfo",
@@ -76,8 +66,6 @@ function ControlledCarousel() {
             }
           }} >
 
-
-
             <img
               className="d-block w-100"
               src={recipes[2].image == undefined ?require("./placeholder.jpg"):recipes[2].image}
@@ -85,15 +73,12 @@ function ControlledCarousel() {
               height="400px"
               style={{ zIndex: "0" }}
             />
-
             <Carousel.Caption>
               <h3>{recipes[2].title}</h3>
               <p>Ready in {recipes[2].readyInMinutes} minutes!</p>
             </Carousel.Caption>
-
           </Link>
         </Carousel.Item>
-
 
       </Carousel>
     );
@@ -102,6 +87,5 @@ function ControlledCarousel() {
     return ("")
   }
 }
-
 
 export default ControlledCarousel

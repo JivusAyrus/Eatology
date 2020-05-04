@@ -9,19 +9,16 @@ export class Signup extends Component {
             isSignedUp: false
         }
     }
-
     componentDidMount() {
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
-
                 reader.onload = function (e) {
                     $('#image').attr('src', e.target.result);
                 }
                 reader.readAsDataURL(input.files[0]);
             }
         }
-
         $("#propic").change(function () {
             readURL(this);
         });
@@ -65,7 +62,6 @@ export class Signup extends Component {
                             "processData": false,
                             "data": JSON.stringify({ email: post_JSON.get("email") })
                         }
-
                         $.ajax(settings).done(function (response) {
                             console.log(response);
                         });
@@ -80,7 +76,6 @@ export class Signup extends Component {
                         $('input[name="cpass"]').val('')
                         $('input[name="password"]').val('')
                     },
-
                 });
             }
             else {
@@ -88,16 +83,11 @@ export class Signup extends Component {
                 alert('Passwords do not match')
                 $('input[name="cpass"]').val('')
             }
-
             event.preventDefault();
-
         });
 
 
-
-
     }
-
     render() {
         if (this.state.isSignedUp) {
             return <Redirect to={{
@@ -129,7 +119,5 @@ export class Signup extends Component {
         }
     }
     handleClick = (e) => { this.imageHandler.click() }
-
 }
-
 export default Signup

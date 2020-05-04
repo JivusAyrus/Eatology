@@ -5,8 +5,6 @@ import '../Css/HomePage.css'
 import $ from 'jquery'
 export class HomePage extends Component {
 
-
-
     render() {
         const size = 1;
         var user = JSON.parse(sessionStorage.getItem('user'))
@@ -76,7 +74,6 @@ export class HomePage extends Component {
                     <br /> <br /><br />
                     <Cardrow title="Desserts" endpoint={endpoint7} />
                     <br />
-
                 </div>
             )
         }
@@ -107,10 +104,8 @@ export class HomePage extends Component {
                     <br />
                 </div>
 
-
             )
         }
     }
 }
-
 export default HomePage

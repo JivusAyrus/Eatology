@@ -6,18 +6,15 @@ import $ from 'jquery'
 class EnterOTP extends Component {
     constructor(props) {
         super(props)
-
         this.state = {
             isCorrect: false
         }
     }
-
     componentDidMount() {
         var that = this;
         $('form').on('submit', function (event) {
             var timeLimit = Date.parse(sessionStorage.getItem('timeLimit'))
             var timeClicked = new Date();
-
             if (timeClicked.getTime() > timeLimit) {
                 alert("Timelimit exceeded.Try Again!")
                 $('input[name="otp"]').val('')
@@ -63,10 +60,8 @@ class EnterOTP extends Component {
             )
         }
     }
-
     
 }
-
 function resendOtp() {
     $.ajax({
         type: "post",
@@ -86,10 +81,7 @@ function resendOtp() {
         },
         error: (jqXHR, status, err) => {
             console.log(jqXHR);
-
         },
-
     });
 }
-
 export default EnterOTP

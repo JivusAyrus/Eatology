@@ -10,7 +10,6 @@ const override = css`
   border-color: red;
 `;
 export class Card extends Component {
-
     constructor(props) {
         super(props)
         this.heart = this.heart.bind(this);
@@ -69,9 +68,7 @@ export class Card extends Component {
                             isLoading:false
                         })
                     },
-
                 });
-
             }
             else {
                 //add to favs (because is favourite will become true in the next render)
@@ -98,11 +95,9 @@ export class Card extends Component {
                             isLoading:false
                         })
                     },
-
                 });
             }
         }
-
     }
     resolveImage(){
         if(this.state.recipe.image == undefined){
@@ -140,7 +135,6 @@ export class Card extends Component {
             error: (jqXHR, status, err) => {
                 console.log(jqXHR);
             },
-
         });
         }
     }
@@ -183,5 +177,4 @@ export class Card extends Component {
         }
     }
 }
-
 export default Card

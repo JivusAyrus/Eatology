@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-
 import '../Css/Login.css'
 import {
     Switch,
@@ -10,16 +9,13 @@ import {
 import Signup from './Signup';
 import $ from "jquery"
 import { Redirect } from 'react-router-dom'
-
 export class Login extends Component {
-
     constructor(props) {
         super(props)
         this.state = {
             isLoggedIn: false
         }
     }
-
     componentDidMount() {
         $("form").submit(function (event) {
             $.get("http://localhost:5000/users/by-email/" + $('input[name="email"]').val(),
@@ -30,32 +26,24 @@ export class Login extends Component {
                         $('input[name="email"]').val('')
                         return
                     }
-
                     if (data[0].password != $('input[name="password"]').val()) {
                         alert("Wrong password !")
                         $('input[name="password"]').val('')
                         return
                     }
-
                     //Add login functionality
                     sessionStorage.setItem('user', JSON.stringify(data[0]))
                     this.setState({
                         isLoggedIn: true
                     })
 
-
-
                     console.log("LOGGED INN!!")
-
                 }.bind(this)
             )
 
-
             event.preventDefault()
         }.bind(this));
-
     }
-
     render() {
         if (this.state.isLoggedIn) {
             return <Redirect to={{
@@ -65,7 +53,6 @@ export class Login extends Component {
         else {
             return (
                 <div class="body" id="root">
-
                     <div class="card">
                         <div class="card-body">
                             <form>
@@ -79,10 +66,8 @@ export class Login extends Component {
                         </div>
                     </div>
                 </div>
-
             )
         }
     }
 }
 export default Login;
-

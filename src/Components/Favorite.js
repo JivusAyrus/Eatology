@@ -18,7 +18,6 @@ export class Favorite extends Component {
       items: []
     }
   }
-
   componentDidMount() {
     var api = "https://api.spoonacular.com/recipes/informationBulk/?apiKey=" + process.env.REACT_APP_API_KEY + "&ids="
     var user = JSON.parse(sessionStorage.getItem("user"))
@@ -54,7 +53,6 @@ export class Favorite extends Component {
         )
     }
   }
-
   render() {
     var user = JSON.parse(sessionStorage.getItem("user"))
     if (user) {
@@ -110,5 +108,4 @@ export class Favorite extends Component {
     }
   }
 }
-
 export default Favorite

@@ -65,7 +65,6 @@ export class RecipeInfo extends Component {
                 error: (jqXHR, status, err) => {
                     console.log(jqXHR);
                 },
-
             });
         }
         else{
@@ -111,7 +110,6 @@ export class RecipeInfo extends Component {
                 error: (jqXHR, status, err) => {
                     console.log(jqXHR);
                 },
-
             });
         }
         
@@ -146,9 +144,7 @@ export class RecipeInfo extends Component {
                     error: (jqXHR, status, err) => {
                         console.log(jqXHR);
                     },
-
                 });
-
             }
             else {
                 //add to favs (because is favourite will become true in the next render)
@@ -166,7 +162,6 @@ export class RecipeInfo extends Component {
                     error: (jqXHR, status, err) => {
                         console.log(jqXHR);
                     },
-
                 });
             }
         }
@@ -203,7 +198,6 @@ export class RecipeInfo extends Component {
                         })
                     } 
             }
-
         }
         return equipments
     }
@@ -324,5 +318,4 @@ export class RecipeInfo extends Component {
         }
     }
 }
-
 export default withRouter(RecipeInfo)

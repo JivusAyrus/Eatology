@@ -3,13 +3,11 @@ import Card from './Card'
 import '../Css/Cardrow.css'
 import { css } from "@emotion/core";
 import ClipLoader from "react-spinners/ClipLoader";
-
 const override = css`
   display: block;
   margin: 0 auto;
   border-color: red;
 `;
-
 export class Cardrow extends Component {
   constructor(props) {
     super(props)
@@ -56,7 +54,6 @@ export class Cardrow extends Component {
           });
         }
       )
-
     // var temp = [
     //   {
     //     "title": "Maggie",
@@ -75,20 +72,17 @@ export class Cardrow extends Component {
     //     "image": null
     //   },
     // ]
-
     // this.setState({
     //   isLoaded: true,
     //   items: temp
     // });
   }
   render(props) {
-
     var cards = []
     if (this.state.isLoaded == true) {
       this.state.items.forEach(recipe => {
         cards.push(React.createElement('div', { class: "card-body" }, [
           React.createElement(Card, { recipe_info: recipe })
-
         ]))
       });
       // var heading = React.createElement('h3',{style:{color:"red",float:"left"}},this.props.title)
@@ -102,7 +96,6 @@ export class Cardrow extends Component {
       // // for (var i = 0; i < 10; i++) {
       // //   tempCards.push(React.createElement('div', { class: "card-body" }, [
       // //     React.createElement(Card, { recipe_info: { title: "" } })
-
       // //   ]))
       // // }
       // // var TempCardsElement = React.createElement('div', { class: "d-flex flex-row flex-nowrap" }, tempCards)
@@ -154,9 +147,7 @@ export class Cardrow extends Component {
         <br />
       </div>
       )
-
     }
   }
 }
-
 export default Cardrow

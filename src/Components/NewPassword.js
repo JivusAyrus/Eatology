@@ -5,12 +5,10 @@ import $ from 'jquery'
 class NewPassword extends Component {
     constructor(props) {
         super(props)
-
         this.state = {
             isChanged: false
         }
     }
-
     componentDidMount() {
         var email = sessionStorage.getItem('email')
         var that = this;
@@ -35,15 +33,12 @@ class NewPassword extends Component {
                         console.log(err);
                     });
             }
-
             else {
                 alert('Passwords do not match')
                 $('input[name="newcpass"]').val('')
             }
             event.preventDefault()
-
         })
-
     }
     render() {
         if (this.state.isChanged) {
@@ -69,5 +64,4 @@ class NewPassword extends Component {
         }
     }
 }
-
 export default NewPassword

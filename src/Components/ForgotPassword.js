@@ -39,9 +39,7 @@ class ForgotPassword extends Component {
                 },
                 error: (jqXHR, status, err) => {
                     console.log(jqXHR);
-
                 },
-
             });
             event.preventDefault()
         })
@@ -70,5 +68,4 @@ class ForgotPassword extends Component {
         }
     }
 }
-
 export default ForgotPassword

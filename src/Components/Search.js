@@ -3,7 +3,6 @@ import '../Css/Search.css'
 import $ from 'jquery'
 import Card from './Card'
 import ReactDOM from 'react-dom'
-
 export class Search extends Component {
     constructor(props) {
         super(props)
@@ -14,7 +13,6 @@ export class Search extends Component {
             recipe_data:[]
         }
     }
-
     render() {
         return (
             <div>
@@ -35,12 +33,9 @@ export class Search extends Component {
                     </form>
                 </center>
                 <div class="row" id="searchresult" children={this.state.cards}>
-
                 </div>
                 <h1 style={{color:"red",marginTop:"15px"}} id="searchtext">No more search results</h1>
                 <button class="btn btn-outline-danger" id="extra" onClick={this.extraresult} style={{borderRadius:"100%",marginTop:"10px"}}><i class="fa fa-arrow-down" aria-hidden="true"></i></button>
-
-
 
 
             </div>
@@ -49,7 +44,6 @@ export class Search extends Component {
     componentWillUnmount(){
         sessionStorage.setItem('search_cache',JSON.stringify(this.state.recipe_data))
         sessionStorage.setItem('search_query',$('#search').val())
-
     }
     getRecipeCards(recipe_data){
         var result = []
@@ -82,7 +76,6 @@ export class Search extends Component {
                 error: (jqXHR, status, err) => {
                     console.log(jqXHR);
                 },
-
             });
         });
         $('form').on("submit", function (event) {
@@ -121,7 +114,6 @@ export class Search extends Component {
                 error: (jqXHR, status, err) => {
                     console.log(jqXHR);
                 },
-
             });
             event.preventDefault();
         });
@@ -169,9 +161,7 @@ export class Search extends Component {
             error: (jqXHR, status, err) => {
                 console.log(jqXHR);
             },
-
         });
     }
 }
-
 export default Search

@@ -11,7 +11,6 @@ import {
 export class Cusinefavs extends Component {
     constructor(props) {
         super(props)
-
         this.state = {
             isUpdated: false
         }
@@ -50,12 +49,9 @@ export class Cusinefavs extends Component {
                 error: (jqXHR, status, err) => {
                     console.log(jqXHR);
                 },
-
             });
             event.preventDefault();
         })
-
-
 
         $(document).ready(function () {
             $('#add').on('click', function () {
@@ -66,7 +62,6 @@ export class Cusinefavs extends Component {
             });
         })
     }
-
     render() {
         if (this.state.isUpdated) {
             return <Redirect to={{
@@ -134,5 +129,4 @@ export class Cusinefavs extends Component {
         }
     }
 }
-
 export default Cusinefavs

@@ -24,35 +24,25 @@ import ContactUs from './ContactUs';
 import RecipeInfo from './RecipeInfo';
 
 
-
-
 export class Mynavbar extends Component {
-
     constructor(props) {
         super(props)
-
         this.state = {
             // user: JSON.parse(sessionStorage.getItem('user'))
         }
     }
 
 
-
-
     componentDidMount() {
-
         $(document).ready(function () {
             $('#sidebar').toggleClass('active');
-
             $('#dismiss').on('click', function () {
                 $('#sidebar').toggleClass('active');
                 $('.overlay').removeClass('active');
             });
-
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
                 $('.overlay').addClass('active');
-
             });
             $('.anchors').on('click', function () {
                 $('#sidebar').toggleClass('active');
@@ -95,7 +85,6 @@ export class Mynavbar extends Component {
             // });
         });
     }
-
     render() {
         const { router, params, location, routes } = this.props
         var user = JSON.parse(sessionStorage.getItem('user'))
@@ -189,7 +178,6 @@ export class Mynavbar extends Component {
             </div>
         )
     }
-
     arrayBufferToBase64(buffer) {
         var binary = '';
         var bytes = [].slice.call(new Uint8Array(buffer));
@@ -197,9 +185,6 @@ export class Mynavbar extends Component {
         return window.btoa(binary);
     };
 
-
 }
 
-
 export default withRouter(Mynavbar)
-
