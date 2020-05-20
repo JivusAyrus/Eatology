@@ -6,6 +6,7 @@ required. The aim of this web application is to provide a means for the user to
 search for and learn any recipe of any cuisine.
 
 # Screens
+<p>
 <img src = "./screenshots\WhatsApp Image 2020-05-20 at 12.58.25 PM (2).jpeg" width = "300" height = "225"/> 
 <img src = "screenshots\WhatsApp Image 2020-05-20 at 12.58.25 PM (1).jpeg" width = "300" height = "225"/> 
 <img src = "screenshots\WhatsApp Image 2020-05-20 at 12.58.25 PM.jpeg" width = "300" height ="225">
@@ -15,6 +16,7 @@ search for and learn any recipe of any cuisine.
 <img src = "screenshots\WhatsApp Image 2020-05-20 at 12.58.29 PM (2).jpeg" width = "300" height = "225">
 <img src = "screenshots\WhatsApp Image 2020-05-20 at 12.58.30 PM (1).jpeg" width = "300" height = "225">
 <img src = "screenshots\WhatsApp Image 2020-05-20 at 12.58.27 PM (2).jpeg" width = "300" height = "225">
+</p>
 
 
 <br/>
