@@ -31,6 +31,7 @@ export class Signup extends Component {
                     if (field.name == 'cpass') return
                     post_JSON.append(field.name, field.value);
                 });
+                post_JSON.append("phone_number","")
                 post_JSON.append("profile_img", document.getElementById('propic').files[0])
                 $.ajax({
                     type: "post",

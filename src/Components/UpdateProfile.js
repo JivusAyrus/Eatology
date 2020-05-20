@@ -92,13 +92,13 @@ export class UpdateProfile extends Component {
                             <form>
                                 <p class="card-title">UpdateProfile</p>
                                 <div class="profile">
-                                    <img id="image" src={"data:image/jpeg;base64," + this.arrayBufferToBase64(user.profile_img.data)} />
+                                    <img id="image" src={user.profile_img != undefined ?"data:image/jpeg;base64," + this.arrayBufferToBase64(user.profile_img.data): require("./default profile.png")} />
                                     <i class="fa fa-edit" onClick={this.handleClick}><input hidden id="propic" type="file" ref={imageref => this.imageHandler = imageref} attach="image/*" /></i>
                                 </div><br />
                                 <input type="text" name="fullname" placeholder="Full Name" defaultValue={user.fullname} required />
                                 <input type="text" name="username" placeholder="Public User Name (max 6 characters)" defaultValue={user.username} required maxlength="6" />
                                 <input type="email" name="email" pattern="(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)" placeholder="Email" required title="eg. abc@gmail.com, abc@dr-ait.org" value={user.email} disabled />
-                                <input type="text" name="phone" placeholder="Phone No" defaultValue={user.phone_number == undefined ? "" : user.phone_number} pattern="^[0-9]{10}" title="The number should be of 10 digits" maxlength="10" minlength="10" /><br />
+                                <input type="text" name="phone_number" placeholder="Phone No" defaultValue={user.phone_number == undefined ? "" : user.phone_number} pattern="^[0-9]{10}" title="The number should be of 10 digits" maxlength="10" minlength="10" /><br />
                                 <button type="submit" class="btn btn-outline-danger">Update</button>
                             </form>
                         </div>

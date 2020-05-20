@@ -6,7 +6,7 @@ import $ from 'jquery'
 export class HomePage extends Component {
 
     render() {
-        const size = 1;
+        const size = 10;
         var user = JSON.parse(sessionStorage.getItem('user'))
         if (user) {
              var favids = ""

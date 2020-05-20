@@ -58,12 +58,14 @@ router.route('/add').post(upload.single('profile_img'), (req, res) => {
         const email = req.body.email
         const password = req.body.password
         const profile_img = req.file.buffer
+        const phone_number = req.body.phone_number
         const newUser = User({
             username,
             fullname,
             email,
             password,
-            profile_img
+            profile_img,
+            phone_number,
         });
         newUser.save()
             .then(user => {
@@ -79,11 +81,13 @@ router.route('/add').post(upload.single('profile_img'), (req, res) => {
         const fullname = req.body.fullname
         const email = req.body.email
         const password = req.body.password
+        const phone_number = req.body.phone_number
         const newUser = User({
             username,
             fullname,
             email,
             password,
+            phone_number,
         });
         newUser.save()
             .then(user => {
@@ -97,25 +101,16 @@ router.route('/add').post(upload.single('profile_img'), (req, res) => {
 })
 // localhost/users/update/:id will update the user whose id is specified
 router.route('/update/:id').post(upload.single('profile_img'), (req, res) => {
-    var username
-    User.findById(req.params.id)
-        .then(users => {
-            username = users.username
             var postObj = req.body
             if (req.file != undefined)
                 postObj.profile_img = req.file.buffer
-            User.findOneAndUpdate({ _id: req.params.id }, postObj)
-                .then(() => {
-                    User.findById(req.params.id)
-                        .then(users => {
-                            res.json(users)
-                        })
-                        .catch(err => res.status(400).json('Error : ' + err));
+            User.findOneAndUpdate({ _id: req.params.id }, postObj,{new:true})
+                .then(users => {
+                    res.json(users)
                 })
                 .catch(err => res.status(400).json('Error : ' + err));
-        })
-        .catch(err => res.status(400).json('Error : ' + err));
 })
+
 //localhost/users/update-by-email/:email will update the user whose email is specified.
 router.route('/update-by-email/:email').post((req, res) => {
     var postObj = req.body
