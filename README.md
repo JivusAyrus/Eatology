@@ -1,4 +1,6 @@
 # Eatology
+Live app : [Eatology](https://eatology-recipes.herokuapp.com/)
+
 This interactive food and recipe web application facilitates a simple, intuitive UI
 that enables the user to quickly find the recipe of their favorite dishes as well as,
 providing a means for following the recipe steps and procuring all the ingredients
