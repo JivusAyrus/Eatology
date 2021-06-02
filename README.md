@@ -20,19 +20,3 @@ REACT_APP_API_KEY=<Your-Api-Key>
 REACT_APP_SERVER=https://eatology-server.herokuapp.com
 ```
 * Run npm start and you should have the app running on React's development server on http://localhost:3000
-
-# Screens
-<p>
-<img src = "./screenshots\WhatsApp Image 2020-05-20 at 12.58.25 PM (2).jpeg" width = "300" height = "225"/> 
-<img src = "screenshots\WhatsApp Image 2020-05-20 at 12.58.25 PM (1).jpeg" width = "300" height = "225"/> 
-<img src = "screenshots\WhatsApp Image 2020-05-20 at 12.58.25 PM.jpeg" width = "300" height ="225">
-<img src = "screenshots\WhatsApp Image 2020-05-20 at 12.58.26 PM (1).jpeg" width = "300" height = "225">
-<img src = "screenshots\WhatsApp Image 2020-05-20 at 12.58.28 PM (1).jpeg" width = "300" height = "225">
-<img src = "screenshots\WhatsApp Image 2020-05-20 at 12.58.28 PM.jpeg" width = "300" height = "225">
-<img src = "screenshots\WhatsApp Image 2020-05-20 at 12.58.29 PM (2).jpeg" width = "300" height = "225">
-<img src = "screenshots\WhatsApp Image 2020-05-20 at 12.58.30 PM (1).jpeg" width = "300" height = "225">
-<img src = "screenshots\WhatsApp Image 2020-05-20 at 12.58.27 PM (2).jpeg" width = "300" height = "225">
-</p>
-
-
-<br/>
