@@ -35,7 +35,7 @@ export class Signup extends Component {
                 post_JSON.append("profile_img", document.getElementById('propic').files[0])
                 $.ajax({
                     type: "post",
-                    url: "http://localhost:5000/users/add",
+                    url: process.env.REACT_APP_SERVER + "/users/add",
                     dataType: "json",
                     data: post_JSON,
                     contentType: false,
@@ -55,7 +55,7 @@ export class Signup extends Component {
                         var settings = {
                             "async": true,
                             "crossDomain": true,
-                            "url": "http://localhost:5000/users/send-registration-mail",
+                            "url": process.env.REACT_APP_SERVER + "/users/send-registration-mail",
                             "method": "POST",
                             "headers": {
                                 "content-type": "application/json"

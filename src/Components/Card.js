@@ -47,7 +47,7 @@ export class Card extends Component {
                 })
                 $.ajax({
                     type: "post",
-                    url: "http://localhost:5000/users/update/remove-favourite/" + JSON.parse(sessionStorage.getItem('user'))._id,
+                    url: process.env.REACT_APP_SERVER + "/users/update/remove-favourite/" + JSON.parse(sessionStorage.getItem('user'))._id,
                     dataType: "json",
                     data: JSON.stringify({ favourite: this.state.recipe.id }),
                     processData: false,                     //Assigns the data to post request body and not url
@@ -77,7 +77,7 @@ export class Card extends Component {
                 })
                 $.ajax({
                     type: "post",
-                    url: "http://localhost:5000/users/update/add-favourite/" + JSON.parse(sessionStorage.getItem('user'))._id,
+                    url: process.env.REACT_APP_SERVER + "/users/update/add-favourite/" + JSON.parse(sessionStorage.getItem('user'))._id,
                     dataType: "json",
                     data: JSON.stringify({ favourite: this.state.recipe.id }),
                     processData: false,                     //Assigns the data to post request body and not url
@@ -121,7 +121,7 @@ export class Card extends Component {
         if(user){
         $.ajax({
             type: "post",
-            url: "http://localhost:5000/users/update/add-search-history/" + JSON.parse(sessionStorage.getItem('user'))._id,
+            url: process.env.REACT_APP_SERVER + "/users/update/add-search-history/" + JSON.parse(sessionStorage.getItem('user'))._id,
             dataType: "json",
             data: JSON.stringify({ history_item: this.state.recipe.id+","+this.state.recipe.title }),
             processData: false,                     //Assigns the data to post request body and not url

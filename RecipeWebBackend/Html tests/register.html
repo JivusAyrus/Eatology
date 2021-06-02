@@ -102,7 +102,7 @@
             //Post request to mongo db
             $.ajax({
                 type: "post",
-                url: "http://localhost:5000/users/add",
+                url: process.env.REACT_APP_SERVER + "/users/add",
                 dataType: "json",
                 data: JSON.stringify(post_JSON),
                 processData: false,                     //Assigns the data to post request body and not url

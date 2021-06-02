@@ -13,7 +13,7 @@
         cuisinesObj = { cuisines : ["american", "Indian", "Chinese"] }
         $.ajax({
             type: "post",
-            url: "http://localhost:5000/users/update/add-fav-cuisines/5e9f13f8b261d337f4d53e90",
+            url: process.env.REACT_APP_SERVER + "/users/update/add-fav-cuisines/5e9f13f8b261d337f4d53e90",
             dataType: "json",
             data: JSON.stringify(cuisinesObj),
             contentType: "application/json",

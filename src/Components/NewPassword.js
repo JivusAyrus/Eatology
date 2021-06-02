@@ -14,7 +14,7 @@ class NewPassword extends Component {
         var that = this;
         $('form').on('submit', function (event) {
             if ($('#newpass').val() == $('#newcpass').val()) {
-                fetch("http://localhost:5000/users/update-by-email/" + email, {
+                fetch(process.env.REACT_APP_SERVER + "/users/update-by-email/" + email, {
                     "method": "POST",
                     "headers": {
                         "content-type": "application/json"

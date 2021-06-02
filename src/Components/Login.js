@@ -18,7 +18,7 @@ export class Login extends Component {
     }
     componentDidMount() {
         $("form").submit(function (event) {
-            $.get("http://localhost:5000/users/by-email/" + $('input[name="email"]').val(),
+            $.get(process.env.REACT_APP_SERVER + "/users/by-email/" + $('input[name="email"]').val(),
                 function (data) {
                     if (data.length == 0) {
                         alert("Invalid email")

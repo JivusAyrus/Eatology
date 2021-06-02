@@ -33,7 +33,7 @@ export class Cusinefavs extends Component {
             var cuisines = { cuisines: favcusine }
             $.ajax({
                 type: "post",
-                url: "http://localhost:5000/users/update/add-fav-cuisines/" + user._id,
+                url: process.env.REACT_APP_SERVER + "/users/update/add-fav-cuisines/" + user._id,
                 dataType: "json",
                 data: JSON.stringify(cuisines),
                 contentType: "application/json",

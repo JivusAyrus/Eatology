@@ -43,7 +43,7 @@ export class UpdateProfile extends Component {
 
             $.ajax({
                 type: "post",
-                url: "http://localhost:5000/users/update/" + user._id,
+                url: process.env.REACT_APP_SERVER + "/users/update/" + user._id,
                 dataType: "json",
                 data: updateObject,
                 contentType: false,

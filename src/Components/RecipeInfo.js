@@ -129,7 +129,7 @@ export class RecipeInfo extends Component {
                 
                 $.ajax({
                     type: "post",
-                    url: "http://localhost:5000/users/update/remove-favourite/" + JSON.parse(sessionStorage.getItem('user'))._id,
+                    url: process.env.REACT_APP_SERVER + "/users/update/remove-favourite/" + JSON.parse(sessionStorage.getItem('user'))._id,
                     dataType: "json",
                     data: JSON.stringify({ favourite: this.state.recipe.id }),
                     processData: false,                     //Assigns the data to post request body and not url
@@ -150,7 +150,7 @@ export class RecipeInfo extends Component {
                 //add to favs (because is favourite will become true in the next render)
                 $.ajax({
                     type: "post",
-                    url: "http://localhost:5000/users/update/add-favourite/" + JSON.parse(sessionStorage.getItem('user'))._id,
+                    url: process.env.REACT_APP_SERVER + "/users/update/add-favourite/" + JSON.parse(sessionStorage.getItem('user'))._id,
                     dataType: "json",
                     data: JSON.stringify({ favourite: this.state.recipe.id }),
                     processData: false,                     //Assigns the data to post request body and not url

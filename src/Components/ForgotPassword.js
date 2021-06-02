@@ -19,7 +19,7 @@ class ForgotPassword extends Component {
         $('form').on('submit',function(event){
             $.ajax({
                 type: "post",
-                url: "http://localhost:5000/users/send-otp/" + $('#email').val() ,
+                url: process.env.REACT_APP_SERVER + "/users/send-otp/" + $('#email').val() ,
                 dataType: "json",
                 contentType: false,
                 cache: false,

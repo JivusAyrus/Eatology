@@ -6,7 +6,7 @@ export class ContactUs extends Component {
         $('form').on('submit',function(event){
             $.ajax({
                 type: "post",
-                url: "http://localhost:5000/users/contact-us",
+                url: process.env.REACT_APP_SERVER + "/users/contact-us",
                 dataType: "json",
                 data: JSON.stringify({ username:$('#contactname').val(),
                                        email_id:$('#contactemail').val(),

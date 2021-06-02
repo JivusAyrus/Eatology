@@ -65,7 +65,7 @@ class EnterOTP extends Component {
 function resendOtp() {
     $.ajax({
         type: "post",
-        url: "http://localhost:5000/users/send-otp/" + sessionStorage.getItem('email') ,
+        url: process.env.REACT_APP_SERVER + "/users/send-otp/" + sessionStorage.getItem('email') ,
         dataType: "json",
         contentType: false,
         cache: false,
