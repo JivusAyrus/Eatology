@@ -1,13 +1,14 @@
 .card-body {
-    min-height: 300px;
-    min-width: 300px;
-    margin-right: 5px;
+  min-height: 300px;
+  min-width: 300px;
+  margin-right: 5px;
 }
 .cardrow::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
-.cardrow{
-    overflowX:scroll;
-    msOverflowStyle:none;
+.cardrow {
+  overflowx: scroll;
+  msoverflowstyle: none;
+  width: 100%;
 }
