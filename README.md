@@ -13,7 +13,7 @@ search for and learn any recipe of any cuisine.
 # Steps To Run
 * Clone the repository
 * When inside the Eatology folder, run ```npm install```.
-* Head over to [Spoonacular's website](https://spoonacular.com/food-api) and get an API key.
+* Head over to [Spoonacular's website](https://spoonacular.com/food-api/pricing) and get an API key.
 * Within Eatology's folder, create a file named .env and add the lines : 
 ```
 REACT_APP_API_KEY=<Your-Api-Key>
