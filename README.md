@@ -19,4 +19,4 @@ search for and learn any recipe of any cuisine.
 REACT_APP_API_KEY=<Your-Api-Key>
 REACT_APP_SERVER=https://eatology-server.herokuapp.com
 ```
-* Run npm start and you should have the app running on React's development server on http://localhost:3000
+* Run ```npm start``` and you should have the app running on React's development server on http://localhost:3000
